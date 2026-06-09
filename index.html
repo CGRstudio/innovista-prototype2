@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InnoVista Strategies — Product</title>
+<meta name="description" content="InnoVista Strategies — AI lead capture and automated booking for home-service businesses." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0f0a; --bg2: #0d130f; --surface: #111912; --surface2: #16201a;
+    --line: rgba(120,170,140,0.12); --line2: rgba(120,170,140,0.20);
+    --green: #52b788; --glow: rgba(82,183,136,0.13);
+    --text: #e7efe9; --mute: #9bb0a3; --dim: #6c8073;
+    --fd: 'Space Grotesk', sans-serif; --fb: 'Hanken Grotesk', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--fb);
+    -webkit-font-smoothing: antialiased; min-height: 100vh;
+    background-image: radial-gradient(rgba(255,255,255,.025) 1.2px, transparent 1.2px);
+    background-size: 26px 26px;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  header { border-bottom: 1px solid var(--line); background: rgba(10,15,10,.7); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 5; }
+  .nav { display: flex; align-items: center; gap: 11px; padding: 18px 0; }
+  .brand { font-family: var(--fd); font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
+  .badge { margin-left: auto; font-size: 12.5px; color: var(--dim); }
+  .hero { padding: 64px 0 36px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--green); padding: 7px 13px; border-radius: 999px; background: var(--glow); box-shadow: inset 0 0 0 1px var(--line2); }
+  .eyebrow span { width: 6px; height: 6px; border-radius: 9px; background: var(--green); box-shadow: 0 0 10px var(--green); }
+  h1 { font-family: var(--fd); font-weight: 700; font-size: clamp(32px, 5vw, 48px); line-height: 1.07; letter-spacing: -.02em; margin: 22px 0 0; max-width: 620px; text-wrap: balance; }
+  .sub { font-size: clamp(16px, 2.2vw, 18px); line-height: 1.55; color: var(--mute); margin: 18px 0 0; max-width: 560px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; padding: 12px 0 80px; }
+  .card { display: flex; flex-direction: column; background: var(--surface); border-radius: 18px; padding: 24px; box-shadow: inset 0 0 0 1px var(--line); text-decoration: none; color: inherit; transition: transform .14s, box-shadow .14s; }
+  .card:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px var(--line2), 0 20px 40px -20px rgba(0,0,0,.7); }
+  .ic { width: 48px; height: 48px; border-radius: 13px; background: var(--glow); box-shadow: inset 0 0 0 1px var(--line2); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .who { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+  .card h2 { font-family: var(--fd); font-weight: 600; font-size: 21px; letter-spacing: -.01em; margin: 6px 0 9px; }
+  .card p { font-size: 14.5px; line-height: 1.55; color: var(--mute); margin: 0 0 20px; flex: 1; }
+  .go { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14.5px; color: var(--green); }
+  footer { border-top: 1px solid var(--line); background: var(--bg2); }
+  .foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; padding: 26px 0; font-size: 12.5px; color: var(--dim); }
+  .note { font-size: 13.5px; color: var(--dim); padding: 0 0 50px; }
+  .note a { color: var(--green); text-decoration: none; }
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#52b788"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#0a0f0a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#0a0f0a"/></svg>
+  <span class="brand">InnoVista</span>
+  <span class="badge">Product overview · 3 experiences</span>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow"><span></span>InnoVista Strategies</span>
+    <h1>AI lead capture for home-service businesses.</h1>
+    <p class="sub">One system, three views — what prospects see, what their customers experience, and what the business runs on. Pick an experience to explore.</p>
+  </section>
+
+  <section class="grid">
+    <a class="card" href="InnoVista%20Website.html">
+      <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#52b788" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><circle cx="6.5" cy="6.5" r=".6" fill="#52b788"/></svg></div>
+      <div class="who">For prospects</div>
+      <h2>Marketing Website</h2>
+      <p>The public site that sells InnoVista to HVAC owners — hero, how-it-works, results, and a live AI chat widget in the corner.</p>
+      <span class="go">Open site →</span>
+    </a>
+
+    <a class="card" href="InnoVista%20Screens.html">
+      <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#52b788" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg></div>
+      <div class="who">For homeowners (their clients)</div>
+      <h2>AI Text Assistant</h2>
+      <p>What a homeowner experiences after a missed call: an SMS conversation that qualifies the job and books it. Shown in the design prototype (Screen 2), with Present mode for client demos.</p>
+      <span class="go">Open prototype →</span>
+    </a>
+
+    <a class="card" href="InnoVista%20Backend.html">
+      <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#52b788" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></div>
+      <div class="who">For the HVAC business</div>
+      <h2>Operator Dashboard</h2>
+      <p>The backend the business logs into: overview, lead pipeline, AI-booked calendar, jobs, notifications, and pricing the AI quotes from.</p>
+      <span class="go">Open dashboard →</span>
+    </a>
+  </section>
+
+  <p class="note">Tip: the homeowner AI chat is also live as a floating widget on the <a href="InnoVista%20Website.html">marketing website</a> — tap the green button in the corner.</p>
+</main>
+
+<footer><div class="wrap foot">
+  <span>© 2026 InnoVista Strategies. Lead capture for the trades.</span>
+  <span>Marketing site · AI assistant · Operator dashboard</span>
+</div></footer>
+</body>
+</html>

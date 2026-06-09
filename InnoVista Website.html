@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InnoVista Strategies — AI Lead Capture for HVAC Businesses</title>
+<meta name="description" content="InnoVista answers, texts back, and qualifies every lead in seconds — then books the job straight on your calendar. 24/7 AI lead capture for home-service businesses." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Hanken Grotesk', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; background: #0a0f0a; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-thumb { background: rgba(140,160,150,.22); border-radius: 9px; border: 3px solid transparent; background-clip: padding-box; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(140,160,150,.35); background-clip: padding-box; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  @keyframes ivblink { 0%, 60%, 100% { opacity: .25; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-2px); } }
+  @keyframes ivpulse { 0% { box-shadow: 0 0 0 0 rgba(82,183,136,.5); } 70% { box-shadow: 0 0 0 16px rgba(82,183,136,0); } 100% { box-shadow: 0 0 0 0 rgba(82,183,136,0); } }
+  @keyframes ivslideup { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: none; } }
+  input::placeholder { color: #6c8073; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#0a0f0a" />
+    <rect x="30" y="30" width="40" height="40" rx="12" fill="#52b788" />
+    <path d="M40 44l5.5 12.5a3.2 3.2 0 0 0 9 0L60 44" stroke="#0a0f0a" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <circle cx="50" cy="40" r="2.6" fill="#0a0f0a" />
+  </svg>
+</template>
+
+<script>
+  window.IV = {
+    bg: '#0a0f0a', bg2: '#0d130f', surface: '#111912', surface2: '#16201a',
+    line: 'rgba(120,170,140,0.12)', line2: 'rgba(120,170,140,0.20)',
+    green: '#52b788', greenBright: '#74c69d', greenDeep: '#40916c', greenGlow: 'rgba(82,183,136,0.13)',
+    text: '#e7efe9', textMute: '#9bb0a3', textDim: '#6c8073',
+  };
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="icons.jsx"></script>
+<script type="text/babel" src="chatbot.jsx"></script>
+<script type="text/babel" src="site.jsx"></script>
+<script type="text/babel">
+  const Site = window.InnoVistaSite;
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<Site />);
+</script>
+</body>
+</html>
