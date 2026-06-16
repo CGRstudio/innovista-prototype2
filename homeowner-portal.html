@@ -9,68 +9,80 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #0a0f0a; --bg2: #0d130f; --surface: #111912; --surface2: #16201a;
-    --line: rgba(120,170,140,0.12); --line2: rgba(120,170,140,0.20);
-    --green: #52b788; --glow: rgba(82,183,136,0.13);
-    --text: #e7efe9; --mute: #9bb0a3; --dim: #6c8073;
+    --bg: #080d09; --bg2: #0b110d; --surface: #131f16; --surface2: #1a2b1e; --surface3: #203026;
+    --line: rgba(120,170,140,0.18); --line2: rgba(120,170,140,0.32);
+    --green: #52b788; --green2: #74c9a0; --glow: rgba(82,183,136,0.15);
+    --text: #eef4f0; --mute: #a8c4b0; --dim: #6e8c78;
     --fd: 'Space Grotesk', sans-serif; --fb: 'Hanken Grotesk', sans-serif;
+    --sidebar: 220px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: var(--fb); -webkit-font-smoothing: antialiased; min-height: 100vh; background-image: radial-gradient(rgba(255,255,255,.025) 1.2px, transparent 1.2px); background-size: 26px 26px; }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
-  header { border-bottom: 1px solid var(--line); background: rgba(10,15,10,.7); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 5; }
-  .nav { display: flex; align-items: center; gap: 11px; padding: 16px 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--fb); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+  header { border-bottom: 1px solid var(--line); background: rgba(8,13,9,.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 10; }
+  .nav { display: flex; align-items: center; gap: 11px; padding: 14px 24px; }
   .brand { font-family: var(--fd); font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
   .nav-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
   .role-badge { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); background: var(--glow); border: 1px solid var(--line2); padding: 4px 10px; border-radius: 999px; }
-  .signout { font-size: 13px; color: var(--dim); cursor: pointer; text-decoration: none; }
-
-  .page-header { padding: 40px 0 24px; }
-  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--green); padding: 6px 12px; border-radius: 999px; background: var(--glow); box-shadow: inset 0 0 0 1px var(--line2); margin-bottom: 16px; }
-  .eyebrow span { width: 6px; height: 6px; border-radius: 9px; background: var(--green); box-shadow: 0 0 10px var(--green); }
-  h1 { font-family: var(--fd); font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 6px; }
-  .sub { font-size: 14px; color: var(--mute); }
-
+  .signout { font-size: 13px; color: var(--dim); text-decoration: none; }
+  .layout { display: flex; flex: 1; }
+  aside { width: var(--sidebar); background: var(--surface); border-right: 1px solid var(--line); padding: 24px 0; flex-shrink: 0; position: sticky; top: 57px; height: calc(100vh - 57px); }
+  .aside-section { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); padding: 0 18px; margin: 20px 0 8px; }
+  .aside-section:first-child { margin-top: 0; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 18px; font-size: 14px; color: var(--mute); text-decoration: none; cursor: pointer; border-left: 2px solid transparent; transition: all .15s; }
+  .nav-item:hover { color: var(--text); background: var(--surface2); }
+  .nav-item.active { color: var(--green); background: var(--glow); border-left-color: var(--green); font-weight: 600; }
+  .nav-icon { font-size: 16px; width: 18px; text-align: center; }
+  .main { flex: 1; padding: 36px 40px; max-width: 720px; }
+  .page-title { font-family: var(--fd); font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 4px; }
+  .page-sub { font-size: 14px; color: var(--mute); margin-bottom: 28px; }
+  .content-area { display: none; }
+  .content-area.active { display: block; }
   .card { background: var(--surface); border-radius: 18px; padding: 24px; box-shadow: inset 0 0 0 1px var(--line); margin-bottom: 16px; }
-  .card-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .card-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
   .card-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-
-  .quote-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .quote-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var(--line); }
   .quote-row:last-child { border-bottom: none; }
-  .quote-item { font-size: 14px; color: var(--text); }
-  .quote-price { font-size: 14px; font-weight: 600; color: var(--green); }
-  .quote-desc { font-size: 12px; color: var(--dim); margin-top: 2px; }
-  .quote-total { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line2); }
-  .quote-total-label { font-family: var(--fd); font-size: 15px; font-weight: 600; }
-  .quote-total-val { font-family: var(--fd); font-size: 22px; font-weight: 700; color: var(--green); }
-  .signed-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #7ce0b0; background: rgba(82,183,136,.15); border: 1px solid rgba(82,183,136,.2); padding: 5px 12px; border-radius: 999px; margin-top: 14px; }
-
-  .appt-block { display: flex; gap: 16px; align-items: flex-start; }
-  .appt-date { background: var(--glow); border: 1px solid var(--line2); border-radius: 12px; padding: 10px 14px; text-align: center; flex-shrink: 0; }
-  .appt-month { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--green); }
-  .appt-day { font-family: var(--fd); font-size: 28px; font-weight: 700; color: var(--text); line-height: 1; }
-  .appt-info h3 { font-family: var(--fd); font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-  .appt-info p { font-size: 13px; color: var(--mute); line-height: 1.5; }
-  .appt-status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--green); background: var(--glow); border: 1px solid var(--line2); padding: 3px 9px; border-radius: 999px; margin-top: 8px; }
-  .appt-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); }
-
-  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .tip { background: var(--surface2); border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 1px var(--line); }
-  .tip-icon { font-size: 20px; margin-bottom: 8px; }
-  .tip-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-  .tip-desc { font-size: 12px; color: var(--dim); line-height: 1.4; }
-
-  .btn-book { display: block; width: 100%; background: var(--green); color: #0a0f0a; border: none; border-radius: 12px; padding: 15px; font-size: 15px; font-weight: 700; font-family: var(--fd); cursor: pointer; text-align: center; text-decoration: none; transition: opacity .15s; letter-spacing: -.01em; margin-top: 8px; }
+  .quote-item { font-size: 14px; color: var(--text); font-weight: 500; }
+  .quote-price { font-size: 14px; font-weight: 700; color: var(--green2); }
+  .quote-desc { font-size: 12px; color: var(--dim); margin-top: 3px; }
+  .quote-total { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line2); }
+  .quote-total-label { font-family: var(--fd); font-size: 15px; font-weight: 600; color: var(--text); }
+  .quote-total-val { font-family: var(--fd); font-size: 26px; font-weight: 700; color: var(--green2); }
+  .signed-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--green2); background: rgba(82,183,136,.15); border: 1px solid rgba(82,183,136,.25); padding: 5px 13px; border-radius: 999px; margin-top: 16px; }
+  .appt-block { display: flex; gap: 18px; align-items: flex-start; }
+  .appt-date { background: var(--glow); border: 1px solid var(--line2); border-radius: 14px; padding: 12px 16px; text-align: center; flex-shrink: 0; }
+  .appt-month { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--green); }
+  .appt-day { font-family: var(--fd); font-size: 32px; font-weight: 700; color: var(--text); line-height: 1; }
+  .appt-info h3 { font-family: var(--fd); font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .appt-info p { font-size: 13px; color: var(--mute); line-height: 1.6; }
+  .appt-status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; color: var(--green); background: var(--glow); border: 1px solid var(--line2); padding: 3px 10px; border-radius: 999px; margin-top: 10px; }
+  .appt-status::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); }
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tip { background: var(--surface2); border-radius: 14px; padding: 18px; box-shadow: inset 0 0 0 1px var(--line2); cursor: pointer; transition: box-shadow .15s; }
+  .tip:hover { box-shadow: inset 0 0 0 1px var(--green); }
+  .tip-icon { font-size: 22px; margin-bottom: 10px; }
+  .tip-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .tip-desc { font-size: 12px; color: var(--mute); line-height: 1.5; }
+  .tip-more { font-size: 12px; color: var(--green); margin-top: 8px; font-weight: 600; }
+  .tip-detail { display: none; margin-top: 32px; }
+  .tip-detail.active { display: block; }
+  .tip-detail h2 { font-family: var(--fd); font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .tip-detail-body { font-size: 14px; color: var(--mute); line-height: 1.7; }
+  .tip-detail-body ul { padding-left: 18px; margin-top: 10px; }
+  .tip-detail-body li { margin-bottom: 6px; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--green); cursor: pointer; margin-bottom: 20px; font-weight: 600; }
+  .back-btn:hover { opacity: .8; }
+  .btn-book { display: block; width: 100%; background: var(--green); color: #080d09; border: none; border-radius: 12px; padding: 15px; font-size: 15px; font-weight: 700; font-family: var(--fd); cursor: pointer; text-align: center; text-decoration: none; transition: opacity .15s; margin-bottom: 10px; }
   .btn-book:hover { opacity: .88; }
-  .btn-secondary { display: block; width: 100%; background: transparent; color: var(--green); border: 1px solid var(--line2); border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; font-family: var(--fd); cursor: pointer; text-align: center; text-decoration: none; transition: all .15s; margin-top: 10px; }
+  .btn-secondary { display: block; width: 100%; background: transparent; color: var(--green2); border: 1px solid var(--line2); border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; font-family: var(--fd); cursor: pointer; text-align: center; text-decoration: none; transition: all .15s; }
   .btn-secondary:hover { background: var(--glow); }
-
-  footer { border-top: 1px solid var(--line); background: var(--bg2); margin-top: 60px; }
-  .foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; padding: 22px 0; font-size: 12px; color: var(--dim); }
+  footer { border-top: 1px solid var(--line); background: var(--bg2); }
+  .foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; padding: 18px 24px; font-size: 12px; color: var(--dim); }
+  .foot a { color: var(--green); text-decoration: none; }
 </style>
 </head>
 <body>
-<header><div class="wrap nav">
+<header><div class="nav">
   <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#52b788"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#0a0f0a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#0a0f0a"/></svg>
   <span class="brand">InnoVista</span>
   <div class="nav-right">
@@ -79,70 +91,207 @@
   </div>
 </div></header>
 
-<main class="wrap">
-  <div class="page-header">
-    <div class="eyebrow"><span></span>Premier HVAC Solutions</div>
-    <h1>Hi, James. 👋</h1>
-    <p class="sub">Here's everything about your recent service and what's coming up.</p>
-  </div>
+<div class="layout">
+  <aside>
+    <div class="aside-section">My Service</div>
+    <a class="nav-item active" onclick="show('home')" href="#"><span class="nav-icon">🏠</span>Home</a>
+    <a class="nav-item" onclick="show('quote')" href="#"><span class="nav-icon">📋</span>My Quote</a>
+    <a class="nav-item" onclick="show('appointments')" href="#"><span class="nav-icon">📅</span>Appointments</a>
+    <div class="aside-section">Support</div>
+    <a class="nav-item" onclick="show('maintenance')" href="#"><span class="nav-icon">🔧</span>Maintenance Tips</a>
+    <a class="nav-item" onclick="show('contact')" href="#"><span class="nav-icon">💬</span>Contact Us</a>
+    <div class="aside-section">Account</div>
+    <a class="nav-item" href="index.html"><span class="nav-icon">🚪</span>Sign out</a>
+  </aside>
 
-  <div class="card">
-    <div class="card-label">Your signed quote</div>
-    <div class="quote-row">
-      <div><div class="quote-item">AC System Installation</div><div class="quote-desc">Carrier 3-ton unit, full install + removal of old unit</div></div>
-      <div class="quote-price">$3,200</div>
-    </div>
-    <div class="quote-row">
-      <div><div class="quote-item">Labor & Materials</div><div class="quote-desc">Full day install, new refrigerant line, electrical hookup</div></div>
-      <div class="quote-price">$850</div>
-    </div>
-    <div class="quote-row">
-      <div><div class="quote-item">1-Year Warranty</div><div class="quote-desc">Parts and labor covered</div></div>
-      <div class="quote-price">Included</div>
-    </div>
-    <div class="quote-total">
-      <span class="quote-total-label">Total agreed</span>
-      <span class="quote-total-val">$4,050</span>
-    </div>
-    <div class="signed-badge">✓ Signed June 14, 2026</div>
-  </div>
+  <div class="main">
 
-  <div class="card">
-    <div class="card-label">Upcoming appointment</div>
-    <div class="appt-block">
-      <div class="appt-date">
-        <div class="appt-month">Jun</div>
-        <div class="appt-day">18</div>
+    <div class="content-area active" id="area-home">
+      <div class="page-title">Hi, James. 👋</div>
+      <p class="page-sub">Here's a summary of your service with Premier HVAC Solutions.</p>
+      <div class="card">
+        <div class="card-label">Upcoming appointment</div>
+        <div class="appt-block">
+          <div class="appt-date"><div class="appt-month">Jun</div><div class="appt-day">18</div></div>
+          <div class="appt-info">
+            <h3>AC Installation</h3>
+            <p>Wednesday, June 18 · 10:00 AM – 3:00 PM<br>Technician: Mike R. · (305) 555-0182<br>6842 SW 112th Ave, Hialeah FL</p>
+            <span class="appt-status">Confirmed</span>
+          </div>
+        </div>
       </div>
-      <div class="appt-info">
-        <h3>AC Installation</h3>
-        <p>Wednesday, June 18 · 10:00 AM – 3:00 PM<br>Technician: Mike R. · (305) 555-0182<br>6842 SW 112th Ave, Hialeah FL</p>
-        <span class="appt-status">Confirmed</span>
+      <div class="card">
+        <div class="card-label">Quick links</div>
+        <a class="btn-book" onclick="show('quote')" href="#">View my signed quote →</a>
+        <a class="btn-secondary" onclick="show('maintenance')" href="#">Maintenance tips for my system</a>
       </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-label">Maintenance tips for your new system</div>
-    <div class="tips-grid">
-      <div class="tip"><div class="tip-icon">🔄</div><div class="tip-title">Change filter every 90 days</div><div class="tip-desc">A clean filter keeps your system running at peak efficiency and extends its life.</div></div>
-      <div class="tip"><div class="tip-icon">🌡️</div><div class="tip-title">Set thermostat to 78°F</div><div class="tip-desc">In South Florida, 78°F is the sweet spot for comfort and energy savings.</div></div>
-      <div class="tip"><div class="tip-icon">🧹</div><div class="tip-title">Clear the outdoor unit</div><div class="tip-desc">Keep 2ft of clearance around your unit. Remove leaves and debris monthly.</div></div>
-      <div class="tip"><div class="tip-icon">📅</div><div class="tip-title">Annual tune-up</div><div class="tip-desc">Schedule a checkup every year before summer to avoid breakdowns in peak heat.</div></div>
+    <div class="content-area" id="area-quote">
+      <div class="page-title">My Quote</div>
+      <p class="page-sub">Your signed agreement with Premier HVAC Solutions.</p>
+      <div class="card">
+        <div class="card-label">Quote #INV-2026-0847</div>
+        <div class="quote-row">
+          <div><div class="quote-item">AC System Installation</div><div class="quote-desc">Carrier 3-ton unit, full install + removal of old unit</div></div>
+          <div class="quote-price">$3,200</div>
+        </div>
+        <div class="quote-row">
+          <div><div class="quote-item">Labor & Materials</div><div class="quote-desc">Full day install, new refrigerant line, electrical hookup</div></div>
+          <div class="quote-price">$850</div>
+        </div>
+        <div class="quote-row">
+          <div><div class="quote-item">1-Year Warranty</div><div class="quote-desc">Parts and labor — all covered</div></div>
+          <div class="quote-price">Included</div>
+        </div>
+        <div class="quote-total">
+          <span class="quote-total-label">Total agreed</span>
+          <span class="quote-total-val">$4,050</span>
+        </div>
+        <div class="signed-badge">✓ Digitally signed — June 14, 2026</div>
+      </div>
     </div>
+
+    <div class="content-area" id="area-appointments">
+      <div class="page-title">My Appointments</div>
+      <p class="page-sub">Upcoming and past service visits.</p>
+      <div class="card">
+        <div class="card-label">Upcoming</div>
+        <div class="appt-block">
+          <div class="appt-date"><div class="appt-month">Jun</div><div class="appt-day">18</div></div>
+          <div class="appt-info">
+            <h3>AC Installation</h3>
+            <p>Wednesday, June 18 · 10:00 AM – 3:00 PM<br>Technician: Mike R. · (305) 555-0182</p>
+            <span class="appt-status">Confirmed</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Book a new appointment</div>
+        <a class="btn-book" onclick="show('contact')" href="#">Request a service visit →</a>
+      </div>
+    </div>
+
+    <div class="content-area" id="area-maintenance">
+      <div id="tips-list">
+        <div class="page-title">Maintenance Tips</div>
+        <p class="page-sub">Keep your new AC system running efficiently all year long.</p>
+        <div class="tips-grid">
+          <div class="tip" onclick="showTip('filter')"><div class="tip-icon">🔄</div><div class="tip-title">Change your filter</div><div class="tip-desc">Every 90 days keeps your system efficient and extends its life.</div><div class="tip-more">Read more →</div></div>
+          <div class="tip" onclick="showTip('thermostat')"><div class="tip-icon">🌡️</div><div class="tip-title">Set your thermostat</div><div class="tip-desc">78°F is the sweet spot in South Florida for comfort and savings.</div><div class="tip-more">Read more →</div></div>
+          <div class="tip" onclick="showTip('outdoor')"><div class="tip-icon">🧹</div><div class="tip-title">Clear the outdoor unit</div><div class="tip-desc">Keep 2ft of clearance and remove debris monthly.</div><div class="tip-more">Read more →</div></div>
+          <div class="tip" onclick="showTip('tuneup')"><div class="tip-icon">📅</div><div class="tip-title">Annual tune-up</div><div class="tip-desc">Schedule before summer every year to avoid peak-season breakdowns.</div><div class="tip-more">Read more →</div></div>
+        </div>
+      </div>
+
+      <div class="tip-detail" id="tip-filter">
+        <div class="back-btn" onclick="backToTips()">← Back to all tips</div>
+        <h2>🔄 Changing your air filter</h2>
+        <div class="tip-detail-body">
+          <p>Your AC filter catches dust, pollen, pet dander, and other particles before they circulate through your home. A clogged filter makes your system work harder, uses more energy, and shortens the life of your unit.</p>
+          <ul>
+            <li>Change your filter every <strong>90 days</strong> as a baseline</li>
+            <li>If you have pets or allergies, change it every <strong>30–60 days</strong></li>
+            <li>Use a MERV 8–11 rated filter for best balance of airflow and filtration</li>
+            <li>Check the filter size printed on the old one before buying a replacement</li>
+            <li>A dirty filter will cause your unit to freeze up — if you see ice on your lines, check the filter first</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tip-detail" id="tip-thermostat">
+        <div class="back-btn" onclick="backToTips()">← Back to all tips</div>
+        <h2>🌡️ Setting your thermostat</h2>
+        <div class="tip-detail-body">
+          <p>In South Florida's heat and humidity, the right thermostat setting makes a big difference in your energy bill and comfort level.</p>
+          <ul>
+            <li>Set to <strong>78°F</strong> when home — optimal comfort vs. energy cost</li>
+            <li>Set to <strong>82°F</strong> when away — saves energy without stressing the system</li>
+            <li>Avoid setting below 72°F — causes the system to over-run and can freeze the coils</li>
+            <li>Use a programmable or smart thermostat to automate your schedule</li>
+            <li>Keep interior doors open for better airflow throughout the home</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tip-detail" id="tip-outdoor">
+        <div class="back-btn" onclick="backToTips()">← Back to all tips</div>
+        <h2>🧹 Clearing your outdoor unit</h2>
+        <div class="tip-detail-body">
+          <p>Your outdoor condenser unit needs airflow to release heat. Blocked airflow causes it to overheat and work inefficiently.</p>
+          <ul>
+            <li>Keep at least <strong>2 feet of clearance</strong> around all sides of the unit</li>
+            <li>Remove leaves, grass clippings, and debris monthly</li>
+            <li>Trim any shrubs or plants growing near the unit</li>
+            <li>Gently rinse the fins with a garden hose once a season — spray from inside out</li>
+            <li>Never cover the unit while it's running or during summer months</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tip-detail" id="tip-tuneup">
+        <div class="back-btn" onclick="backToTips()">← Back to all tips</div>
+        <h2>📅 Annual tune-up</h2>
+        <div class="tip-detail-body">
+          <p>Even a new system benefits from a yearly professional checkup. In South Florida, schedule before summer (ideally March–April) to beat the rush.</p>
+          <ul>
+            <li>A technician will check refrigerant levels, electrical connections, and drain lines</li>
+            <li>They'll clean the evaporator and condenser coils for maximum efficiency</li>
+            <li>Your warranty may require annual maintenance — check your paperwork</li>
+            <li>Regular tune-ups extend your system's life by 3–5 years on average</li>
+            <li>Book early — May and June have 6–8 week wait times in South Florida</li>
+          </ul>
+          <br>
+          <a class="btn-book" onclick="show('contact')" href="#">Book your annual tune-up →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-area" id="area-contact">
+      <div class="page-title">Contact Us</div>
+      <p class="page-sub">Reach your service team at Premier HVAC Solutions.</p>
+      <div class="card">
+        <div class="card-label">Your service team</div>
+        <div style="font-size:14px;color:var(--mute);line-height:2;">
+          <div>📞 <strong style="color:var(--text);">(305) 555-0100</strong> — Office</div>
+          <div>📱 <strong style="color:var(--text);">Mike R. (305) 555-0182</strong> — Your technician</div>
+          <div>✉️ <strong style="color:var(--text);">service@premierhvac.example</strong></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Request a visit</div>
+        <a class="btn-book" href="#">Book a new appointment →</a>
+        <a class="btn-secondary" href="#">Send a message</a>
+      </div>
+    </div>
+
   </div>
+</div>
 
-  <div class="card">
-    <div class="card-label">Need something?</div>
-    <a class="btn-book" href="#">Book a follow-up appointment</a>
-    <a class="btn-secondary" href="#">Contact your technician</a>
-  </div>
-
-</main>
-
-<footer><div class="wrap foot">
-  <span>© 2026 InnoVista Strategies. Lead capture for the trades.</span>
-  <span>My Service Portal · <a href="index.html" style="color:var(--green);text-decoration:none;">Sign out</a></span>
+<footer><div class="foot">
+  <span>© 2026 InnoVista Strategies.</span>
+  <span><a href="index.html">Sign out</a></span>
 </div></footer>
+
+<script>
+function show(area) {
+  document.querySelectorAll('.content-area').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('area-' + area).classList.add('active');
+  if (event && event.currentTarget) event.currentTarget.classList.add('active');
+  backToTips();
+}
+
+function showTip(tip) {
+  document.getElementById('tips-list').style.display = 'none';
+  document.querySelectorAll('.tip-detail').forEach(el => el.classList.remove('active'));
+  document.getElementById('tip-' + tip).classList.add('active');
+}
+
+function backToTips() {
+  document.getElementById('tips-list').style.display = 'block';
+  document.querySelectorAll('.tip-detail').forEach(el => el.classList.remove('active'));
+}
+</script>
 </body>
 </html>

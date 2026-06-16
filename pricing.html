@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InnoVista Strategies — Plans & Pricing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #080d09; --bg2: #0b110d; --surface: #131f16; --surface2: #1a2b1e;
+    --surface3: #203026;
+    --line: rgba(120,170,140,0.18); --line2: rgba(120,170,140,0.30);
+    --green: #52b788; --green2: #74c9a0; --glow: rgba(82,183,136,0.15);
+    --text: #eef4f0; --mute: #a8c4b0; --dim: #6e8c78;
+    --fd: 'Space Grotesk', sans-serif; --fb: 'Hanken Grotesk', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--fb); -webkit-font-smoothing: antialiased; min-height: 100vh; background-image: radial-gradient(rgba(255,255,255,.03) 1.2px, transparent 1.2px); background-size: 26px 26px; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  header { border-bottom: 1px solid var(--line); background: rgba(8,13,9,.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 5; }
+  .nav { display: flex; align-items: center; gap: 11px; padding: 16px 0; }
+  .brand { font-family: var(--fd); font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
+  .nav-links { margin-left: auto; display: flex; gap: 20px; align-items: center; }
+  .nav-links a { font-size: 14px; color: var(--mute); text-decoration: none; transition: color .15s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { background: var(--green); color: #080d09; padding: 8px 18px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; }
+
+  .hero { padding: 72px 0 48px; text-align: center; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--green); padding: 7px 14px; border-radius: 999px; background: var(--glow); box-shadow: inset 0 0 0 1px var(--line2); margin-bottom: 20px; }
+  .eyebrow span { width: 6px; height: 6px; border-radius: 9px; background: var(--green); box-shadow: 0 0 10px var(--green); }
+  h1 { font-family: var(--fd); font-size: clamp(32px,5vw,52px); font-weight: 700; letter-spacing: -.02em; margin-bottom: 16px; }
+  h1 em { font-style: normal; color: var(--green); }
+  .hero-sub { font-size: 18px; color: var(--mute); max-width: 520px; margin: 0 auto 48px; line-height: 1.6; }
+
+  .plans { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 72px; }
+  @media (max-width: 720px) { .plans { grid-template-columns: 1fr; } }
+  .plan { background: var(--surface); border-radius: 20px; padding: 28px; box-shadow: inset 0 0 0 1px var(--line); display: flex; flex-direction: column; position: relative; }
+  .plan.featured { box-shadow: inset 0 0 0 2px var(--green); background: var(--surface2); }
+  .popular-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--green); color: #080d09; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 14px; border-radius: 999px; white-space: nowrap; }
+  .plan-name { font-family: var(--fd); font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+  .plan-price { font-family: var(--fd); font-size: 42px; font-weight: 700; letter-spacing: -.02em; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .plan-price span { font-size: 16px; font-weight: 500; color: var(--mute); }
+  .plan-desc { font-size: 13px; color: var(--mute); margin-bottom: 24px; line-height: 1.5; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .features { list-style: none; flex: 1; margin-bottom: 28px; }
+  .features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--mute); padding: 7px 0; border-bottom: 1px solid var(--line); line-height: 1.4; }
+  .features li:last-child { border-bottom: none; }
+  .features li.included { color: var(--text); }
+  .features li.excluded { opacity: .4; text-decoration: line-through; }
+  .check { color: var(--green); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .cross { color: var(--dim); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .ai-star { color: #ffd166; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .btn-plan { display: block; text-align: center; padding: 13px; border-radius: 10px; font-size: 14px; font-weight: 700; font-family: var(--fd); text-decoration: none; cursor: pointer; border: none; transition: opacity .15s; }
+  .btn-outline { background: transparent; color: var(--green); box-shadow: inset 0 0 0 1.5px var(--green); }
+  .btn-outline:hover { background: var(--glow); }
+  .btn-solid { background: var(--green); color: #080d09; }
+  .btn-solid:hover { opacity: .88; }
+
+  .compare { margin-bottom: 72px; }
+  .compare h2 { font-family: var(--fd); font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th { text-align: center; padding: 14px 16px; font-family: var(--fd); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); border-bottom: 1px solid var(--line2); }
+  thead th:first-child { text-align: left; }
+  tbody tr { border-bottom: 1px solid var(--line); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 12px 16px; color: var(--mute); text-align: center; }
+  tbody td:first-child { text-align: left; color: var(--text); font-weight: 500; }
+  tbody tr:hover td { background: var(--surface); }
+  .th-featured { color: var(--green) !important; }
+  .cell-yes { color: var(--green); font-size: 17px; }
+  .cell-no { color: var(--dim); font-size: 17px; }
+  .cell-ai { color: #ffd166; font-size: 15px; }
+  .cell-manual { font-size: 12px; color: var(--mute); }
+  .section-row td { background: var(--surface2); color: var(--green) !important; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 8px 16px; }
+
+  .faq { margin-bottom: 72px; max-width: 680px; }
+  .faq h2 { font-family: var(--fd); font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 24px; }
+  .faq-item { border-bottom: 1px solid var(--line); padding: 18px 0; }
+  .faq-q { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .faq-a { font-size: 14px; color: var(--mute); line-height: 1.6; }
+
+  footer { border-top: 1px solid var(--line); background: var(--bg2); }
+  .foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; padding: 22px 0; font-size: 12px; color: var(--dim); }
+  .foot a { color: var(--green); text-decoration: none; }
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#52b788"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#0a0f0a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#0a0f0a"/></svg>
+  <span class="brand">InnoVista</span>
+  <div class="nav-links">
+    <a href="InnoVista Website.html">Marketing Site</a>
+    <a href="index.html">Login</a>
+    <a class="nav-cta" href="index.html">Get started →</a>
+  </div>
+</div></header>
+
+<main>
+  <div class="wrap">
+    <div class="hero">
+      <div class="eyebrow"><span></span>Plans & Pricing</div>
+      <h1>The right plan for<br><em>every stage of growth.</em></h1>
+      <p class="hero-sub">Start free, automate your follow-up, then let AI run your leads around the clock.</p>
+    </div>
+
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Basic</div>
+        <div class="plan-price">$0<span>/mo</span></div>
+        <div class="plan-desc">Get started capturing leads and managing your calendar manually. No credit card required.</div>
+        <ul class="features">
+          <li class="included"><span class="check">✓</span>Lead capture form</li>
+          <li class="included"><span class="check">✓</span>Email notifications</li>
+          <li class="included"><span class="check">✓</span>Missed call text back</li>
+          <li class="included"><span class="check">✓</span>Manual appointment calendar</li>
+          <li class="excluded"><span class="cross">✗</span>SMS automation</li>
+          <li class="excluded"><span class="cross">✗</span>Pipeline dashboard</li>
+          <li class="excluded"><span class="cross">✗</span>Lead list & detail view</li>
+          <li class="excluded"><span class="cross">✗</span>AI chatbot</li>
+        </ul>
+        <a class="btn-plan btn-outline" href="index.html">Get started free</a>
+      </div>
+
+      <div class="plan featured">
+        <div class="popular-badge">Most popular</div>
+        <div class="plan-name">Standard</div>
+        <div class="plan-price">$297<span>/mo</span></div>
+        <div class="plan-desc">Automate your follow-up and let the system book jobs while you're on the job.</div>
+        <ul class="features">
+          <li class="included"><span class="check">✓</span>Everything in Basic</li>
+          <li class="included"><span class="check">✓</span>SMS follow-up automation</li>
+          <li class="included"><span class="check">✓</span>Automated booking calendar</li>
+          <li class="included"><span class="check">✓</span>Pipeline / Kanban dashboard</li>
+          <li class="included"><span class="check">✓</span>Lead list & detail view</li>
+          <li class="included"><span class="check">✓</span>Google review request automation</li>
+          <li class="included"><span class="check">✓</span>Multi-day follow-up sequences</li>
+          <li class="excluded"><span class="cross">✗</span>AI chatbot & voice calling</li>
+        </ul>
+        <a class="btn-plan btn-solid" href="index.html">Start Standard →</a>
+      </div>
+
+      <div class="plan">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$597<span>/mo</span></div>
+        <div class="plan-desc">Full AI automation. The system qualifies, books, and follows up — 24/7, no human needed.</div>
+        <ul class="features">
+          <li class="included"><span class="check">✓</span>Everything in Standard</li>
+          <li class="included"><span class="ai-star">★</span>AI chatbot — 24/7 lead qualification</li>
+          <li class="included"><span class="ai-star">★</span>AI voice calling</li>
+          <li class="included"><span class="check">✓</span>Advanced reporting dashboard</li>
+          <li class="included"><span class="check">✓</span>Multi-location support</li>
+          <li class="included"><span class="check">✓</span>White label options</li>
+          <li class="included"><span class="check">✓</span>Snapshot cloning — deploy in 24hr</li>
+          <li class="included"><span class="check">✓</span>Priority support</li>
+        </ul>
+        <a class="btn-plan btn-outline" href="index.html">Start Pro →</a>
+      </div>
+    </div>
+
+    <div class="compare">
+      <h2>Compare all features</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Basic</th>
+            <th class="th-featured">Standard</th>
+            <th>Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="section-row"><td colspan="4">Lead Capture</td></tr>
+          <tr><td>Lead capture form</td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>Email notifications</td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>Missed call text back</td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>SMS follow-up automation</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>Multi-day follow-up sequences</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+
+          <tr class="section-row"><td colspan="4">Calendar & Booking</td></tr>
+          <tr><td>Appointment calendar</td><td><span class="cell-manual">Manual only</span></td><td><span class="cell-yes">✓ Automated</span></td><td><span class="cell-yes">✓ Automated</span></td></tr>
+          <tr><td>Booking reminders</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+
+          <tr class="section-row"><td colspan="4">Pipeline & Leads</td></tr>
+          <tr><td>Lead list view</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>Pipeline / Kanban dashboard</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>Lead detail view</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>Google review automation</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
+
+          <tr class="section-row"><td colspan="4">AI Features</td></tr>
+          <tr><td>AI chatbot — 24/7 qualification</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-ai">★ Pro only</span></td></tr>
+          <tr><td>AI voice calling</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-ai">★ Pro only</span></td></tr>
+          <tr><td>Advanced reporting</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td></tr>
+
+          <tr class="section-row"><td colspan="4">Agency & Scale</td></tr>
+          <tr><td>Multi-location support</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>White label options</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>Snapshot cloning (24hr deploy)</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td></tr>
+          <tr><td>Priority support</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="faq">
+      <h2>Common questions</h2>
+      <div class="faq-item"><div class="faq-q">Can I start on Basic and upgrade later?</div><div class="faq-a">Absolutely. Start free, get your first leads in, and upgrade to Standard or Pro when you're ready to automate. Your data and leads carry over instantly.</div></div>
+      <div class="faq-item"><div class="faq-q">What makes the AI chatbot Pro-only?</div><div class="faq-a">The AI chatbot qualifies every lead automatically — 24/7, no human needed. It's the most powerful feature in the platform and the centerpiece of what makes Pro worth it.</div></div>
+      <div class="faq-item"><div class="faq-q">Is there a setup fee?</div><div class="faq-a">No setup fees on any plan. Pro clients get a done-for-you onboarding and snapshot deployment within 24 hours of signing up.</div></div>
+      <div class="faq-item"><div class="faq-q">What trades do you support?</div><div class="faq-a">We're launching with roofing first, then expanding to HVAC, plumbing, electrical, and landscaping. Pro clients get early access to each new trade snapshot as it launches.</div></div>
+      <div class="faq-item"><div class="faq-q">Can my clients have their own login?</div><div class="faq-a">Yes. Every business owner gets their own dashboard login. Their customers get a personal service portal to view quotes, appointments, and maintenance tips — no app download needed.</div></div>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap foot">
+  <span>© 2026 InnoVista Strategies. Lead capture for the trades.</span>
+  <span><a href="index.html">Login</a> · <a href="InnoVista Website.html">Marketing site</a></span>
+</div></footer>
+</body>
+</html>

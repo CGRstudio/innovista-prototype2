@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InnoVista — Plan Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #080d09; --bg2: #0b110d; --surface: #131f16; --surface2: #1a2b1e; --surface3: #203026;
+    --line: rgba(120,170,140,0.18); --line2: rgba(120,170,140,0.30);
+    --green: #52b788; --green2: #74c9a0; --glow: rgba(82,183,136,0.15);
+    --text: #eef4f0; --mute: #a8c4b0; --dim: #6e8c78;
+    --fd: 'Space Grotesk', sans-serif; --fb: 'Hanken Grotesk', sans-serif;
+    --sidebar: 220px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--fb); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+  
+  header { border-bottom: 1px solid var(--line); background: rgba(8,13,9,.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 10; }
+  .nav { display: flex; align-items: center; gap: 11px; padding: 14px 24px; }
+  .brand { font-family: var(--fd); font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+  .role-badge { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); background: var(--glow); border: 1px solid var(--line2); padding: 4px 10px; border-radius: 999px; }
+  .signout { font-size: 13px; color: var(--dim); text-decoration: none; }
+  .signout:hover { color: var(--mute); }
+
+  .layout { display: flex; flex: 1; }
+
+  aside { width: var(--sidebar); background: var(--surface); border-right: 1px solid var(--line); padding: 24px 0; flex-shrink: 0; position: sticky; top: 57px; height: calc(100vh - 57px); overflow-y: auto; }
+  .aside-section { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); padding: 0 18px; margin: 20px 0 8px; }
+  .aside-section:first-child { margin-top: 0; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 18px; font-size: 14px; color: var(--mute); text-decoration: none; cursor: pointer; border-left: 2px solid transparent; transition: all .15s; }
+  .nav-item:hover { color: var(--text); background: var(--surface2); }
+  .nav-item.active { color: var(--green); background: var(--glow); border-left-color: var(--green); font-weight: 600; }
+  .nav-icon { font-size: 16px; width: 18px; text-align: center; }
+
+  .main { flex: 1; padding: 36px 40px; max-width: 900px; }
+  .page-title { font-family: var(--fd); font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 6px; }
+  .page-sub { font-size: 14px; color: var(--mute); margin-bottom: 32px; }
+
+  .client-table { width: 100%; border-collapse: collapse; }
+  .client-table thead th { text-align: left; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); padding: 10px 14px; border-bottom: 1px solid var(--line2); }
+  .client-table tbody tr { border-bottom: 1px solid var(--line); transition: background .12s; }
+  .client-table tbody tr:hover { background: var(--surface2); }
+  .client-table tbody td { padding: 14px; font-size: 14px; color: var(--mute); vertical-align: middle; }
+  .client-table tbody td:first-child { color: var(--text); font-weight: 500; }
+
+  .plan-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 999px; letter-spacing: .04em; }
+  .badge-basic { background: rgba(110,140,120,.15); color: #8aaa96; border: 1px solid rgba(110,140,120,.25); }
+  .badge-standard { background: rgba(100,149,237,.15); color: #8ab4f8; border: 1px solid rgba(100,149,237,.25); }
+  .badge-pro { background: rgba(255,209,102,.12); color: #ffd166; border: 1px solid rgba(255,209,102,.2); }
+
+  .plan-select { background: var(--surface2); border: 1px solid var(--line); border-radius: 7px; padding: 6px 10px; font-size: 13px; color: var(--text); font-family: var(--fb); cursor: pointer; outline: none; }
+  .plan-select:focus { border-color: var(--green); }
+
+  .toggle-wrap { display: flex; gap: 8px; flex-wrap: wrap; }
+  .toggle { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--mute); background: var(--surface2); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; transition: all .15s; user-select: none; }
+  .toggle.on { color: var(--green); border-color: var(--line2); background: var(--glow); }
+  .toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dim); flex-shrink: 0; transition: background .15s; }
+  .toggle.on .toggle-dot { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .toggle.ai-feat { color: #ffd166; border-color: rgba(255,209,102,.2); background: rgba(255,209,102,.08); }
+  .toggle.ai-feat .toggle-dot { background: #ffd166; }
+
+  .save-btn { background: var(--green); color: #080d09; border: none; border-radius: 7px; padding: 7px 16px; font-size: 13px; font-weight: 700; font-family: var(--fd); cursor: pointer; transition: opacity .15s; }
+  .save-btn:hover { opacity: .85; }
+  .saved-msg { font-size: 12px; color: var(--green); display: none; margin-left: 8px; }
+
+  .summary-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 28px; }
+  .scard { background: var(--surface); border-radius: 14px; padding: 18px; box-shadow: inset 0 0 0 1px var(--line); }
+  .scard-val { font-family: var(--fd); font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .scard-label { font-size: 12px; color: var(--dim); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+  .scard-val.basic-c { color: #8aaa96; }
+  .scard-val.standard-c { color: #8ab4f8; }
+  .scard-val.pro-c { color: #ffd166; }
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#52b788"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#0a0f0a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#0a0f0a"/></svg>
+  <span class="brand">InnoVista</span>
+  <div class="nav-right">
+    <span class="role-badge">InnoVista Admin</span>
+    <a class="signout" href="index.html">Sign out</a>
+  </div>
+</div></header>
+
+<div class="layout">
+  <aside>
+    <div class="aside-section">Agency</div>
+    <a class="nav-item" href="InnoVista%20Backend.html"><span class="nav-icon">📊</span>Overview</a>
+    <a class="nav-item active" href="admin-plans.html"><span class="nav-icon">⚙️</span>Plan Management</a>
+    <a class="nav-item" href="#"><span class="nav-icon">👥</span>All Clients</a>
+    <a class="nav-item" href="#"><span class="nav-icon">📦</span>Snapshot Library</a>
+    <div class="aside-section">Platform</div>
+    <a class="nav-item" href="pricing.html"><span class="nav-icon">💳</span>Pricing Page</a>
+    <a class="nav-item" href="#"><span class="nav-icon">📈</span>Revenue</a>
+    <a class="nav-item" href="#"><span class="nav-icon">🔔</span>Notifications</a>
+    <div class="aside-section">Account</div>
+    <a class="nav-item" href="#"><span class="nav-icon">🔧</span>Settings</a>
+    <a class="nav-item" href="index.html"><span class="nav-icon">🚪</span>Sign out</a>
+  </aside>
+
+  <div class="main">
+    <div class="page-title">Plan Management</div>
+    <p class="page-sub">Control which features each client can access based on their plan. Changes take effect immediately.</p>
+
+    <div class="summary-cards">
+      <div class="scard"><div class="scard-val basic-c">3</div><div class="scard-label">Basic clients</div></div>
+      <div class="scard"><div class="scard-val standard-c">5</div><div class="scard-label">Standard clients</div></div>
+      <div class="scard"><div class="scard-val pro-c">2</div><div class="scard-label">Pro clients</div></div>
+    </div>
+
+    <table class="client-table">
+      <thead>
+        <tr>
+          <th>Business</th>
+          <th>Trade</th>
+          <th>Current Plan</th>
+          <th>Active Features</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="client-rows"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const FEATURES = {
+  basic:    ['Lead Form','Email Alerts','Missed Call Text','Manual Calendar'],
+  standard: ['Lead Form','Email Alerts','Missed Call Text','Manual Calendar','SMS Automation','Auto Calendar','Pipeline','Lead List','Review Requests'],
+  pro:      ['Lead Form','Email Alerts','Missed Call Text','Manual Calendar','SMS Automation','Auto Calendar','Pipeline','Lead List','Review Requests','AI Chatbot ★','AI Voice ★','Advanced Reports','Multi-location','White Label','Snapshots','Priority Support'],
+};
+const AI_FEATS = ['AI Chatbot ★','AI Voice ★'];
+
+const clients = [
+  { name:'Premier HVAC Solutions', trade:'HVAC', plan:'pro' },
+  { name:'SunState Roofing',       trade:'Roofing', plan:'standard' },
+  { name:'Ace Plumbing Co.',       trade:'Plumbing', plan:'basic' },
+  { name:'Bright Electric',        trade:'Electrical', plan:'standard' },
+  { name:'GreenLeaf Landscaping',  trade:'Landscaping', plan:'basic' },
+  { name:'CoolBreeze Air',         trade:'HVAC', plan:'pro' },
+  { name:'FlowRight Plumbing',     trade:'Plumbing', plan:'standard' },
+  { name:'TopTile Roofing',        trade:'Roofing', plan:'basic' },
+  { name:'Volt Masters',           trade:'Electrical', plan:'standard' },
+  { name:'TrimRight Lawn Care',    trade:'Landscaping', plan:'standard' },
+];
+
+const state = clients.map(c => ({ ...c, features: [...FEATURES[c.plan]] }));
+
+function badgeClass(plan) { return 'plan-badge badge-' + plan; }
+function badgeLabel(plan) { return plan.charAt(0).toUpperCase() + plan.slice(1); }
+
+function render() {
+  const tbody = document.getElementById('client-rows');
+  tbody.innerHTML = '';
+  state.forEach((c, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${c.name}</td>
+      <td>${c.trade}</td>
+      <td>
+        <select class="plan-select" onchange="changePlan(${i}, this.value)">
+          <option value="basic"    ${c.plan==='basic'    ? 'selected':''}>Basic</option>
+          <option value="standard" ${c.plan==='standard' ? 'selected':''}>Standard</option>
+          <option value="pro"      ${c.plan==='pro'      ? 'selected':''}>Pro</option>
+        </select>
+      </td>
+      <td><div class="toggle-wrap" id="toggles-${i}"></div></td>
+      <td><button class="save-btn" onclick="save(${i}, this)">Save</button><span class="saved-msg" id="saved-${i}">✓ Saved</span></td>
+    `;
+    tbody.appendChild(tr);
+    renderToggles(i);
+  });
+}
+
+function renderToggles(i) {
+  const wrap = document.getElementById('toggles-' + i);
+  wrap.innerHTML = '';
+  FEATURES[state[i].plan].forEach(feat => {
+    const on = state[i].features.includes(feat);
+    const isAI = AI_FEATS.includes(feat);
+    const div = document.createElement('div');
+    div.className = 'toggle' + (on ? (isAI ? ' on ai-feat' : ' on') : '');
+    div.innerHTML = `<span class="toggle-dot"></span>${feat}`;
+    div.onclick = () => toggleFeat(i, feat);
+    wrap.appendChild(div);
+  });
+}
+
+function changePlan(i, plan) {
+  state[i].plan = plan;
+  state[i].features = [...FEATURES[plan]];
+  renderToggles(i);
+}
+
+function toggleFeat(i, feat) {
+  const idx = state[i].features.indexOf(feat);
+  if (idx > -1) state[i].features.splice(idx, 1);
+  else state[i].features.push(feat);
+  renderToggles(i);
+}
+
+function save(i, btn) {
+  const msg = document.getElementById('saved-' + i);
+  msg.style.display = 'inline';
+  setTimeout(() => { msg.style.display = 'none'; }, 2000);
+}
+
+render();
+</script>
+</body>
+</html>
