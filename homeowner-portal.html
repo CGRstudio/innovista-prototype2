@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InnoVista — My Service Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0f0a; --bg2: #0d130f; --surface: #111912; --surface2: #16201a;
+    --line: rgba(120,170,140,0.12); --line2: rgba(120,170,140,0.20);
+    --green: #52b788; --glow: rgba(82,183,136,0.13);
+    --text: #e7efe9; --mute: #9bb0a3; --dim: #6c8073;
+    --fd: 'Space Grotesk', sans-serif; --fb: 'Hanken Grotesk', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--fb); -webkit-font-smoothing: antialiased; min-height: 100vh; background-image: radial-gradient(rgba(255,255,255,.025) 1.2px, transparent 1.2px); background-size: 26px 26px; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+  header { border-bottom: 1px solid var(--line); background: rgba(10,15,10,.7); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 5; }
+  .nav { display: flex; align-items: center; gap: 11px; padding: 16px 0; }
+  .brand { font-family: var(--fd); font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+  .role-badge { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); background: var(--glow); border: 1px solid var(--line2); padding: 4px 10px; border-radius: 999px; }
+  .signout { font-size: 13px; color: var(--dim); cursor: pointer; text-decoration: none; }
+
+  .page-header { padding: 40px 0 24px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--green); padding: 6px 12px; border-radius: 999px; background: var(--glow); box-shadow: inset 0 0 0 1px var(--line2); margin-bottom: 16px; }
+  .eyebrow span { width: 6px; height: 6px; border-radius: 9px; background: var(--green); box-shadow: 0 0 10px var(--green); }
+  h1 { font-family: var(--fd); font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 6px; }
+  .sub { font-size: 14px; color: var(--mute); }
+
+  .card { background: var(--surface); border-radius: 18px; padding: 24px; box-shadow: inset 0 0 0 1px var(--line); margin-bottom: 16px; }
+  .card-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .card-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+  .quote-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .quote-row:last-child { border-bottom: none; }
+  .quote-item { font-size: 14px; color: var(--text); }
+  .quote-price { font-size: 14px; font-weight: 600; color: var(--green); }
+  .quote-desc { font-size: 12px; color: var(--dim); margin-top: 2px; }
+  .quote-total { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line2); }
+  .quote-total-label { font-family: var(--fd); font-size: 15px; font-weight: 600; }
+  .quote-total-val { font-family: var(--fd); font-size: 22px; font-weight: 700; color: var(--green); }
+  .signed-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #7ce0b0; background: rgba(82,183,136,.15); border: 1px solid rgba(82,183,136,.2); padding: 5px 12px; border-radius: 999px; margin-top: 14px; }
+
+  .appt-block { display: flex; gap: 16px; align-items: flex-start; }
+  .appt-date { background: var(--glow); border: 1px solid var(--line2); border-radius: 12px; padding: 10px 14px; text-align: center; flex-shrink: 0; }
+  .appt-month { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--green); }
+  .appt-day { font-family: var(--fd); font-size: 28px; font-weight: 700; color: var(--text); line-height: 1; }
+  .appt-info h3 { font-family: var(--fd); font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .appt-info p { font-size: 13px; color: var(--mute); line-height: 1.5; }
+  .appt-status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--green); background: var(--glow); border: 1px solid var(--line2); padding: 3px 9px; border-radius: 999px; margin-top: 8px; }
+  .appt-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .tip { background: var(--surface2); border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 1px var(--line); }
+  .tip-icon { font-size: 20px; margin-bottom: 8px; }
+  .tip-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .tip-desc { font-size: 12px; color: var(--dim); line-height: 1.4; }
+
+  .btn-book { display: block; width: 100%; background: var(--green); color: #0a0f0a; border: none; border-radius: 12px; padding: 15px; font-size: 15px; font-weight: 700; font-family: var(--fd); cursor: pointer; text-align: center; text-decoration: none; transition: opacity .15s; letter-spacing: -.01em; margin-top: 8px; }
+  .btn-book:hover { opacity: .88; }
+  .btn-secondary { display: block; width: 100%; background: transparent; color: var(--green); border: 1px solid var(--line2); border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; font-family: var(--fd); cursor: pointer; text-align: center; text-decoration: none; transition: all .15s; margin-top: 10px; }
+  .btn-secondary:hover { background: var(--glow); }
+
+  footer { border-top: 1px solid var(--line); background: var(--bg2); margin-top: 60px; }
+  .foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; padding: 22px 0; font-size: 12px; color: var(--dim); }
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#52b788"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#0a0f0a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#0a0f0a"/></svg>
+  <span class="brand">InnoVista</span>
+  <div class="nav-right">
+    <span class="role-badge">My Portal</span>
+    <a class="signout" href="index.html">Sign out</a>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <div class="page-header">
+    <div class="eyebrow"><span></span>Premier HVAC Solutions</div>
+    <h1>Hi, James. 👋</h1>
+    <p class="sub">Here's everything about your recent service and what's coming up.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Your signed quote</div>
+    <div class="quote-row">
+      <div><div class="quote-item">AC System Installation</div><div class="quote-desc">Carrier 3-ton unit, full install + removal of old unit</div></div>
+      <div class="quote-price">$3,200</div>
+    </div>
+    <div class="quote-row">
+      <div><div class="quote-item">Labor & Materials</div><div class="quote-desc">Full day install, new refrigerant line, electrical hookup</div></div>
+      <div class="quote-price">$850</div>
+    </div>
+    <div class="quote-row">
+      <div><div class="quote-item">1-Year Warranty</div><div class="quote-desc">Parts and labor covered</div></div>
+      <div class="quote-price">Included</div>
+    </div>
+    <div class="quote-total">
+      <span class="quote-total-label">Total agreed</span>
+      <span class="quote-total-val">$4,050</span>
+    </div>
+    <div class="signed-badge">✓ Signed June 14, 2026</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Upcoming appointment</div>
+    <div class="appt-block">
+      <div class="appt-date">
+        <div class="appt-month">Jun</div>
+        <div class="appt-day">18</div>
+      </div>
+      <div class="appt-info">
+        <h3>AC Installation</h3>
+        <p>Wednesday, June 18 · 10:00 AM – 3:00 PM<br>Technician: Mike R. · (305) 555-0182<br>6842 SW 112th Ave, Hialeah FL</p>
+        <span class="appt-status">Confirmed</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Maintenance tips for your new system</div>
+    <div class="tips-grid">
+      <div class="tip"><div class="tip-icon">🔄</div><div class="tip-title">Change filter every 90 days</div><div class="tip-desc">A clean filter keeps your system running at peak efficiency and extends its life.</div></div>
+      <div class="tip"><div class="tip-icon">🌡️</div><div class="tip-title">Set thermostat to 78°F</div><div class="tip-desc">In South Florida, 78°F is the sweet spot for comfort and energy savings.</div></div>
+      <div class="tip"><div class="tip-icon">🧹</div><div class="tip-title">Clear the outdoor unit</div><div class="tip-desc">Keep 2ft of clearance around your unit. Remove leaves and debris monthly.</div></div>
+      <div class="tip"><div class="tip-icon">📅</div><div class="tip-title">Annual tune-up</div><div class="tip-desc">Schedule a checkup every year before summer to avoid breakdowns in peak heat.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Need something?</div>
+    <a class="btn-book" href="#">Book a follow-up appointment</a>
+    <a class="btn-secondary" href="#">Contact your technician</a>
+  </div>
+
+</main>
+
+<footer><div class="wrap foot">
+  <span>© 2026 InnoVista Strategies. Lead capture for the trades.</span>
+  <span>My Service Portal · <a href="index.html" style="color:var(--green);text-decoration:none;">Sign out</a></span>
+</div></footer>
+</body>
+</html>
