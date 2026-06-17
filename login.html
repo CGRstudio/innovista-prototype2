@@ -101,21 +101,21 @@
         <div class="hint"><strong>Demo:</strong> chris@innovista.com / admin123</div>
         <div class="form-group"><label>Email address</label><input type="email" id="admin-email" placeholder="chris@innovista.com" /></div>
         <div class="form-group"><label>Password</label><input type="password" id="admin-pass" placeholder="••••••••" /></div>
-        <button class="btn-login" onclick="tryLogin('admin')">Sign in as Admin →</button>
+        <button type="button" class="btn-login" onclick="tryLogin('admin', event)">Sign in as Admin →</button>
       </div>
 
       <div id="form-client" style="display:none;">
         <div class="hint"><strong>Demo:</strong> client@hvaccompany.example / client123</div>
         <div class="form-group"><label>Email address</label><input type="email" id="client-email" placeholder="client@hvaccompany.example" /></div>
         <div class="form-group"><label>Password</label><input type="password" id="client-pass" placeholder="••••••••" /></div>
-        <button class="btn-login" onclick="tryLogin('client')">Sign in →</button>
+        <button type="button" class="btn-login" onclick="tryLogin('client', event)">Sign in →</button>
       </div>
 
       <div id="form-homeowner" style="display:none;">
         <div class="hint"><strong>Demo:</strong> Enter phone number 555-867-5309</div>
         <div class="form-group"><label>Phone number</label><input type="tel" id="hw-phone" placeholder="555-867-5309" /></div>
         <div class="divider"><hr/><span>We'll verify your number</span><hr/></div>
-        <button class="btn-login" onclick="tryLogin('homeowner')">Access my portal →</button>
+        <button type="button" class="btn-login" onclick="tryLogin('homeowner', event)">Access my portal →</button>
       </div>
     </div>
   </div>
@@ -139,7 +139,8 @@ function setRole(role) {
   });
   document.getElementById('error-msg').classList.remove('show');
 }
-function tryLogin(role) {
+function tryLogin(role, evt) {
+  if (evt) { evt.preventDefault(); evt.stopPropagation(); }
   const err = document.getElementById('error-msg');
   err.classList.remove('show');
   if (role==='admin') { const e=document.getElementById('admin-email').value.trim().toLowerCase(), p=document.getElementById('admin-pass').value.trim(); if(e===CREDS.admin.email&&p===CREDS.admin.pass){go(CREDS.admin.dest);return;} }
