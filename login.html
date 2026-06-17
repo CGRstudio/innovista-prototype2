@@ -125,6 +125,7 @@
 
 <script>
 let currentRole = 'admin';
+sessionStorage.removeItem('innovista_session');
 const CREDS = {
   admin:     { email:'chris@innovista.com',        pass:'admin123',  dest:'InnoVista%20Backend.html' },
   client:    { email:'client@hvaccompany.example', pass:'client123', dest:'client-dashboard.html' },
@@ -146,8 +147,14 @@ function tryLogin(role) {
   if (role==='homeowner') { const ph=document.getElementById('hw-phone').value.replace(/\D/g,''); if(ph===CREDS.homeowner.phone||ph===''){go(CREDS.homeowner.dest);return;} }
   err.classList.add('show');
 }
-function go(dest) { window.location.href = dest; }
-document.addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(currentRole); });
+function go(dest) { sessionStorage.setItem('innovista_session', JSON.stringify({role: currentRole, ts: Date.now()})); window.location.href = dest; }
+document.addEventListener('keydown', e => {
+  if (e.key==='Enter') {
+    if (document.getElementById('form-admin').style.display !== 'none') tryLogin('admin');
+    else if (document.getElementById('form-client').style.display !== 'none') tryLogin('client');
+    else if (document.getElementById('form-homeowner').style.display !== 'none') tryLogin('homeowner');
+  }
+});
 </script>
 </body>
 </html>
