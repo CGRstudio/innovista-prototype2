@@ -1,127 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>InnoVista — Business Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg: #080d09; --bg2: #0b110d; --surface: #131f16; --surface2: #1a2b1e;
-    --line: rgba(120,170,140,0.18); --line2: rgba(120,170,140,0.32);
-    --green: #52b788; --green2: #74c9a0; --glow: rgba(82,183,136,0.15);
-    --text: #eef4f0; --mute: #a8c4b0; --dim: #6e8c78;
-    --fd: 'Space Grotesk', sans-serif; --fb: 'Hanken Grotesk', sans-serif;
-    --sidebar: 220px;
+  :root{
+    --bg:#F4F6F8;--surface:#FFFFFF;--surface2:#F9FAFB;--border:#E5E7EB;--border2:#D1D5DB;
+    --green:#16A34A;--green-light:#DCFCE7;--green-dark:#15803D;--green-glow:rgba(22,163,74,.08);
+    --text:#111827;--mute:#6B7280;--dim:#9CA3AF;
+    --fd:'Space Grotesk',sans-serif;--fb:'Inter',sans-serif;
+    --shadow-sm:0 1px 3px rgba(0,0,0,.08);--shadow:0 4px 12px rgba(0,0,0,.08);
+    --sidebar:232px;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: var(--fb); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
-  header { border-bottom: 1px solid var(--line); background: rgba(8,13,9,.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 10; }
-  .nav { display: flex; align-items: center; gap: 11px; padding: 14px 24px; }
-  .brand { font-family: var(--fd); font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
-  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
-  .role-badge { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); background: var(--glow); border: 1px solid var(--line2); padding: 4px 10px; border-radius: 999px; }
-  .plan-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: rgba(255,209,102,.12); color: #ffd166; border: 1px solid rgba(255,209,102,.2); }
-  .signout { font-size: 13px; color: var(--dim); text-decoration: none; }
-  .layout { display: flex; flex: 1; }
-
-  aside { width: var(--sidebar); background: var(--surface); border-right: 1px solid var(--line); padding: 24px 0; flex-shrink: 0; position: sticky; top: 57px; height: calc(100vh - 57px); overflow-y: auto; }
-  .aside-section { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); padding: 0 18px; margin: 20px 0 8px; }
-  .aside-section:first-child { margin-top: 0; }
-  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 18px; font-size: 14px; color: var(--mute); text-decoration: none; cursor: pointer; border-left: 2px solid transparent; transition: all .15s; }
-  .nav-item:hover { color: var(--text); background: var(--surface2); }
-  .nav-item.active { color: var(--green); background: var(--glow); border-left-color: var(--green); font-weight: 600; }
-  .nav-icon { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.6; }
-  .nav-item.active .nav-icon { opacity: 1; }
-  .locked { opacity: .38; pointer-events: none; }
-  .locked-tip { font-size: 10px; color: var(--dim); background: var(--surface2); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; margin-left: auto; }
-
-  .main { flex: 1; padding: 36px 40px; }
-  .page-title { font-family: var(--fd); font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 4px; }
-  .page-sub { font-size: 14px; color: var(--mute); margin-bottom: 28px; }
-  .content-area { display: none; }
-  .content-area.active { display: block; }
-
-  .stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 14px; margin-bottom: 28px; }
-  .stat { background: var(--surface); border-radius: 14px; padding: 20px; box-shadow: inset 0 0 0 1px var(--line); }
-  .stat-val { font-family: var(--fd); font-size: 34px; font-weight: 700; color: var(--green2); }
-  .stat-label { font-size: 12px; color: var(--dim); margin-top: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
-
-  .section-title { font-family: var(--fd); font-size: 16px; font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
-  .section-title span { font-size: 12px; color: var(--green); font-weight: 500; cursor: pointer; }
-
-  .pipeline { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 10px; margin-bottom: 32px; }
-  .stage { background: var(--surface); border-radius: 14px; padding: 16px; box-shadow: inset 0 0 0 1px var(--line); }
-  .stage-name { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-  .lead-card { background: var(--surface2); border-radius: 10px; padding: 11px 13px; margin-bottom: 8px; box-shadow: inset 0 0 0 1px var(--line2); cursor: pointer; transition: box-shadow .15s; }
-  .lead-card:hover { box-shadow: inset 0 0 0 1px var(--green); }
-  .lead-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
-  .lead-detail { font-size: 11px; color: var(--dim); }
-  .lead-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-top: 6px; }
-  .badge-new { background: rgba(82,183,136,.2); color: var(--green2); }
-  .badge-contacted { background: rgba(100,149,237,.18); color: #8ab4f8; }
-  .badge-qualified { background: rgba(255,165,0,.15); color: #ffa040; }
-  .badge-booked { background: rgba(116,201,160,.2); color: #74c9a0; }
-
-  /* Calendar */
-  .cal-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-  .cal-title { font-family: var(--fd); font-size: 18px; font-weight: 600; }
-  .cal-toggles { display: flex; background: var(--surface); border-radius: 8px; box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
-  .cal-tog { padding: 7px 16px; font-size: 13px; font-weight: 600; color: var(--mute); cursor: pointer; border: none; background: transparent; transition: all .15s; font-family: var(--fb); }
-  .cal-tog.active { background: var(--green); color: #080d09; }
-  .cal-nav { display: flex; gap: 8px; align-items: center; }
-  .cal-nav-btn { background: var(--surface); border: 1px solid var(--line); border-radius: 7px; color: var(--mute); font-size: 16px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .15s; }
-  .cal-nav-btn:hover { border-color: var(--green); color: var(--green); }
-
-  .cal-day-names { display: grid; grid-template-columns: repeat(7,1fr); gap: 6px; margin-bottom: 6px; }
-  .cal-day-name { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); text-align: center; padding: 4px 0; }
-  .cal-month-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 6px; }
-  .cal-cell { background: var(--surface); border-radius: 10px; padding: 10px 8px; box-shadow: inset 0 0 0 1px var(--line); min-height: 80px; }
-  .cal-cell.today { box-shadow: inset 0 0 0 1.5px var(--green); }
-  .cal-cell.empty { background: transparent; box-shadow: none; }
-  .cal-num { font-size: 12px; font-weight: 600; color: var(--dim); margin-bottom: 6px; }
-  .cal-num.today-num { color: var(--green); }
-  .cal-appt { background: var(--glow); border: 1px solid var(--line2); border-radius: 5px; padding: 4px 7px; font-size: 10px; color: var(--green2); line-height: 1.3; margin-bottom: 4px; }
-
-  .cal-week-grid { display: grid; grid-template-columns: 60px repeat(7,1fr); gap: 1px; background: var(--line); border-radius: 10px; overflow: hidden; }
-  .cal-week-head { background: var(--surface); padding: 10px 8px; text-align: center; font-size: 11px; font-weight: 600; color: var(--dim); text-transform: uppercase; letter-spacing: .05em; }
-  .cal-week-head.today-col { color: var(--green); }
-  .cal-time-col { background: var(--surface2); padding: 8px 6px; font-size: 10px; color: var(--dim); text-align: right; height: 44px; display: flex; align-items: center; justify-content: flex-end; }
-  .cal-week-cell { background: var(--surface); height: 44px; position: relative; }
-  .cal-week-cell.today-col { background: var(--surface2); }
-  .cal-week-appt { position: absolute; left: 3px; right: 3px; top: 3px; background: var(--glow); border: 1px solid var(--line2); border-radius: 4px; padding: 3px 6px; font-size: 10px; color: var(--green2); line-height: 1.3; }
-
-  .cal-day-grid { display: grid; grid-template-columns: 60px 1fr; gap: 1px; background: var(--line); border-radius: 10px; overflow: hidden; max-height: 520px; overflow-y: auto; }
-  .cal-day-time { background: var(--surface2); padding: 8px 10px; font-size: 11px; color: var(--dim); text-align: right; height: 52px; display: flex; align-items: flex-start; justify-content: flex-end; padding-top: 6px; }
-  .cal-day-slot { background: var(--surface); height: 52px; position: relative; border-bottom: 1px solid var(--line); }
-  .cal-day-appt { position: absolute; left: 8px; right: 8px; top: 4px; background: var(--glow); border: 1px solid var(--line2); border-left: 3px solid var(--green); border-radius: 6px; padding: 6px 10px; font-size: 12px; color: var(--green2); font-weight: 500; }
-
-  .add-appt-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--green); background: var(--glow); border: 1px solid var(--line2); border-radius: 8px; padding: 8px 16px; cursor: pointer; margin-bottom: 20px; }
-
-  .lead-table { width: 100%; border-collapse: collapse; }
-  .lead-table thead th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); padding: 10px 14px; border-bottom: 1px solid var(--line2); }
-  .lead-table tbody tr { border-bottom: 1px solid var(--line); cursor: pointer; transition: background .12s; }
-  .lead-table tbody tr:hover { background: var(--surface2); }
-  .lead-table tbody td { padding: 13px 14px; font-size: 14px; color: var(--mute); }
-  .lead-table tbody td:first-child { color: var(--text); font-weight: 500; }
-
-  .notif { display: flex; align-items: flex-start; gap: 14px; background: var(--surface); border-radius: 12px; padding: 16px; box-shadow: inset 0 0 0 1px var(--line); margin-bottom: 10px; }
-  .notif-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 5px; box-shadow: 0 0 6px var(--green); }
-  .notif-dot.read { background: var(--dim); box-shadow: none; }
-  .notif-text { font-size: 14px; color: var(--text); line-height: 1.5; }
-  .notif-time { font-size: 12px; color: var(--dim); margin-top: 3px; }
-
-  footer { border-top: 1px solid var(--line); background: var(--bg2); }
-  .foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; padding: 18px 24px; font-size: 12px; color: var(--dim); }
-  .foot a { color: var(--green); text-decoration: none; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--fb);-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;}
+  header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;box-shadow:var(--shadow-sm);}
+  .nav{display:flex;align-items:center;gap:11px;padding:0 24px;height:64px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--fd);font-weight:700;font-size:20px;text-decoration:none;color:var(--text);}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+  .role-badge{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green);background:var(--green-light);border:1px solid #BBF7D0;padding:4px 10px;border-radius:999px;}
+  .plan-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;background:#FEF3C7;color:#D97706;border:1px solid #FDE68A;}
+  .signout{font-size:13px;font-weight:500;color:var(--mute);text-decoration:none;padding:7px 14px;border:1px solid var(--border);border-radius:7px;}
+  .signout:hover{color:var(--text);border-color:var(--border2);}
+  .layout{display:flex;flex:1;}
+  aside{width:var(--sidebar);background:var(--surface);border-right:1px solid var(--border);padding:20px 0;flex-shrink:0;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto;}
+  .aside-section{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:0 16px;margin:20px 0 6px;}
+  .aside-section:first-child{margin-top:0;}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:9px 16px;font-size:14px;font-weight:500;color:var(--mute);text-decoration:none;cursor:pointer;border-left:2px solid transparent;transition:all .15s;}
+  .nav-item:hover{color:var(--text);background:var(--bg);}
+  .nav-item.active{color:var(--green);background:var(--green-light);border-left-color:var(--green);font-weight:600;}
+  .nav-icon{width:16px;height:16px;flex-shrink:0;stroke:currentColor;opacity:.7;}
+  .nav-item.active .nav-icon{opacity:1;}
+  .locked{opacity:.35;pointer-events:none;}
+  .locked-tip{font-size:10px;color:var(--dim);background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:1px 6px;margin-left:auto;}
+  .main{flex:1;padding:32px 36px;}
+  .page-title{font-family:var(--fd);font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px;}
+  .page-sub{font-size:14px;color:var(--mute);margin-bottom:24px;}
+  .content-area{display:none;}
+  .content-area.active{display:block;}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:28px;}
+  .stat{background:var(--surface);border-radius:12px;padding:20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
+  .stat-val{font-family:var(--fd);font-size:32px;font-weight:700;color:var(--green);}
+  .stat-label{font-size:12px;color:var(--mute);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;}
+  .section-title{font-family:var(--fd);font-size:16px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+  .section-title a{font-size:13px;color:var(--green);font-weight:500;text-decoration:none;cursor:pointer;}
+  .pipeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:28px;}
+  .stage{background:var(--surface);border-radius:12px;padding:14px;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
+  .stage-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  .lead-card{background:var(--surface2);border-radius:8px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--border);cursor:pointer;transition:border-color .15s;}
+  .lead-card:hover{border-color:var(--green);}
+  .lead-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+  .lead-detail{font-size:11px;color:var(--mute);}
+  .lead-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;margin-top:5px;}
+  .badge-new{background:#DCFCE7;color:#15803D;}
+  .badge-contacted{background:#DBEAFE;color:#1D4ED8;}
+  .badge-qualified{background:#FEF3C7;color:#D97706;}
+  .badge-booked{background:#D1FAE5;color:#065F46;}
+  .cal-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+  .cal-title-text{font-family:var(--fd);font-size:17px;font-weight:600;}
+  .cal-toggles{display:flex;background:var(--surface2);border-radius:8px;border:1px solid var(--border);overflow:hidden;}
+  .cal-tog{padding:7px 16px;font-size:13px;font-weight:600;color:var(--mute);cursor:pointer;border:none;background:transparent;font-family:var(--fb);transition:all .15s;}
+  .cal-tog.active{background:var(--green);color:#fff;}
+  .cal-nav{display:flex;gap:8px;align-items:center;}
+  .cal-nav-btn{background:var(--surface);border:1px solid var(--border);border-radius:7px;color:var(--mute);font-size:16px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+  .cal-nav-btn:hover{border-color:var(--green);color:var(--green);}
+  .cal-day-names{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px;}
+  .cal-day-name{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);text-align:center;padding:4px 0;}
+  .cal-month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .cal-cell{background:var(--surface);border-radius:9px;padding:9px 8px;border:1px solid var(--border);min-height:76px;}
+  .cal-cell.today{border-color:var(--green);box-shadow:0 0 0 1px var(--green);}
+  .cal-cell.empty{background:transparent;border-color:transparent;}
+  .cal-num{font-size:12px;font-weight:600;color:var(--dim);margin-bottom:5px;}
+  .cal-num.today-num{color:var(--green);font-weight:700;}
+  .cal-appt{background:var(--green-light);border:1px solid #BBF7D0;border-radius:4px;padding:3px 7px;font-size:10px;color:var(--green-dark);line-height:1.3;margin-bottom:3px;font-weight:500;}
+  .cal-week-grid{display:grid;grid-template-columns:60px repeat(7,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+  .cal-week-head{background:var(--surface2);padding:10px 8px;text-align:center;font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;}
+  .cal-week-head.today-col{color:var(--green);}
+  .cal-time-col{background:var(--surface2);padding:8px 6px;font-size:10px;color:var(--dim);text-align:right;height:44px;display:flex;align-items:center;justify-content:flex-end;}
+  .cal-week-cell{background:var(--surface);height:44px;position:relative;}
+  .cal-week-cell.today-col{background:#F0FDF4;}
+  .cal-week-appt{position:absolute;left:3px;right:3px;top:3px;background:var(--green-light);border:1px solid #BBF7D0;border-radius:4px;padding:3px 6px;font-size:10px;color:var(--green-dark);font-weight:500;}
+  .cal-day-grid{display:grid;grid-template-columns:60px 1fr;gap:1px;background:var(--border);border-radius:10px;overflow:hidden;border:1px solid var(--border);max-height:520px;overflow-y:auto;}
+  .cal-day-time{background:var(--surface2);padding:8px 10px;font-size:11px;color:var(--dim);text-align:right;height:52px;display:flex;align-items:flex-start;justify-content:flex-end;padding-top:6px;}
+  .cal-day-slot{background:var(--surface);height:52px;position:relative;border-bottom:1px solid var(--border);}
+  .cal-day-appt{position:absolute;left:8px;right:8px;top:4px;background:var(--green-light);border:1px solid #BBF7D0;border-left:3px solid var(--green);border-radius:6px;padding:6px 10px;font-size:12px;color:var(--green-dark);font-weight:500;}
+  .add-appt-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--green);background:var(--green-light);border:1px solid #BBF7D0;border-radius:8px;padding:8px 16px;cursor:pointer;margin-bottom:18px;transition:background .15s;}
+  .add-appt-btn:hover{background:#BBF7D0;}
+  .lead-table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
+  .lead-table thead th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding:12px 14px;background:var(--surface2);border-bottom:1px solid var(--border);}
+  .lead-table tbody tr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+  .lead-table tbody tr:hover{background:var(--surface2);}
+  .lead-table tbody td{padding:13px 14px;font-size:14px;color:var(--mute);}
+  .lead-table tbody td:first-child{color:var(--text);font-weight:500;}
+  .notif{display:flex;align-items:flex-start;gap:14px;background:var(--surface);border-radius:12px;padding:16px;border:1px solid var(--border);margin-bottom:10px;box-shadow:var(--shadow-sm);}
+  .notif-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:5px;}
+  .notif-dot.read{background:var(--dim);}
+  .notif-text{font-size:14px;color:var(--text);line-height:1.5;}
+  .notif-time{font-size:12px;color:var(--dim);margin-top:3px;}
+  footer{background:var(--text);color:#9CA3AF;}
+  .foot{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;padding:18px 24px;font-size:12px;}
+  .foot a{color:#D1D5DB;text-decoration:none;}
 </style>
 </head>
 <body>
 <header><div class="nav">
-  <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#52b788"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#0a0f0a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#0a0f0a"/></svg>
-  <span class="brand">InnoVista</span>
+  <a class="brand" href="index.html">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#16A34A"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#fff"/></svg>
+    InnoVista
+  </a>
   <div class="nav-right">
     <span class="role-badge">Business Owner</span>
     <span class="plan-badge">Pro Plan</span>
@@ -133,48 +123,38 @@
   <aside>
     <div class="aside-section">Dashboard</div>
     <a class="nav-item active" onclick="show('overview',this)" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-      Overview
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Overview
     </a>
     <a class="nav-item" onclick="show('pipeline',this)" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      Pipeline
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Pipeline
     </a>
     <a class="nav-item" onclick="show('leads',this)" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>
-      Lead List
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>Lead List
     </a>
     <div class="aside-section">Scheduling</div>
     <a class="nav-item" onclick="show('calendar',this)" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      Calendar
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendar
     </a>
     <a class="nav-item" onclick="show('jobs',this)" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-      Jobs
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Jobs
     </a>
     <div class="aside-section">Communications</div>
     <a class="nav-item" onclick="show('notifications',this)" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      Notifications
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications
     </a>
     <a class="nav-item locked" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg>
-      AI Chatbot<span class="locked-tip">Pro</span>
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg>AI Chatbot<span class="locked-tip">Pro</span>
     </a>
     <div class="aside-section">Account</div>
     <a class="nav-item" onclick="show('settings',this)" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      Settings
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings
     </a>
     <a class="nav-item" href="login.html">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      Sign out
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out
     </a>
   </aside>
 
   <div class="main">
-
     <div class="content-area active" id="area-overview">
       <div class="page-title">Welcome back, Premier HVAC 👋</div>
       <p class="page-sub">Here's your business at a glance.</p>
@@ -184,19 +164,11 @@
         <div class="stat"><div class="stat-val">6</div><div class="stat-label">This week</div></div>
         <div class="stat"><div class="stat-val">$18,400</div><div class="stat-label">Pipeline value</div></div>
       </div>
-      <div class="section-title">Pipeline snapshot <span onclick="show('pipeline',null)">View all →</span></div>
+      <div class="section-title">Pipeline snapshot <a onclick="show('pipeline',null)">View all →</a></div>
       <div class="pipeline">
-        <div class="stage"><div class="stage-name">New</div>
-          <div class="lead-card"><div class="lead-name">Sarah M.</div><div class="lead-detail">AC not cooling · Miami</div><span class="lead-badge badge-new">New</span></div>
-          <div class="lead-card"><div class="lead-name">Tom R.</div><div class="lead-detail">Tune-up · Doral</div><span class="lead-badge badge-new">New</span></div>
-        </div>
-        <div class="stage"><div class="stage-name">Qualified</div>
-          <div class="lead-card"><div class="lead-name">Marcus J.</div><div class="lead-detail">Full replace · Kendall</div><span class="lead-badge badge-qualified">Qualified</span></div>
-        </div>
-        <div class="stage"><div class="stage-name">Booked</div>
-          <div class="lead-card"><div class="lead-name">James T.</div><div class="lead-detail">Install · Jun 18</div><span class="lead-badge badge-booked">Booked ✓</span></div>
-          <div class="lead-card"><div class="lead-name">Rosa V.</div><div class="lead-detail">Repair · Jun 19</div><span class="lead-badge badge-booked">Booked ✓</span></div>
-        </div>
+        <div class="stage"><div class="stage-name">New</div><div class="lead-card"><div class="lead-name">Sarah M.</div><div class="lead-detail">AC not cooling · Miami</div><span class="lead-badge badge-new">New</span></div><div class="lead-card"><div class="lead-name">Tom R.</div><div class="lead-detail">Tune-up · Doral</div><span class="lead-badge badge-new">New</span></div></div>
+        <div class="stage"><div class="stage-name">Qualified</div><div class="lead-card"><div class="lead-name">Marcus J.</div><div class="lead-detail">Full replace · Kendall</div><span class="lead-badge badge-qualified">Qualified</span></div></div>
+        <div class="stage"><div class="stage-name">Booked</div><div class="lead-card"><div class="lead-name">James T.</div><div class="lead-detail">Install · Jun 18</div><span class="lead-badge badge-booked">Booked ✓</span></div><div class="lead-card"><div class="lead-name">Rosa V.</div><div class="lead-detail">Repair · Jun 19</div><span class="lead-badge badge-booked">Booked ✓</span></div></div>
       </div>
     </div>
 
@@ -204,25 +176,11 @@
       <div class="page-title">Lead Pipeline</div>
       <p class="page-sub">Track every lead from first contact to completed job.</p>
       <div class="pipeline" style="grid-template-columns:repeat(5,1fr);">
-        <div class="stage"><div class="stage-name">New Lead</div>
-          <div class="lead-card"><div class="lead-name">Sarah M.</div><div class="lead-detail">AC not cooling · Miami</div><span class="lead-badge badge-new">New</span></div>
-          <div class="lead-card"><div class="lead-name">Tom R.</div><div class="lead-detail">Tune-up · Doral</div><span class="lead-badge badge-new">New</span></div>
-        </div>
-        <div class="stage"><div class="stage-name">Contacted</div>
-          <div class="lead-card"><div class="lead-name">Linda K.</div><div class="lead-detail">Duct cleaning · Brickell</div><span class="lead-badge badge-contacted">Contacted</span></div>
-        </div>
-        <div class="stage"><div class="stage-name">Qualified</div>
-          <div class="lead-card"><div class="lead-name">Marcus J.</div><div class="lead-detail">Full replace · Kendall</div><span class="lead-badge badge-qualified">Qualified</span></div>
-          <div class="lead-card"><div class="lead-name">Anna P.</div><div class="lead-detail">Emergency · Coral Gables</div><span class="lead-badge badge-qualified">Qualified</span></div>
-        </div>
-        <div class="stage"><div class="stage-name">Booked</div>
-          <div class="lead-card"><div class="lead-name">James T.</div><div class="lead-detail">Install · Jun 18</div><span class="lead-badge badge-booked">Booked ✓</span></div>
-          <div class="lead-card"><div class="lead-name">Rosa V.</div><div class="lead-detail">Repair · Jun 19</div><span class="lead-badge badge-booked">Booked ✓</span></div>
-        </div>
-        <div class="stage"><div class="stage-name">Complete</div>
-          <div class="lead-card"><div class="lead-name">Derek W.</div><div class="lead-detail">Tune-up · Pinecrest ✓</div></div>
-          <div class="lead-card"><div class="lead-name">Mei L.</div><div class="lead-detail">Filter replace ✓</div></div>
-        </div>
+        <div class="stage"><div class="stage-name">New Lead</div><div class="lead-card"><div class="lead-name">Sarah M.</div><div class="lead-detail">AC not cooling · Miami</div><span class="lead-badge badge-new">New</span></div><div class="lead-card"><div class="lead-name">Tom R.</div><div class="lead-detail">Tune-up · Doral</div><span class="lead-badge badge-new">New</span></div></div>
+        <div class="stage"><div class="stage-name">Contacted</div><div class="lead-card"><div class="lead-name">Linda K.</div><div class="lead-detail">Duct cleaning · Brickell</div><span class="lead-badge badge-contacted">Contacted</span></div></div>
+        <div class="stage"><div class="stage-name">Qualified</div><div class="lead-card"><div class="lead-name">Marcus J.</div><div class="lead-detail">Full replace · Kendall</div><span class="lead-badge badge-qualified">Qualified</span></div><div class="lead-card"><div class="lead-name">Anna P.</div><div class="lead-detail">Emergency · Coral Gables</div><span class="lead-badge badge-qualified">Qualified</span></div></div>
+        <div class="stage"><div class="stage-name">Booked</div><div class="lead-card"><div class="lead-name">James T.</div><div class="lead-detail">Install · Jun 18</div><span class="lead-badge badge-booked">Booked ✓</span></div><div class="lead-card"><div class="lead-name">Rosa V.</div><div class="lead-detail">Repair · Jun 19</div><span class="lead-badge badge-booked">Booked ✓</span></div></div>
+        <div class="stage"><div class="stage-name">Complete</div><div class="lead-card"><div class="lead-name">Derek W.</div><div class="lead-detail">Tune-up · Pinecrest ✓</div></div><div class="lead-card"><div class="lead-name">Mei L.</div><div class="lead-detail">Filter replace ✓</div></div></div>
       </div>
     </div>
 
@@ -249,9 +207,9 @@
       <div class="add-appt-btn">+ Add appointment</div>
       <div class="cal-toolbar">
         <div class="cal-nav">
-          <div class="cal-nav-btn" onclick="calPrev()">‹</div>
-          <div class="cal-title" id="cal-label">June 2026</div>
-          <div class="cal-nav-btn" onclick="calNext()">›</div>
+          <div class="cal-nav-btn">‹</div>
+          <div class="cal-title-text">June 2026</div>
+          <div class="cal-nav-btn">›</div>
         </div>
         <div class="cal-toggles">
           <button class="cal-tog" onclick="calView('day',this)">Day</button>
@@ -270,8 +228,8 @@
         <tbody>
           <tr><td>James T.</td><td>AC Installation</td><td>Mike R.</td><td>Jun 18</td><td><span class="lead-badge badge-booked">Scheduled</span></td></tr>
           <tr><td>Rosa V.</td><td>System Repair</td><td>Carlos M.</td><td>Jun 19</td><td><span class="lead-badge badge-booked">Scheduled</span></td></tr>
-          <tr><td>Derek W.</td><td>Tune-up</td><td>Mike R.</td><td>Jun 12</td><td><span class="lead-badge" style="background:rgba(82,183,136,.1);color:#52b788;">Complete ✓</span></td></tr>
-          <tr><td>Mei L.</td><td>Filter Replace</td><td>Carlos M.</td><td>Jun 10</td><td><span class="lead-badge" style="background:rgba(82,183,136,.1);color:#52b788;">Complete ✓</span></td></tr>
+          <tr><td>Derek W.</td><td>Tune-up</td><td>Mike R.</td><td>Jun 12</td><td><span class="lead-badge" style="background:#D1FAE5;color:#065F46;">Complete ✓</span></td></tr>
+          <tr><td>Mei L.</td><td>Filter Replace</td><td>Carlos M.</td><td>Jun 10</td><td><span class="lead-badge" style="background:#D1FAE5;color:#065F46;">Complete ✓</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -288,91 +246,46 @@
     <div class="content-area" id="area-settings">
       <div class="page-title">Settings</div>
       <p class="page-sub">Manage your account preferences.</p>
-      <div class="notif" style="flex-direction:column;gap:8px;"><div style="font-size:13px;font-weight:600;color:var(--text);">Business info</div><div style="font-size:13px;color:var(--mute);">Premier HVAC Solutions · client@hvaccompany.example · (305) 555-0100</div></div>
-      <div class="notif" style="flex-direction:column;gap:8px;margin-top:10px;"><div style="font-size:13px;font-weight:600;color:var(--text);">Current plan</div><div style="font-size:13px;color:var(--mute);">Pro Plan — all features enabled. <a href="pricing.html" style="color:var(--green);text-decoration:none;">View plan details →</a></div></div>
+      <div class="notif" style="flex-direction:column;gap:8px;"><div style="font-size:13px;font-weight:600;">Business info</div><div style="font-size:13px;color:var(--mute);">Premier HVAC Solutions · client@hvaccompany.example · (305) 555-0100</div></div>
+      <div class="notif" style="flex-direction:column;gap:8px;margin-top:10px;"><div style="font-size:13px;font-weight:600;">Current plan</div><div style="font-size:13px;color:var(--mute);">Pro Plan — all features enabled. <a href="pricing.html" style="color:var(--green);text-decoration:none;">View plan details →</a></div></div>
     </div>
-
   </div>
 </div>
 
 <footer><div class="foot"><span>© 2026 InnoVista Strategies.</span><span><a href="pricing.html">Plans</a> · <a href="login.html">Sign out</a></span></div></footer>
 
 <script>
-let currentView = 'month';
-const appts = {
-  16: ['Sarah M. · 9am'],
-  18: ['James T. · 10am', 'Linda K. · 2pm'],
-  19: ['Rosa V. · 11am'],
-  20: ['Marcus J. · 9am'],
-  22: ['Anna P. · 1pm'],
-};
-const hours = ['7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm'];
-const dayAppts = { 9:'James T. — AC Install · Hialeah', 14:'Linda K. — Duct Cleaning · Brickell' };
-const weekDays = ['Mon 16','Tue 17','Wed 18','Thu 19','Fri 20','Sat 21','Sun 22'];
-const weekAppts = { 0: { 9:'Sarah M.' }, 2: { 10:'James T.', 14:'Linda K.' }, 3: { 11:'Rosa V.' }, 4: { 9:'Marcus J.' }, 6: { 13:'Anna P.' } };
-
-function calView(v, btn) {
-  currentView = v;
-  document.querySelectorAll('.cal-tog').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderCal();
-}
-
-function calPrev() {}
-function calNext() {}
-
-function renderCal() {
-  const body = document.getElementById('cal-body');
-  if (currentView === 'month') {
-    let h = `<div class="cal-day-names">`;
-    ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(d => h += `<div class="cal-day-name">${d}</div>`);
-    h += `</div><div class="cal-month-grid">`;
-    for (let i = 0; i < 1; i++) h += `<div class="cal-cell empty"></div>`;
-    for (let d = 1; d <= 30; d++) {
-      const isToday = d === 18;
-      h += `<div class="cal-cell${isToday?' today':''}"><div class="cal-num${isToday?' today-num':''}">${d}${isToday?' ●':''}</div>`;
-      (appts[d]||[]).forEach(a => h += `<div class="cal-appt">${a}</div>`);
-      h += `</div>`;
-    }
-    h += `</div>`;
-    body.innerHTML = h;
-  } else if (currentView === 'week') {
-    let h = `<div class="cal-week-grid">`;
-    h += `<div class="cal-week-head"></div>`;
-    weekDays.forEach((d,i) => h += `<div class="cal-week-head${i===2?' today-col':''}">${d}</div>`);
-    hours.forEach(hr => {
-      const hrNum = parseInt(hr) + (hr.includes('pm') && !hr.startsWith('12') ? 12 : 0);
-      h += `<div class="cal-time-col">${hr}</div>`;
-      weekDays.forEach((_,di) => {
-        const hasAppt = weekAppts[di] && weekAppts[di][hrNum];
-        h += `<div class="cal-week-cell${di===2?' today-col':''}">${hasAppt ? `<div class="cal-week-appt">${hasAppt}</div>` : ''}</div>`;
-      });
-    });
-    h += `</div>`;
-    body.innerHTML = h;
+const appts={16:['Sarah M. · 9am'],18:['James T. · 10am','Linda K. · 2pm'],19:['Rosa V. · 11am'],20:['Marcus J. · 9am'],22:['Anna P. · 1pm']};
+const hours=['7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm'];
+const dayAppts={9:'James T. — AC Install · Hialeah',14:'Linda K. — Duct Cleaning · Brickell'};
+const weekDays=['Mon 16','Tue 17','Wed 18','Thu 19','Fri 20','Sat 21','Sun 22'];
+const weekAppts={0:{9:'Sarah M.'},2:{10:'James T.',14:'Linda K.'},3:{11:'Rosa V.'},4:{9:'Marcus J.'},6:{13:'Anna P.'}};
+function calView(v,btn){document.querySelectorAll('.cal-tog').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderCal(v);}
+function renderCal(view='month'){
+  const body=document.getElementById('cal-body');
+  if(view==='month'){
+    let h=`<div class="cal-day-names">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="cal-day-name">${d}</div>`).join('')}</div><div class="cal-month-grid"><div class="cal-cell empty"></div>`;
+    for(let d=1;d<=30;d++){const t=d===18;h+=`<div class="cal-cell${t?' today':''}"><div class="cal-num${t?' today-num':''}">${d}${t?' ●':''}</div>${(appts[d]||[]).map(a=>`<div class="cal-appt">${a}</div>`).join('')}</div>`;}
+    body.innerHTML=h+'</div>';
+  } else if(view==='week'){
+    let h=`<div class="cal-week-grid"><div class="cal-week-head"></div>${weekDays.map((d,i)=>`<div class="cal-week-head${i===2?' today-col':''}">${d}</div>`).join('')}`;
+    hours.forEach(hr=>{const n=parseInt(hr)+(hr.includes('pm')&&!hr.startsWith('12')?12:0);h+=`<div class="cal-time-col">${hr}</div>${weekDays.map((_,di)=>`<div class="cal-week-cell${di===2?' today-col':''}">${weekAppts[di]&&weekAppts[di][n]?`<div class="cal-week-appt">${weekAppts[di][n]}</div>`:''}</div>`).join('')}`;});
+    body.innerHTML=h+'</div>';
   } else {
-    let h = `<div style="font-family:var(--fd);font-size:15px;font-weight:600;margin-bottom:14px;">Wednesday, June 18</div>`;
-    h += `<div class="cal-day-grid">`;
-    hours.forEach(hr => {
-      const hrNum = parseInt(hr) + (hr.includes('pm') && !hr.startsWith('12') ? 12 : 0);
-      const appt = dayAppts[hrNum];
-      h += `<div class="cal-day-time">${hr}</div><div class="cal-day-slot">${appt ? `<div class="cal-day-appt">${appt}</div>` : ''}</div>`;
-    });
-    h += `</div>`;
-    body.innerHTML = h;
+    let h=`<div style="font-family:var(--fd);font-size:15px;font-weight:600;margin-bottom:14px;color:var(--text)">Wednesday, June 18</div><div class="cal-day-grid">`;
+    hours.forEach(hr=>{const n=parseInt(hr)+(hr.includes('pm')&&!hr.startsWith('12')?12:0);const a=dayAppts[n];h+=`<div class="cal-day-time">${hr}</div><div class="cal-day-slot">${a?`<div class="cal-day-appt">${a}</div>`:''}</div>`;});
+    body.innerHTML=h+'</div>';
   }
 }
-
-function show(area, el) {
-  document.querySelectorAll('.content-area').forEach(e => e.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
-  document.getElementById('area-' + area).classList.add('active');
-  if (el) el.classList.add('active');
-  if (area === 'calendar') renderCal();
+function show(area,el){
+  document.querySelectorAll('.content-area').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(e=>e.classList.remove('active'));
+  document.getElementById('area-'+area).classList.add('active');
+  if(el)el.classList.add('active');
+  if(area==='calendar')renderCal('month');
   return false;
 }
-
-renderCal();
+renderCal('month');
 </script>
 </body>
 </html>

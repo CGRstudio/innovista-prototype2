@@ -4,116 +4,110 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>InnoVista Strategies — AI Lead Capture for Home Service Businesses</title>
-<meta name="description" content="InnoVista answers, texts back, and qualifies every lead in seconds — then books the job straight on your calendar. 24/7 AI lead capture for home-service businesses." />
+<meta name="description" content="InnoVista answers, texts back, and qualifies every lead in seconds — then books the job straight on your calendar." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #080d09; --bg2: #0b110d; --surface: #131f16; --surface2: #1a2b1e;
-    --line: rgba(120,170,140,0.18); --line2: rgba(120,170,140,0.32);
-    --green: #52b788; --green2: #74c9a0; --glow: rgba(82,183,136,0.15);
-    --text: #eef4f0; --mute: #a8c4b0; --dim: #6e8c78;
-    --fd: 'Space Grotesk', sans-serif; --fb: 'Hanken Grotesk', sans-serif;
+    --bg: #F4F6F8; --bg2: #EAECF0;
+    --surface: #FFFFFF; --surface2: #F9FAFB;
+    --border: #E5E7EB; --border2: #D1D5DB;
+    --green: #16A34A; --green-light: #DCFCE7; --green-mid: #22C55E;
+    --green-dark: #15803D; --green-glow: rgba(22,163,74,0.1);
+    --text: #111827; --mute: #6B7280; --dim: #9CA3AF;
+    --fd: 'Space Grotesk', sans-serif; --fb: 'Inter', sans-serif;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+    --shadow: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,.1), 0 4px 8px rgba(0,0,0,.04);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { min-height: 100%; }
-  body { background: var(--bg); color: var(--text); font-family: var(--fb); -webkit-font-smoothing: antialiased;
-    background-image: radial-gradient(rgba(255,255,255,.025) 1.2px, transparent 1.2px);
-    background-size: 26px 26px; }
+  body { background: var(--bg); color: var(--text); font-family: var(--fb); -webkit-font-smoothing: antialiased; }
 
-  /* ── NAV ── */
-  header { border-bottom: 1px solid var(--line); background: rgba(8,13,9,.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
-  .nav { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; gap: 12px; height: 60px; }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; box-shadow: var(--shadow-sm); }
+  .nav { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; gap: 12px; height: 64px; }
   .brand { display: flex; align-items: center; gap: 10px; font-family: var(--fd); font-weight: 700; font-size: 20px; letter-spacing: -.01em; text-decoration: none; color: var(--text); }
   .nav-links { display: flex; align-items: center; gap: 28px; margin-left: 32px; }
-  .nav-links a { font-size: 14px; color: var(--mute); text-decoration: none; transition: color .15s; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--mute); text-decoration: none; transition: color .15s; }
   .nav-links a:hover { color: var(--text); }
-  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-  .nav-login { font-size: 14px; font-weight: 600; color: var(--mute); text-decoration: none; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--line2); transition: all .15s; }
-  .nav-login:hover { color: var(--text); border-color: var(--green); background: var(--glow); }
-  .nav-cta { font-size: 14px; font-weight: 700; color: #080d09; background: var(--green); text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: opacity .15s; font-family: var(--fd); }
-  .nav-cta:hover { opacity: .88; }
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .nav-login { font-size: 14px; font-weight: 600; color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border2); transition: all .15s; background: var(--surface); }
+  .nav-login:hover { border-color: var(--green); color: var(--green); }
+  .nav-cta { font-size: 14px; font-weight: 700; color: #fff; background: var(--green); text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background .15s; font-family: var(--fd); }
+  .nav-cta:hover { background: var(--green-dark); }
 
-  /* ── HERO ── */
-  .hero { max-width: 1120px; margin: 0 auto; padding: 80px 28px 60px; }
-  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--green); padding: 7px 14px; border-radius: 999px; background: var(--glow); box-shadow: inset 0 0 0 1px var(--line2); margin-bottom: 24px; }
-  .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
-  h1 { font-family: var(--fd); font-size: clamp(36px,5.5vw,58px); font-weight: 700; letter-spacing: -.025em; line-height: 1.06; max-width: 720px; margin-bottom: 20px; }
+  .hero { max-width: 1120px; margin: 0 auto; padding: 88px 28px 64px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--green); padding: 6px 13px; border-radius: 999px; background: var(--green-light); border: 1px solid #BBF7D0; margin-bottom: 24px; }
+  .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+  h1 { font-family: var(--fd); font-size: clamp(36px,5.5vw,58px); font-weight: 700; letter-spacing: -.025em; line-height: 1.06; max-width: 680px; margin-bottom: 20px; color: var(--text); }
   h1 em { font-style: normal; color: var(--green); }
-  .hero-sub { font-size: clamp(16px,2vw,19px); color: var(--mute); max-width: 540px; line-height: 1.6; margin-bottom: 36px; }
+  .hero-sub { font-size: clamp(16px,2vw,19px); color: var(--mute); max-width: 520px; line-height: 1.6; margin-bottom: 36px; }
   .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
-  .btn-primary { font-family: var(--fd); font-size: 15px; font-weight: 700; color: #080d09; background: var(--green); padding: 13px 26px; border-radius: 10px; text-decoration: none; transition: opacity .15s; }
-  .btn-primary:hover { opacity: .88; }
-  .btn-ghost { font-family: var(--fd); font-size: 15px; font-weight: 600; color: var(--mute); padding: 13px 26px; border-radius: 10px; text-decoration: none; border: 1px solid var(--line2); transition: all .15s; }
-  .btn-ghost:hover { color: var(--text); border-color: var(--green); background: var(--glow); }
+  .btn-primary { font-family: var(--fd); font-size: 15px; font-weight: 700; color: #fff; background: var(--green); padding: 13px 26px; border-radius: 10px; text-decoration: none; transition: background .15s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-ghost { font-family: var(--fd); font-size: 15px; font-weight: 600; color: var(--text); padding: 13px 26px; border-radius: 10px; text-decoration: none; border: 1px solid var(--border2); background: var(--surface); transition: all .15s; }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); }
 
-  /* ── STATS ── */
-  .stats-row { display: flex; gap: 40px; flex-wrap: wrap; padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 80px; }
-  .stat { }
-  .stat-val { font-family: var(--fd); font-size: 32px; font-weight: 700; color: var(--green2); letter-spacing: -.02em; }
-  .stat-label { font-size: 13px; color: var(--dim); margin-top: 3px; }
+  .stats-row { display: flex; gap: 48px; flex-wrap: wrap; padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stat-val { font-family: var(--fd); font-size: 30px; font-weight: 700; color: var(--green); letter-spacing: -.02em; }
+  .stat-label { font-size: 13px; color: var(--mute); margin-top: 3px; }
 
-  /* ── HOW IT WORKS ── */
-  .section { max-width: 1120px; margin: 0 auto; padding: 0 28px 80px; }
-  .section-label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
-  .section-title { font-family: var(--fd); font-size: clamp(26px,3.5vw,38px); font-weight: 700; letter-spacing: -.02em; margin-bottom: 48px; max-width: 520px; line-height: 1.15; }
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
-  .step { background: var(--surface); border-radius: 18px; padding: 26px; box-shadow: inset 0 0 0 1px var(--line); }
-  .step-num { font-family: var(--fd); font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--dim); margin-bottom: 16px; }
-  .step-icon { width: 44px; height: 44px; background: var(--glow); border: 1px solid var(--line2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .section { max-width: 1120px; margin: 0 auto; padding: 72px 28px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+  .section-title { font-family: var(--fd); font-size: clamp(26px,3.5vw,36px); font-weight: 700; letter-spacing: -.02em; margin-bottom: 48px; max-width: 480px; line-height: 1.2; color: var(--text); }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 16px; }
+  .step { background: var(--surface); border-radius: 16px; padding: 26px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+  .step-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--dim); margin-bottom: 16px; }
+  .step-icon { width: 44px; height: 44px; background: var(--green-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
   .step-icon svg { width: 22px; height: 22px; stroke: var(--green); }
-  .step h3 { font-family: var(--fd); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
-  .step p { font-size: 14px; color: var(--mute); line-height: 1.55; }
+  .step h3 { font-family: var(--fd); font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+  .step p { font-size: 14px; color: var(--mute); line-height: 1.6; }
 
-  /* ── FEATURES ── */
   .features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; }
-  .feat { background: var(--surface); border-radius: 16px; padding: 22px; box-shadow: inset 0 0 0 1px var(--line); }
-  .feat-icon { width: 38px; height: 38px; background: var(--glow); border: 1px solid var(--line2); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .feat { background: var(--surface); border-radius: 14px; padding: 22px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+  .feat-icon { width: 38px; height: 38px; background: var(--green-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
   .feat-icon svg { width: 18px; height: 18px; stroke: var(--green); }
-  .feat h3 { font-family: var(--fd); font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .feat h3 { font-family: var(--fd); font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
   .feat p { font-size: 13px; color: var(--mute); line-height: 1.5; }
 
-  /* ── PLANS CTA ── */
   .plans-cta { max-width: 1120px; margin: 0 auto; padding: 0 28px 80px; }
-  .plans-band { background: var(--surface); border-radius: 20px; box-shadow: inset 0 0 0 1px var(--line); padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-  .plans-band h2 { font-family: var(--fd); font-size: 28px; font-weight: 700; letter-spacing: -.02em; max-width: 420px; line-height: 1.2; }
-  .plans-band p { font-size: 14px; color: var(--mute); margin-top: 8px; max-width: 360px; line-height: 1.5; }
+  .plans-band { background: var(--green); border-radius: 20px; padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .plans-band h2 { font-family: var(--fd); font-size: 28px; font-weight: 700; letter-spacing: -.02em; color: #fff; max-width: 400px; line-height: 1.2; }
+  .plans-band p { font-size: 14px; color: rgba(255,255,255,.8); margin-top: 8px; max-width: 360px; line-height: 1.5; }
   .plans-btns { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+  .btn-white { font-family: var(--fd); font-size: 14px; font-weight: 700; color: var(--green); background: #fff; padding: 11px 22px; border-radius: 8px; text-decoration: none; }
+  .btn-outline-white { font-family: var(--fd); font-size: 14px; font-weight: 600; color: #fff; background: transparent; padding: 11px 22px; border-radius: 8px; text-decoration: none; border: 1.5px solid rgba(255,255,255,.5); }
 
-  /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--line); background: var(--bg2); }
-  .foot { max-width: 1120px; margin: 0 auto; padding: 28px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 12px; color: var(--dim); }
-  .foot a { color: var(--green); text-decoration: none; }
+  footer { background: var(--text); color: #9CA3AF; }
+  .foot { max-width: 1120px; margin: 0 auto; padding: 32px 28px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 13px; }
+  .foot a { color: #D1D5DB; text-decoration: none; }
+  .foot a:hover { color: #fff; }
 
-  /* ── CHAT WIDGET ── */
   .chat-bubble { position: fixed; bottom: 28px; right: 28px; z-index: 100; }
-  .chat-btn { width: 56px; height: 56px; background: var(--green); border-radius: 50%; border: none; cursor: pointer; box-shadow: 0 8px 24px rgba(82,183,136,.35); display: flex; align-items: center; justify-content: center; transition: transform .15s; }
-  .chat-btn:hover { transform: scale(1.08); }
-  .chat-btn svg { width: 24px; height: 24px; stroke: #080d09; }
-  .chat-window { position: absolute; bottom: 68px; right: 0; width: 320px; background: var(--surface); border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.5); box-shadow: inset 0 0 0 1px var(--line2), 0 20px 60px rgba(0,0,0,.5); overflow: hidden; display: none; }
+  .chat-btn { width: 56px; height: 56px; background: var(--green); border-radius: 50%; border: none; cursor: pointer; box-shadow: var(--shadow-lg); display: flex; align-items: center; justify-content: center; transition: transform .15s; }
+  .chat-btn:hover { transform: scale(1.08); background: var(--green-dark); }
+  .chat-btn svg { width: 24px; height: 24px; stroke: #fff; }
+  .chat-window { position: absolute; bottom: 68px; right: 0; width: 320px; background: var(--surface); border-radius: 16px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); overflow: hidden; display: none; }
   .chat-window.open { display: block; }
-  .chat-head { background: var(--green); padding: 14px 16px; display: flex; align-items: center; gap: 10px; }
-  .chat-head-dot { width: 8px; height: 8px; border-radius: 50%; background: #080d09; opacity: .5; }
-  .chat-head-dot.live { background: #080d09; opacity: 1; box-shadow: 0 0 0 3px rgba(8,13,9,.2); }
-  .chat-head-text { font-family: var(--fd); font-size: 13px; font-weight: 700; color: #080d09; }
-  .chat-head-sub { font-size: 11px; color: rgba(8,13,9,.65); }
-  .chat-msgs { padding: 16px; height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+  .chat-head { background: var(--green); padding: 14px 16px; }
+  .chat-head-text { font-family: var(--fd); font-size: 14px; font-weight: 700; color: #fff; }
+  .chat-head-sub { font-size: 11px; color: rgba(255,255,255,.75); margin-top: 2px; }
+  .chat-msgs { padding: 16px; height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: var(--bg); }
   .msg { max-width: 85%; font-size: 13px; line-height: 1.5; padding: 9px 13px; border-radius: 12px; }
-  .msg.bot { background: var(--surface2); color: var(--text); border-bottom-left-radius: 4px; align-self: flex-start; }
-  .msg.user { background: var(--green); color: #080d09; font-weight: 500; border-bottom-right-radius: 4px; align-self: flex-end; }
-  .chat-input-row { display: flex; gap: 8px; padding: 12px 14px; border-top: 1px solid var(--line); }
-  .chat-input { flex: 1; background: var(--surface2); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; font-size: 13px; color: var(--text); font-family: var(--fb); outline: none; }
+  .msg.bot { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-bottom-left-radius: 4px; align-self: flex-start; }
+  .msg.user { background: var(--green); color: #fff; font-weight: 500; border-bottom-right-radius: 4px; align-self: flex-end; }
+  .chat-input-row { display: flex; gap: 8px; padding: 12px 14px; border-top: 1px solid var(--border); background: var(--surface); }
+  .chat-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; font-size: 13px; color: var(--text); font-family: var(--fb); outline: none; }
   .chat-input:focus { border-color: var(--green); }
-  .chat-send { background: var(--green); border: none; border-radius: 8px; padding: 9px 14px; color: #080d09; font-weight: 700; font-size: 13px; cursor: pointer; font-family: var(--fd); }
+  .chat-send { background: var(--green); border: none; border-radius: 8px; padding: 9px 14px; color: #fff; font-weight: 700; font-size: 13px; cursor: pointer; font-family: var(--fd); }
 </style>
 </head>
 <body>
-
 <header>
   <nav class="nav">
     <a class="brand" href="index.html">
-      <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#52b788"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#0a0f0a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#0a0f0a"/></svg>
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#16A34A"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#fff"/></svg>
       InnoVista
     </a>
     <div class="nav-links">
@@ -123,7 +117,7 @@
     </div>
     <div class="nav-right">
       <a class="nav-login" href="login.html">Log in</a>
-      <a class="nav-cta" href="login.html">Get started →</a>
+      <a class="nav-cta" href="login.html">Get started free →</a>
     </div>
   </nav>
 </header>
@@ -140,51 +134,31 @@
     <div class="stats-row">
       <div class="stat"><div class="stat-val">&lt;60s</div><div class="stat-label">Average first reply time</div></div>
       <div class="stat"><div class="stat-val">24/7</div><div class="stat-label">Lead capture, no downtime</div></div>
-      <div class="stat"><div class="stat-val">3×</div><div class="stat-label">More leads converted vs. manual follow-up</div></div>
-      <div class="stat"><div class="stat-val">$0</div><div class="stat-label">To get started on Basic</div></div>
+      <div class="stat"><div class="stat-val">3×</div><div class="stat-label">More leads converted</div></div>
+      <div class="stat"><div class="stat-val">$0</div><div class="stat-label">To get started</div></div>
     </div>
   </div>
 
-  <div class="section" id="how-it-works">
+  <div class="section" id="how-it-works" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
     <div class="section-label">How it works</div>
     <div class="section-title">From missed call to booked job — automatically.</div>
     <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg></div>
-        <h3>Lead submits or calls</h3>
-        <p>A homeowner fills out your form or calls your number. InnoVista captures the lead instantly, even on a missed call.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-        <h3>AI texts back in 60 seconds</h3>
-        <p>Our AI sends a personalized SMS immediately, starting a conversation that qualifies the job without any human involvement.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <h3>Lead gets qualified</h3>
-        <p>The AI asks the right questions — service needed, location, urgency — and scores the lead before a human ever gets involved.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-        <h3>Job gets booked</h3>
-        <p>The AI books the appointment straight to your calendar and sends the homeowner a confirmation and reminder. Done.</p>
-      </div>
+      <div class="step"><div class="step-num">01</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg></div><h3>Lead submits or calls</h3><p>A homeowner fills out your form or calls. InnoVista captures the lead instantly, even on a missed call.</p></div>
+      <div class="step"><div class="step-num">02</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h3>AI texts back in 60 seconds</h3><p>A personalized SMS goes out immediately, starting a conversation that qualifies the job automatically.</p></div>
+      <div class="step"><div class="step-num">03</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3>Lead gets qualified</h3><p>The AI asks the right questions — service, location, urgency — and scores the lead before a human gets involved.</p></div>
+      <div class="step"><div class="step-num">04</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Job gets booked</h3><p>The AI books the appointment to your calendar and sends a confirmation and reminder. Done.</p></div>
     </div>
   </div>
 
   <div class="section" id="features">
     <div class="section-label">Features</div>
-    <div class="section-title">Everything your business needs to run leads on autopilot.</div>
+    <div class="section-title">Everything you need to run leads on autopilot.</div>
     <div class="features-grid">
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg></div><h3>AI Chatbot</h3><p>Qualifies every lead automatically, 24/7. Never lose a job to a slow response again. Pro plan only.</p></div>
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h3>Instant SMS Follow-up</h3><p>Every new lead gets a text within 60 seconds. Multi-day follow-up sequences keep them warm until they book.</p></div>
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Automated Booking</h3><p>The AI books jobs straight to your calendar and sends reminders to reduce no-shows.</p></div>
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><h3>Lead Pipeline</h3><p>A clean Kanban board shows every lead's status from first contact to completed job.</p></div>
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>Google Review Requests</h3><p>Automatically asks happy customers for a Google review after the job is complete.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg></div><h3>AI Chatbot</h3><p>Qualifies every lead automatically, 24/7. Pro plan only.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h3>Instant SMS Follow-up</h3><p>Every lead gets a text within 60 seconds. Multi-day sequences keep them warm until they book.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Automated Booking</h3><p>Jobs booked straight to your calendar with automatic reminders to reduce no-shows.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><h3>Lead Pipeline</h3><p>A clean Kanban board showing every lead from first contact to completed job.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>Google Review Requests</h3><p>Automatically asks happy customers for a review after every completed job.</p></div>
       <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Client Portal</h3><p>Every homeowner gets a personal portal to view their quote, appointments, and maintenance tips.</p></div>
     </div>
   </div>
@@ -196,8 +170,8 @@
         <p>Basic is free forever. Upgrade to Standard or Pro when you want the automation to kick in.</p>
       </div>
       <div class="plans-btns">
-        <a class="btn-ghost" href="pricing.html">Compare plans</a>
-        <a class="btn-primary" href="login.html">Get started free →</a>
+        <a class="btn-outline-white" href="pricing.html">Compare plans</a>
+        <a class="btn-white" href="login.html">Get started free →</a>
       </div>
     </div>
   </div>
@@ -210,59 +184,26 @@
   </div>
 </footer>
 
-<!-- AI Chat Widget -->
 <div class="chat-bubble">
   <div class="chat-window" id="chat-win">
-    <div class="chat-head">
-      <div><div class="chat-head-text">InnoVista AI</div><div class="chat-head-sub">Typically replies in seconds</div></div>
-      <div class="chat-head-dot live" style="margin-left:auto;"></div>
-    </div>
-    <div class="chat-msgs" id="chat-msgs">
-      <div class="msg bot">Hi! 👋 I'm the InnoVista AI. What HVAC service can I help you with today?</div>
-    </div>
+    <div class="chat-head"><div class="chat-head-text">InnoVista AI</div><div class="chat-head-sub">Typically replies in seconds</div></div>
+    <div class="chat-msgs" id="chat-msgs"><div class="msg bot">Hi! 👋 I'm the InnoVista AI. What HVAC service can I help you with today?</div></div>
     <div class="chat-input-row">
       <input class="chat-input" id="chat-in" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendMsg()" />
       <button class="chat-send" onclick="sendMsg()">Send</button>
     </div>
   </div>
-  <button class="chat-btn" onclick="toggleChat()">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg>
-  </button>
+  <button class="chat-btn" onclick="toggleChat()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg></button>
 </div>
-
 <script>
-function toggleChat() {
-  document.getElementById('chat-win').classList.toggle('open');
-}
-
-const replies = [
-  "Got it! Can I get your name and phone number so we can follow up?",
-  "Thanks! What's the address for the service?",
-  "Perfect. Is this urgent or can we schedule within the next few days?",
-  "Great — I'm checking availability now. We have openings Wednesday June 18 at 10am or Thursday June 19 at 2pm. Which works for you?",
-  "Confirmed! You'll get a text confirmation shortly. Anything else I can help with?"
-];
-let replyIdx = 0;
-
+function toggleChat() { document.getElementById('chat-win').classList.toggle('open'); }
+const replies = ["Got it! Can I get your name and phone number so we can follow up?","Thanks! What's the address for the service?","Perfect. Is this urgent or can we schedule within the next few days?","Great — we have openings Wednesday June 18 at 10am or Thursday June 19 at 2pm. Which works?","Confirmed! You'll get a text shortly. Anything else I can help with?"];
+let ri = 0;
 function sendMsg() {
-  const input = document.getElementById('chat-in');
-  const msgs = document.getElementById('chat-msgs');
-  const txt = input.value.trim();
+  const input = document.getElementById('chat-in'), msgs = document.getElementById('chat-msgs'), txt = input.value.trim();
   if (!txt) return;
-  const userMsg = document.createElement('div');
-  userMsg.className = 'msg user';
-  userMsg.textContent = txt;
-  msgs.appendChild(userMsg);
-  input.value = '';
-  msgs.scrollTop = msgs.scrollHeight;
-  setTimeout(() => {
-    const botMsg = document.createElement('div');
-    botMsg.className = 'msg bot';
-    botMsg.textContent = replies[replyIdx % replies.length];
-    replyIdx++;
-    msgs.appendChild(botMsg);
-    msgs.scrollTop = msgs.scrollHeight;
-  }, 800);
+  const u = document.createElement('div'); u.className='msg user'; u.textContent=txt; msgs.appendChild(u); input.value=''; msgs.scrollTop=msgs.scrollHeight;
+  setTimeout(()=>{ const b=document.createElement('div'); b.className='msg bot'; b.textContent=replies[ri%replies.length]; ri++; msgs.appendChild(b); msgs.scrollTop=msgs.scrollHeight; },800);
 }
 </script>
 </body>

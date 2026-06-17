@@ -3,103 +3,94 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>InnoVista Strategies — Login</title>
-<meta name="description" content="InnoVista Strategies — AI lead capture and automated booking for home-service businesses." />
+<title>InnoVista — Log in</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #0a0f0a; --bg2: #0d130f; --surface: #111912; --surface2: #16201a;
-    --line: rgba(120,170,140,0.12); --line2: rgba(120,170,140,0.20);
-    --green: #52b788; --glow: rgba(82,183,136,0.13);
-    --text: #e7efe9; --mute: #9bb0a3; --dim: #6c8073;
-    --fd: 'Space Grotesk', sans-serif; --fb: 'Hanken Grotesk', sans-serif;
+    --bg: #F4F6F8; --surface: #FFFFFF; --surface2: #F9FAFB;
+    --border: #E5E7EB; --border2: #D1D5DB;
+    --green: #16A34A; --green-light: #DCFCE7; --green-dark: #15803D; --green-glow: rgba(22,163,74,0.08);
+    --text: #111827; --mute: #6B7280; --dim: #9CA3AF;
+    --fd: 'Space Grotesk', sans-serif; --fb: 'Inter', sans-serif;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.08); --shadow: 0 4px 12px rgba(0,0,0,.08);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
-  body {
-    background: var(--bg); color: var(--text); font-family: var(--fb);
-    -webkit-font-smoothing: antialiased; min-height: 100vh;
-    background-image: radial-gradient(rgba(255,255,255,.025) 1.2px, transparent 1.2px);
-    background-size: 26px 26px;
-    display: flex; flex-direction: column;
-  }
-
-  header { border-bottom: 1px solid var(--line); background: rgba(10,15,10,.7); backdrop-filter: blur(10px); }
-  .nav { max-width: 1060px; margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; gap: 11px; }
-  .brand { font-family: var(--fd); font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
-
+  body { background: var(--bg); color: var(--text); font-family: var(--fb); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+  .nav { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; gap: 12px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--fd); font-weight: 700; font-size: 20px; text-decoration: none; color: var(--text); }
+  .back-link { margin-left: auto; font-size: 13px; color: var(--mute); text-decoration: none; }
+  .back-link:hover { color: var(--text); }
   main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px 24px; }
+  .login-wrap { width: 100%; max-width: 440px; }
+  .login-heading { font-family: var(--fd); font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 6px; }
+  .login-sub { font-size: 14px; color: var(--mute); margin-bottom: 28px; }
 
-  .login-wrap { width: 100%; max-width: 420px; }
-  .login-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--green); padding: 6px 12px; border-radius: 999px; background: var(--glow); box-shadow: inset 0 0 0 1px var(--line2); margin-bottom: 20px; }
-  .login-eyebrow span { width: 6px; height: 6px; border-radius: 9px; background: var(--green); box-shadow: 0 0 10px var(--green); }
-  .login-wrap h1 { font-family: var(--fd); font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 6px; }
-  .login-wrap p { font-size: 14px; color: var(--mute); margin-bottom: 32px; line-height: 1.5; }
+  .role-tabs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 24px; }
+  .role-tab { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 8px; text-align: center; cursor: pointer; transition: all .15s; box-shadow: var(--shadow-sm); }
+  .role-tab:hover { border-color: var(--green); }
+  .role-tab.active { border-color: var(--green); background: var(--green-light); }
+  .role-tab-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--bg); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
+  .role-tab.active .role-tab-icon { background: var(--green-light); }
+  .role-tab-icon svg { width: 18px; height: 18px; stroke: var(--mute); }
+  .role-tab.active .role-tab-icon svg { stroke: var(--green); }
+  .role-tab-label { font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--mute); }
+  .role-tab.active .role-tab-label { color: var(--green); }
 
-  .role-tabs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 28px; }
-  .role-tab { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 8px; text-align: center; cursor: pointer; transition: all .15s; }
-  .role-tab:hover { border-color: var(--line2); }
-  .role-tab.active { border-color: var(--green); background: var(--glow); }
-  .role-tab .rt-icon { font-size: 20px; margin-bottom: 6px; }
-  .role-tab .rt-label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); }
-  .role-tab.active .rt-label { color: var(--green); }
-
-  .form-card { background: var(--surface); border-radius: 18px; padding: 28px; box-shadow: inset 0 0 0 1px var(--line); }
-  .form-group { margin-bottom: 18px; }
-  .form-group label { display: block; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
-  .form-group input { width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 15px; color: var(--text); font-family: var(--fb); outline: none; transition: border-color .15s; }
-  .form-group input:focus { border-color: var(--green); }
+  .form-card { background: var(--surface); border-radius: 16px; padding: 28px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .hint { font-size: 12px; color: var(--mute); background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 20px; line-height: 1.5; }
+  .hint strong { color: var(--text); }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 7px; letter-spacing: .02em; }
+  .form-group input { width: 100%; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; padding: 11px 14px; font-size: 14px; color: var(--text); font-family: var(--fb); outline: none; transition: border-color .15s; }
+  .form-group input:focus { border-color: var(--green); background: #fff; }
   .form-group input::placeholder { color: var(--dim); }
-
-  .hint { font-size: 12px; color: var(--dim); margin-bottom: 20px; line-height: 1.5; padding: 10px 14px; background: var(--glow); border-radius: 8px; border: 1px solid var(--line2); }
-  .hint strong { color: var(--mute); }
-
-  .btn-login { width: 100%; background: var(--green); color: #0a0f0a; border: none; border-radius: 10px; padding: 14px; font-size: 15px; font-weight: 700; font-family: var(--fd); cursor: pointer; transition: opacity .15s; letter-spacing: -.01em; }
-  .btn-login:hover { opacity: .88; }
-
-  .error-msg { font-size: 13px; color: #f28b82; background: rgba(242,139,130,.1); border: 1px solid rgba(242,139,130,.2); border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; display: none; }
+  .btn-login { width: 100%; background: var(--green); color: #fff; border: none; border-radius: 9px; padding: 13px; font-size: 15px; font-weight: 700; font-family: var(--fd); cursor: pointer; transition: background .15s; }
+  .btn-login:hover { background: var(--green-dark); }
+  .divider { display: flex; align-items: center; gap: 12px; margin: 18px 0; }
+  .divider hr { flex: 1; border: none; border-top: 1px solid var(--border); }
+  .divider span { font-size: 12px; color: var(--dim); white-space: nowrap; }
+  .error-msg { font-size: 13px; color: #DC2626; background: #FEF2F2; border: 1px solid #FECACA; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; display: none; }
   .error-msg.show { display: block; }
-
-  .divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
-  .divider hr { flex: 1; border: none; border-top: 1px solid var(--line); }
-  .divider span { font-size: 12px; color: var(--dim); }
-
-  .homeowner-note { font-size: 13px; color: var(--mute); text-align: center; line-height: 1.5; }
-  .homeowner-note strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 14px; }
-
-  footer { border-top: 1px solid var(--line); background: var(--bg2); }
-  .foot { max-width: 1060px; margin: 0 auto; padding: 22px 24px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; font-size: 12px; color: var(--dim); }
+  footer { background: var(--text); color: #9CA3AF; }
+  .foot { max-width: 1120px; margin: 0 auto; padding: 22px 28px; display: flex; justify-content: space-between; font-size: 12px; flex-wrap: wrap; gap: 10px; }
+  .foot a { color: #D1D5DB; text-decoration: none; }
 </style>
 </head>
 <body>
-
-<header>
-  <div class="nav">
-    <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#52b788"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#0a0f0a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#0a0f0a"/></svg>
-    <span class="brand">InnoVista</span>
-  </div>
-</header>
+<header><div class="nav">
+  <a class="brand" href="index.html">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#16A34A"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#fff"/></svg>
+    InnoVista
+  </a>
+  <a class="back-link" href="index.html">← Back to site</a>
+</div></header>
 
 <main>
   <div class="login-wrap">
-    <div class="login-eyebrow"><span></span>Secure Access</div>
-    <h1>Welcome back.</h1>
-    <p>Select your role below, then sign in to access your dashboard.</p>
+    <div class="login-heading">Welcome back.</div>
+    <div class="login-sub">Select your role and sign in to your dashboard.</div>
 
     <div class="role-tabs">
       <div class="role-tab active" onclick="setRole('admin')" id="tab-admin">
-        <div class="rt-icon">🏢</div>
-        <div class="rt-label">InnoVista<br>Admin</div>
+        <div class="role-tab-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <div class="role-tab-label">InnoVista<br>Admin</div>
       </div>
       <div class="role-tab" onclick="setRole('client')" id="tab-client">
-        <div class="rt-icon">🔧</div>
-        <div class="rt-label">Business<br>Owner</div>
+        <div class="role-tab-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="role-tab-label">Business<br>Owner</div>
       </div>
       <div class="role-tab" onclick="setRole('homeowner')" id="tab-homeowner">
-        <div class="rt-icon">🏠</div>
-        <div class="rt-label">My Service<br>Portal</div>
+        <div class="role-tab-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="role-tab-label">My Service<br>Portal</div>
       </div>
     </div>
 
@@ -107,97 +98,56 @@
       <div class="error-msg" id="error-msg">Incorrect credentials. Please try again.</div>
 
       <div id="form-admin">
-        <div class="hint"><strong>Demo credentials:</strong> chris@innovista.com / admin123</div>
-        <div class="form-group">
-          <label>Email address</label>
-          <input type="email" id="admin-email" placeholder="chris@innovista.com" />
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="admin-pass" placeholder="••••••••" />
-        </div>
+        <div class="hint"><strong>Demo:</strong> chris@innovista.com / admin123</div>
+        <div class="form-group"><label>Email address</label><input type="email" id="admin-email" placeholder="chris@innovista.com" /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="admin-pass" placeholder="••••••••" /></div>
         <button class="btn-login" onclick="tryLogin('admin')">Sign in as Admin →</button>
       </div>
 
       <div id="form-client" style="display:none;">
-        <div class="hint"><strong>Demo credentials:</strong> client@hvaccompany.example / client123</div>
-        <div class="form-group">
-          <label>Email address</label>
-          <input type="email" id="client-email" placeholder="client@hvaccompany.example" />
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="client-pass" placeholder="••••••••" />
-        </div>
-        <button class="btn-login" onclick="tryLogin('client')">Sign in as Business Owner →</button>
+        <div class="hint"><strong>Demo:</strong> client@hvaccompany.example / client123</div>
+        <div class="form-group"><label>Email address</label><input type="email" id="client-email" placeholder="client@hvaccompany.example" /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="client-pass" placeholder="••••••••" /></div>
+        <button class="btn-login" onclick="tryLogin('client')">Sign in →</button>
       </div>
 
       <div id="form-homeowner" style="display:none;">
-        <div class="hint"><strong>Demo credentials:</strong> Phone number 555-867-5309</div>
-        <div class="form-group">
-          <label>Phone number</label>
-          <input type="tel" id="hw-phone" placeholder="555-867-5309" />
-        </div>
-        <div class="divider"><hr /><span>We'll text you a link — or use demo number above</span><hr /></div>
-        <button class="btn-login" onclick="tryLogin('homeowner')">Access My Portal →</button>
+        <div class="hint"><strong>Demo:</strong> Enter phone number 555-867-5309</div>
+        <div class="form-group"><label>Phone number</label><input type="tel" id="hw-phone" placeholder="555-867-5309" /></div>
+        <div class="divider"><hr/><span>We'll verify your number</span><hr/></div>
+        <button class="btn-login" onclick="tryLogin('homeowner')">Access my portal →</button>
       </div>
     </div>
-
   </div>
 </main>
 
-<footer>
-  <div class="foot">
-    <span>© 2026 InnoVista Strategies. Lead capture for the trades.</span>
-    <span>Powered by AI · Built for the trades</span>
-  </div>
-</footer>
+<footer><div class="foot"><span>© 2026 InnoVista Strategies.</span><span><a href="index.html">Home</a> · <a href="pricing.html">Pricing</a></span></div></footer>
 
 <script>
-  let currentRole = 'admin';
-
-  const CREDS = {
-    admin:     { email: 'chris@innovista.com',          pass: 'admin123',  dest: 'InnoVista%20Backend.html' },
-    client:    { email: 'client@hvaccompany.example',   pass: 'client123', dest: 'client-dashboard.html' },
-    homeowner: { phone: '555-867-5309',                               dest: 'homeowner-portal.html' },
-  };
-
-  function setRole(role) {
-    currentRole = role;
-    ['admin','client','homeowner'].forEach(r => {
-      document.getElementById('tab-' + r).classList.toggle('active', r === role);
-      document.getElementById('form-' + r).style.display = r === role ? 'block' : 'none';
-    });
-    document.getElementById('error-msg').classList.remove('show');
-  }
-
-  function tryLogin(role) {
-    const err = document.getElementById('error-msg');
-    err.classList.remove('show');
-
-    if (role === 'admin') {
-      const e = document.getElementById('admin-email').value.trim().toLowerCase();
-      const p = document.getElementById('admin-pass').value.trim();
-      if (e === CREDS.admin.email && p === CREDS.admin.pass) { go(CREDS.admin.dest); return; }
-    }
-    if (role === 'client') {
-      const e = document.getElementById('client-email').value.trim().toLowerCase();
-      const p = document.getElementById('client-pass').value.trim();
-      if (e === CREDS.client.email && p === CREDS.client.pass) { go(CREDS.client.dest); return; }
-    }
-    if (role === 'homeowner') {
-      const ph = document.getElementById('hw-phone').value.trim().replace(/\D/g,'');
-      const demo = CREDS.homeowner.phone.replace(/\D/g,'');
-      if (ph === demo || ph === '') { go(CREDS.homeowner.dest); return; }
-    }
-    err.classList.add('show');
-  }
-
-  function go(dest) { window.location.href = dest; }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Enter') tryLogin(currentRole);
+let currentRole = 'admin';
+const CREDS = {
+  admin:     { email:'chris@innovista.com',        pass:'admin123',  dest:'InnoVista%20Backend.html' },
+  client:    { email:'client@hvaccompany.example', pass:'client123', dest:'client-dashboard.html' },
+  homeowner: { phone:'5558675309', dest:'homeowner-portal.html' },
+};
+function setRole(role) {
+  currentRole = role;
+  ['admin','client','homeowner'].forEach(r => {
+    document.getElementById('tab-'+r).classList.toggle('active', r===role);
+    document.getElementById('form-'+r).style.display = r===role ? 'block' : 'none';
   });
+  document.getElementById('error-msg').classList.remove('show');
+}
+function tryLogin(role) {
+  const err = document.getElementById('error-msg');
+  err.classList.remove('show');
+  if (role==='admin') { const e=document.getElementById('admin-email').value.trim().toLowerCase(), p=document.getElementById('admin-pass').value.trim(); if(e===CREDS.admin.email&&p===CREDS.admin.pass){go(CREDS.admin.dest);return;} }
+  if (role==='client') { const e=document.getElementById('client-email').value.trim().toLowerCase(), p=document.getElementById('client-pass').value.trim(); if(e===CREDS.client.email&&p===CREDS.client.pass){go(CREDS.client.dest);return;} }
+  if (role==='homeowner') { const ph=document.getElementById('hw-phone').value.replace(/\D/g,''); if(ph===CREDS.homeowner.phone||ph===''){go(CREDS.homeowner.dest);return;} }
+  err.classList.add('show');
+}
+function go(dest) { window.location.href = dest; }
+document.addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(currentRole); });
 </script>
 </body>
 </html>
