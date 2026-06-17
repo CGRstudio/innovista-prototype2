@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  var s = sessionStorage.getItem('innovista_session');
+  if (!s) { window.location.replace('login.html'); }
+})();
+</script>
+
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>InnoVista — Business Dashboard</title>
@@ -142,8 +149,8 @@
     <a class="nav-item" onclick="show('notifications',this)" href="#">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications
     </a>
-    <a class="nav-item locked" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg>AI Chatbot<span class="locked-tip">Pro</span>
+    <a class="nav-item" onclick="show('chatbot',this)" href="#">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3.5V7A1.5 1.5 0 0 1 6 5.5Z"/></svg>AI Chatbot
     </a>
     <div class="aside-section">Account</div>
     <a class="nav-item" onclick="show('settings',this)" href="#">
@@ -241,6 +248,29 @@
       <div class="notif"><div class="notif-dot"></div><div><div class="notif-text">James T. confirmed his appointment for June 18 at 10am.</div><div class="notif-time">4 hours ago</div></div></div>
       <div class="notif"><div class="notif-dot read"></div><div><div class="notif-text">Derek W. left a 5-star Google review after his tune-up.</div><div class="notif-time">Yesterday</div></div></div>
       <div class="notif"><div class="notif-dot read"></div><div><div class="notif-text">Marcus J. qualified by AI — ready to book a full system replacement.</div><div class="notif-time">Yesterday</div></div></div>
+    </div>
+
+    <div class="content-area" id="area-chatbot">
+      <div class="page-title">AI Chatbot</div>
+      <p class="page-sub">Qualifies and books leads automatically, 24/7.</p>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">18</div><div class="stat-label">Conversations this week</div></div>
+        <div class="stat"><div class="stat-val">14</div><div class="stat-label">Leads qualified</div></div>
+        <div class="stat"><div class="stat-val">9 sec</div><div class="stat-label">Avg response time</div></div>
+        <div class="stat"><div class="stat-val">78%</div><div class="stat-label">Booking rate</div></div>
+      </div>
+      <div class="section-title">Recent conversation</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;max-width:480px;box-shadow:var(--shadow-sm);">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:var(--surface2);border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-start;max-width:85%;">Hi! Thanks for reaching out. What service do you need help with today?</div>
+          <div style="background:var(--green);color:#fff;border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-end;max-width:85%;">My AC stopped cooling, it's an emergency</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-start;max-width:85%;">Sorry to hear that! Can I get your address so we can get a technician out today?</div>
+          <div style="background:var(--green);color:#fff;border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-end;max-width:85%;">6842 SW 112th Ave, Hialeah</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-start;max-width:85%;">Got it — I have a technician available today at 4pm. Want me to book that?</div>
+          <div style="background:var(--green);color:#fff;border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-end;max-width:85%;">Yes please!</div>
+          <div style="background:var(--green-light);border:1px solid #BBF7D0;border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-start;max-width:85%;color:var(--green-dark);font-weight:600;">✓ Booked — Today at 4pm. Confirmation sent by text.</div>
+        </div>
+      </div>
     </div>
 
     <div class="content-area" id="area-settings">
