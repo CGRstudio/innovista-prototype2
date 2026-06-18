@@ -1,164 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>InnoVista — Plans & Pricing</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg:#F4F6F8; --surface:#FFFFFF; --surface2:#F9FAFB; --border:#E5E7EB; --border2:#D1D5DB;
-    --green:#16A34A; --green-light:#DCFCE7; --green-dark:#15803D; --green-glow:rgba(22,163,74,.08);
-    --text:#111827; --mute:#6B7280; --dim:#9CA3AF;
-    --fd:'Space Grotesk',sans-serif; --fb:'Inter',sans-serif;
-    --shadow-sm:0 1px 3px rgba(0,0,0,.08); --shadow:0 4px 12px rgba(0,0,0,.08);
+  :root{
+    --bg:#0F0F0F;--surface:#161616;--surface2:#1C1C1C;
+    --line:rgba(255,255,255,0.08);--line2:rgba(255,255,255,0.16);
+    --green:#22C55E;--green-dim:#7BC47B;
+    --text:#FFFFFF;--mute:rgba(255,255,255,0.55);--dim:rgba(255,255,255,0.4);
+    --fb:'Inter',sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:var(--fb);-webkit-font-smoothing:antialiased;}
-  header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;box-shadow:var(--shadow-sm);}
-  .nav{max-width:1120px;margin:0 auto;padding:0 28px;display:flex;align-items:center;gap:12px;height:64px;}
-  .brand{display:flex;align-items:center;gap:10px;font-family:var(--fd);font-weight:700;font-size:20px;text-decoration:none;color:var(--text);}
-  .nav-links{display:flex;align-items:center;gap:28px;margin-left:32px;}
-  .nav-links a{font-size:14px;font-weight:500;color:var(--mute);text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+  header{border-bottom:0.5px solid var(--line);position:sticky;top:0;background:rgba(15,15,15,0.85);backdrop-filter:blur(12px);z-index:50;}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0;}
+  .brand{font-size:18px;font-weight:500;color:var(--text);text-decoration:none;letter-spacing:-0.02em;}
+  .nav-links{display:flex;align-items:center;gap:36px;}
+  .nav-links a{font-size:13px;color:var(--mute);text-decoration:none;}
   .nav-links a:hover,.nav-links a.active{color:var(--text);}
-  .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
-  .nav-login{font-size:14px;font-weight:600;color:var(--text);text-decoration:none;padding:8px 16px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);}
-  .nav-login:hover{border-color:var(--green);color:var(--green);}
-  .nav-cta{font-size:14px;font-weight:700;color:#fff;background:var(--green);text-decoration:none;padding:8px 18px;border-radius:8px;font-family:var(--fd);}
-  .nav-cta:hover{background:var(--green-dark);}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
-  .hero{padding:72px 0 56px;text-align:center;}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);padding:6px 13px;border-radius:999px;background:var(--green-light);border:1px solid #BBF7D0;margin-bottom:20px;}
-  .eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
-  h1{font-family:var(--fd);font-size:clamp(30px,4.5vw,46px);font-weight:700;letter-spacing:-.025em;margin-bottom:14px;}
-  h1 em{font-style:normal;color:var(--green);}
-  .hero-sub{font-size:17px;color:var(--mute);max-width:480px;margin:0 auto;line-height:1.6;}
-  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:48px 0 64px;}
-  @media(max-width:720px){.plans{grid-template-columns:1fr;}}
-  .plan{background:var(--surface);border-radius:18px;padding:28px;border:1.5px solid var(--border);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;position:relative;}
-  .plan.featured{border-color:var(--green);box-shadow:0 0 0 1px var(--green),var(--shadow);}
-  .popular-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 14px;border-radius:999px;white-space:nowrap;}
-  .plan-name{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
-  .plan-price{font-family:var(--fd);font-size:44px;font-weight:700;letter-spacing:-.03em;color:var(--text);line-height:1;margin-bottom:4px;}
-  .plan-price span{font-size:16px;font-weight:500;color:var(--mute);}
-  .plan-desc{font-size:13px;color:var(--mute);margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--border);line-height:1.5;}
-  .features{list-style:none;flex:1;margin-bottom:26px;}
-  .features li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--mute);padding:7px 0;border-bottom:1px solid var(--border);line-height:1.4;}
-  .features li:last-child{border-bottom:none;}
+  .nav-login{padding:9px 20px;border:0.5px solid var(--line2);border-radius:999px;font-size:13px;color:var(--text);text-decoration:none;}
+  .hero{padding:90px 0 60px;text-align:center;}
+  .eyebrow{font-size:12px;letter-spacing:0.14em;color:var(--green-dim);text-transform:uppercase;margin-bottom:26px;}
+  h1{font-size:clamp(34px,5vw,52px);font-weight:500;letter-spacing:-0.03em;line-height:1.1;margin-bottom:18px;}
+  h1 em{font-style:normal;color:var(--mute);}
+  .hero-sub{font-size:16px;color:var(--mute);max-width:440px;margin:0 auto;line-height:1.6;}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin:60px 0 90px;border:0.5px solid var(--line);}
+  .plan{background:var(--bg);padding:36px 32px;display:flex;flex-direction:column;}
+  .plan.featured{background:var(--surface);}
+  .plan-name{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
+  .plan-price{font-size:42px;font-weight:500;letter-spacing:-0.02em;line-height:1;margin-bottom:6px;}
+  .plan-price span{font-size:15px;color:var(--mute);font-weight:400;}
+  .plan-desc{font-size:13px;color:var(--mute);margin-bottom:28px;padding-bottom:24px;border-bottom:0.5px solid var(--line);line-height:1.5;}
+  .features{list-style:none;flex:1;margin-bottom:32px;}
+  .features li{font-size:14px;color:var(--mute);padding:9px 0;display:flex;gap:10px;}
   .features li.included{color:var(--text);}
-  .features li.excluded{opacity:.4;text-decoration:line-through;}
-  .check{color:var(--green);font-size:15px;flex-shrink:0;margin-top:1px;}
-  .cross{color:var(--dim);font-size:14px;flex-shrink:0;margin-top:1px;}
-  .ai-star{color:#D97706;font-size:14px;flex-shrink:0;margin-top:1px;}
-  .btn-plan{display:block;text-align:center;padding:12px;border-radius:9px;font-size:14px;font-weight:700;font-family:var(--fd);text-decoration:none;cursor:pointer;border:none;transition:all .15s;}
-  .btn-outline{background:transparent;color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green);}
-  .btn-outline:hover{background:var(--green-light);}
-  .btn-solid{background:var(--green);color:#fff;}
-  .btn-solid:hover{background:var(--green-dark);}
-  .compare{margin-bottom:64px;}
-  .compare h2{font-family:var(--fd);font-size:26px;font-weight:700;letter-spacing:-.02em;margin-bottom:24px;}
-  table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border);}
-  thead th{text-align:center;padding:14px 16px;font-family:var(--fd);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);background:var(--surface2);border-bottom:1px solid var(--border);}
+  .features li.excluded{opacity:.35;text-decoration:line-through;}
+  .features li.ai span{color:#FBBF24;}
+  .btn-plan{display:block;text-align:center;padding:12px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;}
+  .btn-outline{border:0.5px solid var(--line2);color:var(--text);}
+  .btn-solid{background:#fff;color:#0F0F0F;}
+  .compare{margin-bottom:90px;}
+  .compare h2{font-size:24px;font-weight:500;letter-spacing:-0.02em;margin-bottom:30px;}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  thead th{text-align:center;padding:14px 16px;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--dim);border-bottom:0.5px solid var(--line2);}
   thead th:first-child{text-align:left;}
-  .th-featured{color:var(--green)!important;}
-  tbody tr{border-bottom:1px solid var(--border);}
-  tbody tr:last-child{border-bottom:none;}
+  .th-featured{color:var(--green-dim)!important;}
+  tbody tr{border-bottom:0.5px solid var(--line);}
   tbody td{padding:12px 16px;color:var(--mute);text-align:center;}
-  tbody td:first-child{text-align:left;color:var(--text);font-weight:500;}
-  tbody tr:hover td{background:var(--surface2);}
-  .section-row td{background:#F0FDF4;color:var(--green)!important;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;}
-  .cell-yes{color:var(--green);font-size:17px;}
-  .cell-no{color:var(--dim);font-size:17px;}
-  .cell-ai{color:#D97706;font-size:13px;font-weight:600;}
-  .cell-manual{font-size:12px;color:var(--mute);}
-  .faq{margin-bottom:72px;max-width:680px;}
-  .faq h2{font-family:var(--fd);font-size:26px;font-weight:700;letter-spacing:-.02em;margin-bottom:24px;}
-  .faq-item{border-bottom:1px solid var(--border);padding:18px 0;}
-  .faq-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px;}
-  .faq-a{font-size:14px;color:var(--mute);line-height:1.6;}
-  .cta-band{background:var(--green);border-radius:20px;padding:48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:72px;}
-  .cta-band h2{font-family:var(--fd);font-size:26px;font-weight:700;color:#fff;max-width:380px;line-height:1.2;}
-  .cta-band p{font-size:14px;color:rgba(255,255,255,.8);margin-top:8px;line-height:1.5;}
-  .cta-btns{display:flex;gap:12px;flex-wrap:wrap;}
-  .btn-white{font-family:var(--fd);font-size:14px;font-weight:700;color:var(--green);background:#fff;padding:11px 22px;border-radius:8px;text-decoration:none;}
-  .btn-outline-white{font-family:var(--fd);font-size:14px;font-weight:600;color:#fff;background:transparent;padding:11px 22px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,.5);}
-  footer{background:var(--text);color:#9CA3AF;}
-  .foot{max-width:1120px;margin:0 auto;padding:28px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:13px;}
-  .foot a{color:#D1D5DB;text-decoration:none;}
+  tbody td:first-child{text-align:left;color:var(--text);}
+  .section-row td{color:var(--green-dim)!important;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:18px 16px 8px;border-bottom:none;}
+  .cell-yes{color:var(--text);}
+  .cell-no{color:var(--dim);}
+  .cell-ai{color:#FBBF24;font-size:12px;}
+  footer{border-top:0.5px solid var(--line);}
+  .foot{display:flex;justify-content:space-between;padding:28px 0;font-size:12px;color:var(--dim);flex-wrap:wrap;gap:10px;}
+  .foot a{color:var(--mute);text-decoration:none;}
 </style>
 </head>
 <body>
-<header><div class="nav wrap" style="max-width:1120px">
-  <a class="brand" href="index.html">
-    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#16A34A"/><path d="M9 11.5l4.2 9.5a3 3 0 0 0 5.5 0L23 11.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.9" fill="#fff"/></svg>
-    InnoVista
-  </a>
+<header><div class="wrap nav">
+  <a class="brand" href="index.html">InnoVista</a>
   <div class="nav-links">
     <a href="index.html#how-it-works">How it works</a>
-    <a href="index.html#features">Features</a>
-    <a href="pricing.html" class="active" style="color:var(--text)">Pricing</a>
-  </div>
-  <div class="nav-right">
+    <a href="pricing.html" class="active">Pricing</a>
     <a class="nav-login" href="login.html">Log in</a>
-    <a class="nav-cta" href="login.html">Get started →</a>
   </div>
 </div></header>
 
-<div class="wrap">
+<main class="wrap">
   <div class="hero">
-    <div class="eyebrow"><span class="eyebrow-dot"></span>Plans & Pricing</div>
-    <h1>The right plan for<br><em>every stage of growth.</em></h1>
-    <p class="hero-sub">Start free, automate your follow-up, then let AI run your leads around the clock.</p>
+    <div class="eyebrow">Plans & pricing</div>
+    <h1>Start free. Scale<br/><em>when you're ready.</em></h1>
+    <p class="hero-sub">Automate your follow-up, then let AI run your leads around the clock.</p>
   </div>
 
   <div class="plans">
     <div class="plan">
       <div class="plan-name">Basic</div>
       <div class="plan-price">$0<span>/mo</span></div>
-      <div class="plan-desc">Get started capturing leads and managing your calendar manually. No credit card required.</div>
+      <div class="plan-desc">Capture leads and manage your calendar manually. No card required.</div>
       <ul class="features">
-        <li class="included"><span class="check">✓</span>Lead capture form</li>
-        <li class="included"><span class="check">✓</span>Email notifications</li>
-        <li class="included"><span class="check">✓</span>Missed call text back</li>
-        <li class="included"><span class="check">✓</span>Manual appointment calendar</li>
-        <li class="excluded"><span class="cross">✗</span>SMS automation</li>
-        <li class="excluded"><span class="cross">✗</span>Pipeline dashboard</li>
-        <li class="excluded"><span class="cross">✗</span>AI chatbot</li>
+        <li class="included">Lead capture form</li>
+        <li class="included">Email notifications</li>
+        <li class="included">Missed call text back</li>
+        <li class="included">Manual appointment calendar</li>
+        <li class="excluded">SMS automation</li>
+        <li class="excluded">Pipeline dashboard</li>
+        <li class="excluded">AI chatbot</li>
       </ul>
       <a class="btn-plan btn-outline" href="login.html">Get started free</a>
     </div>
-
     <div class="plan featured">
-      <div class="popular-badge">Most popular</div>
       <div class="plan-name">Standard</div>
       <div class="plan-price">$297<span>/mo</span></div>
-      <div class="plan-desc">Automate your follow-up and let the system book jobs while you're on the job.</div>
+      <div class="plan-desc">Automate follow-up and let the system book jobs for you.</div>
       <ul class="features">
-        <li class="included"><span class="check">✓</span>Everything in Basic</li>
-        <li class="included"><span class="check">✓</span>SMS follow-up automation</li>
-        <li class="included"><span class="check">✓</span>Automated booking calendar</li>
-        <li class="included"><span class="check">✓</span>Pipeline / Kanban dashboard</li>
-        <li class="included"><span class="check">✓</span>Lead list & detail view</li>
-        <li class="included"><span class="check">✓</span>Google review automation</li>
-        <li class="excluded"><span class="cross">✗</span>AI chatbot & voice calling</li>
+        <li class="included">Everything in Basic</li>
+        <li class="included">SMS follow-up automation</li>
+        <li class="included">Automated booking calendar</li>
+        <li class="included">Pipeline / Kanban dashboard</li>
+        <li class="included">Lead list & detail view</li>
+        <li class="included">Google review automation</li>
+        <li class="excluded">AI chatbot & voice calling</li>
       </ul>
       <a class="btn-plan btn-solid" href="login.html">Start Standard →</a>
     </div>
-
     <div class="plan">
       <div class="plan-name">Pro</div>
       <div class="plan-price">$597<span>/mo</span></div>
-      <div class="plan-desc">Full AI automation. Qualifies, books, and follows up — 24/7, no human needed.</div>
+      <div class="plan-desc">Full AI automation. Qualifies, books, follows up — 24/7.</div>
       <ul class="features">
-        <li class="included"><span class="check">✓</span>Everything in Standard</li>
-        <li class="included"><span class="ai-star">★</span>AI chatbot — 24/7 qualification</li>
-        <li class="included"><span class="ai-star">★</span>AI voice calling</li>
-        <li class="included"><span class="check">✓</span>Advanced reporting dashboard</li>
-        <li class="included"><span class="check">✓</span>Multi-location support</li>
-        <li class="included"><span class="check">✓</span>White label options</li>
-        <li class="included"><span class="check">✓</span>Priority support</li>
+        <li class="included">Everything in Standard</li>
+        <li class="included ai"><span>★</span> AI chatbot — 24/7 qualification</li>
+        <li class="included ai"><span>★</span> AI voice calling</li>
+        <li class="included">Advanced reporting</li>
+        <li class="included">Multi-location support</li>
+        <li class="included">White label options</li>
+        <li class="included">Priority support</li>
       </ul>
       <a class="btn-plan btn-outline" href="login.html">Start Pro →</a>
     </div>
@@ -169,49 +133,19 @@
     <table>
       <thead><tr><th>Feature</th><th>Basic</th><th class="th-featured">Standard</th><th>Pro</th></tr></thead>
       <tbody>
-        <tr class="section-row"><td colspan="4">Lead Capture</td></tr>
+        <tr class="section-row"><td colspan="4">Lead capture</td></tr>
         <tr><td>Lead capture form</td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr><td>Email notifications</td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr><td>Missed call text back</td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
         <tr><td>SMS follow-up automation</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr><td>Multi-day follow-up sequences</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr class="section-row"><td colspan="4">Calendar & Booking</td></tr>
-        <tr><td>Appointment calendar</td><td><span class="cell-manual">Manual only</span></td><td><span class="cell-yes">✓ Automated</span></td><td><span class="cell-yes">✓ Automated</span></td></tr>
-        <tr><td>Booking reminders</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr class="section-row"><td colspan="4">Pipeline & Leads</td></tr>
-        <tr><td>Lead list view</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr><td>Pipeline / Kanban dashboard</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr><td>Google review automation</td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr class="section-row"><td colspan="4">AI Features</td></tr>
-        <tr><td>AI chatbot — 24/7 qualification</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-ai">★ Pro only</span></td></tr>
+        <tr class="section-row"><td colspan="4">Calendar & booking</td></tr>
+        <tr><td>Appointment calendar</td><td><span class="cell-no" style="font-size:12px;">Manual only</span></td><td><span class="cell-yes">✓ Automated</span></td><td><span class="cell-yes">✓ Automated</span></td></tr>
+        <tr class="section-row"><td colspan="4">AI features</td></tr>
+        <tr><td>AI chatbot</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-ai">★ Pro only</span></td></tr>
         <tr><td>AI voice calling</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-ai">★ Pro only</span></td></tr>
-        <tr><td>Advanced reporting</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr class="section-row"><td colspan="4">Agency & Scale</td></tr>
-        <tr><td>Multi-location support</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr><td>White label options</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td></tr>
-        <tr><td>Priority support</td><td><span class="cell-no">—</span></td><td><span class="cell-no">—</span></td><td><span class="cell-yes">✓</span></td></tr>
       </tbody>
     </table>
   </div>
+</main>
 
-  <div class="faq">
-    <h2>Common questions</h2>
-    <div class="faq-item"><div class="faq-q">Can I start on Basic and upgrade later?</div><div class="faq-a">Yes. Start free, get your first leads in, and upgrade to Standard or Pro when you're ready. Your data carries over instantly.</div></div>
-    <div class="faq-item"><div class="faq-q">What makes the AI chatbot Pro-only?</div><div class="faq-a">The AI chatbot qualifies every lead automatically 24/7 — no human needed. It's the most powerful feature in the platform and the centerpiece of what makes Pro worth it.</div></div>
-    <div class="faq-item"><div class="faq-q">Is there a setup fee?</div><div class="faq-a">No setup fees on any plan. Pro clients get a done-for-you onboarding and snapshot deployment within 24 hours of signing up.</div></div>
-    <div class="faq-item"><div class="faq-q">What trades do you support?</div><div class="faq-a">Launching with roofing first, then HVAC, plumbing, electrical, and landscaping. Pro clients get early access to each new trade snapshot as it launches.</div></div>
-    <div class="faq-item"><div class="faq-q">Can my clients log in and see their own data?</div><div class="faq-a">Yes. Every business owner gets their own dashboard. Their customers get a personal service portal for quotes, appointments, and maintenance tips.</div></div>
-  </div>
-
-  <div class="cta-band">
-    <div><h2>Start free. Scale when you're ready.</h2><p>Basic is free forever. Upgrade when you want the automation to kick in.</p></div>
-    <div class="cta-btns">
-      <a class="btn-outline-white" href="#plans">Compare plans</a>
-      <a class="btn-white" href="login.html">Get started free →</a>
-    </div>
-  </div>
-</div>
-
-<footer><div class="foot"><span>© 2026 InnoVista Strategies.</span><span><a href="index.html">Home</a> · <a href="login.html">Log in</a></span></div></footer>
+<footer><div class="wrap foot"><span>© 2026 InnoVista Strategies.</span><span><a href="index.html">Home</a> · <a href="login.html">Log in</a></span></div></footer>
 </body>
 </html>

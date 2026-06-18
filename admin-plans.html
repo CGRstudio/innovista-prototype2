@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  var s = sessionStorage.getItem('innovista_session');
+  if (!s) { window.location.replace('login.html'); }
+})();
+</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>InnoVista — Plan Management</title>
+<title>InnoVista — Agency Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -11,6 +17,7 @@
   :root{
     --bg:#F4F6F8;--surface:#FFFFFF;--surface2:#F9FAFB;--border:#E5E7EB;--border2:#D1D5DB;
     --green:#16A34A;--green-light:#DCFCE7;--green-dark:#15803D;
+    --gold:#D97706;--gold-light:#FEF3C7;--red:#DC2626;--red-light:#FEE2E2;--blue:#1D4ED8;--blue-light:#DBEAFE;
     --text:#111827;--mute:#6B7280;--dim:#9CA3AF;
     --fd:'Space Grotesk',sans-serif;--fb:'Inter',sans-serif;
     --shadow-sm:0 1px 3px rgba(0,0,0,.08);--shadow:0 4px 12px rgba(0,0,0,.08);
@@ -24,6 +31,7 @@
   .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
   .role-badge{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green);background:var(--green-light);border:1px solid #BBF7D0;padding:4px 10px;border-radius:999px;}
   .signout{font-size:13px;font-weight:500;color:var(--mute);text-decoration:none;padding:7px 14px;border:1px solid var(--border);border-radius:7px;}
+  .signout:hover{color:var(--text);border-color:var(--border2);}
   .layout{display:flex;flex:1;}
   aside{width:var(--sidebar);background:var(--surface);border-right:1px solid var(--border);padding:20px 0;flex-shrink:0;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto;}
   .aside-section{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:0 16px;margin:20px 0 6px;}
@@ -31,36 +39,92 @@
   .nav-item{display:flex;align-items:center;gap:10px;padding:9px 16px;font-size:14px;font-weight:500;color:var(--mute);text-decoration:none;cursor:pointer;border-left:2px solid transparent;transition:all .15s;}
   .nav-item:hover{color:var(--text);background:var(--bg);}
   .nav-item.active{color:var(--green);background:var(--green-light);border-left-color:var(--green);font-weight:600;}
-  .nav-icon{width:16px;height:16px;flex-shrink:0;stroke:currentColor;opacity:.7;}
+  .nav-icon{width:16px;height:16px;flex-shrink:0;opacity:.7;}
   .nav-item.active .nav-icon{opacity:1;}
   .main{flex:1;padding:32px 36px;}
   .page-title{font-family:var(--fd);font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px;}
   .page-sub{font-size:14px;color:var(--mute);margin-bottom:28px;}
+  .content-area{display:none;}
+  .content-area.active{display:block;}
+  .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--green);cursor:pointer;margin-bottom:18px;font-weight:600;}
+
   .summary-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
   .scard{background:var(--surface);border-radius:12px;padding:20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
-  .scard-val{font-family:var(--fd);font-size:32px;font-weight:700;}
+  .scard-val{font-family:var(--fd);font-size:30px;font-weight:700;}
   .scard-label{font-size:12px;color:var(--mute);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;}
-  .basic-c{color:var(--mute);}
-  .standard-c{color:#1D4ED8;}
-  .pro-c{color:#D97706;}
-  table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
-  thead th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding:12px 14px;background:var(--surface2);border-bottom:1px solid var(--border);}
-  tbody tr{border-bottom:1px solid var(--border);transition:background .12s;}
+
+  table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
+  thead th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);padding:12px 14px;background:var(--surface2);border-bottom:1px solid var(--border);}
+  tbody tr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
   tbody tr:hover{background:var(--surface2);}
-  tbody td{padding:14px;font-size:14px;color:var(--mute);vertical-align:middle;}
+  tbody td{padding:14px;font-size:14px;color:var(--mute);}
   tbody td:first-child{color:var(--text);font-weight:500;}
-  .plan-select{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:13px;color:var(--text);font-family:var(--fb);cursor:pointer;outline:none;}
-  .plan-select:focus{border-color:var(--green);}
+  .row-link{color:var(--text);font-weight:600;}
+
+  .plan-select{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:13px;color:var(--text);font-family:var(--fb);cursor:pointer;}
   .toggle-wrap{display:flex;gap:6px;flex-wrap:wrap;}
-  .toggle{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--mute);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;cursor:pointer;transition:all .15s;user-select:none;}
+  .toggle{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--mute);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;cursor:pointer;}
   .toggle.on{color:var(--green-dark);border-color:#BBF7D0;background:var(--green-light);}
-  .toggle-dot{width:7px;height:7px;border-radius:50%;background:var(--dim);flex-shrink:0;transition:background .15s;}
-  .toggle.on .toggle-dot{background:var(--green);}
-  .toggle.ai-feat.on{color:#92400E;border-color:#FDE68A;background:#FEF3C7;}
-  .toggle.ai-feat.on .toggle-dot{background:#D97706;}
-  .save-btn{background:var(--green);color:#fff;border:none;border-radius:7px;padding:7px 16px;font-size:13px;font-weight:700;font-family:var(--fd);cursor:pointer;transition:background .15s;}
+  .toggle.ai-feat.on{color:var(--gold);border-color:#FDE68A;background:var(--gold-light);}
+  .save-btn{background:var(--green);color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:13px;font-weight:700;font-family:var(--fd);cursor:pointer;}
   .save-btn:hover{background:var(--green-dark);}
   .saved-msg{font-size:12px;color:var(--green);display:none;margin-left:8px;font-weight:600;}
+
+  .badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;}
+  .badge-healthy{background:var(--green-light);color:var(--green-dark);}
+  .badge-risk{background:var(--red-light);color:var(--red);}
+  .badge-watch{background:var(--gold-light);color:var(--gold);}
+  .badge-paid{background:var(--green-light);color:var(--green-dark);}
+  .badge-overdue{background:var(--red-light);color:var(--red);}
+  .badge-pro{background:var(--gold-light);color:var(--gold);}
+  .badge-standard{background:var(--blue-light);color:var(--blue);}
+  .badge-basic{background:var(--surface2);color:var(--dim);border:1px solid var(--border);}
+  .badge-won{background:var(--green-light);color:var(--green-dark);}
+  .badge-lost{background:var(--red-light);color:var(--red);}
+
+  .detail-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px;}
+  .detail-name{font-family:var(--fd);font-size:22px;font-weight:700;}
+  .detail-meta{font-size:13px;color:var(--dim);margin-top:4px;}
+  .detail-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+  .dstat{background:var(--surface);border-radius:12px;padding:18px;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
+  .dstat-val{font-family:var(--fd);font-size:26px;font-weight:700;}
+  .dstat-label{font-size:11px;color:var(--dim);margin-top:4px;}
+  .detail-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;}
+  .panel{background:var(--surface);border-radius:12px;padding:22px;border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:16px;}
+  .panel-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
+  .health-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border);}
+  .health-row:last-child{border-bottom:none;}
+  .health-label{font-size:13px;color:var(--mute);}
+  .health-val{font-size:13px;color:var(--text);font-weight:500;}
+  .bar-bg{width:100%;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-top:6px;}
+  .bar-fill{height:100%;background:var(--green);border-radius:3px;}
+  .billing-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+  .billing-row:last-child{border-bottom:none;}
+
+  .pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;}
+  .stage{background:var(--surface);border-radius:12px;padding:14px;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
+  .stage-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;}
+  .lead-card{background:var(--surface2);border-radius:8px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--border);cursor:pointer;}
+  .lead-card:hover{border-color:var(--border2);}
+  .lead-name{font-size:13px;font-weight:600;}
+  .lead-detail{font-size:11px;color:var(--mute);margin-top:2px;}
+
+  .cal-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+  .cal-title-text{font-family:var(--fd);font-size:17px;font-weight:600;}
+  .cal-toggles{display:flex;background:var(--surface2);border-radius:8px;border:1px solid var(--border);overflow:hidden;}
+  .cal-tog{padding:7px 14px;font-size:13px;font-weight:600;color:var(--mute);cursor:pointer;border:none;background:transparent;font-family:var(--fb);}
+  .cal-tog.active{background:var(--green);color:#fff;}
+  .cal-day-names{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px;}
+  .cal-day-name{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);text-align:center;padding:4px 0;}
+  .cal-month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .cal-cell{background:var(--surface);border-radius:9px;padding:9px 8px;border:1px solid var(--border);min-height:74px;}
+  .cal-cell.today{border-color:var(--green);box-shadow:0 0 0 1px var(--green);}
+  .cal-cell.empty{background:transparent;border-color:transparent;}
+  .cal-num{font-size:12px;font-weight:600;color:var(--dim);margin-bottom:5px;}
+  .cal-num.today-num{color:var(--green);font-weight:700;}
+  .cal-appt{background:var(--blue-light);border-radius:4px;padding:3px 7px;font-size:10px;color:var(--blue);margin-bottom:3px;font-weight:500;}
+  .add-btn{display:inline-flex;gap:6px;font-size:13px;font-weight:600;color:var(--green);background:var(--green-light);border:1px solid #BBF7D0;border-radius:8px;padding:8px 16px;cursor:pointer;margin-bottom:18px;}
+
   footer{background:var(--text);color:#9CA3AF;}
   .foot{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;padding:18px 24px;font-size:12px;}
   .foot a{color:#D1D5DB;text-decoration:none;}
@@ -80,92 +144,246 @@
 
 <div class="layout">
   <aside>
-    <div class="aside-section">Agency</div>
-    <a class="nav-item" href="InnoVista%20Backend.html">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Overview
-    </a>
-    <a class="nav-item active" href="admin-plans.html">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Plan Management
-    </a>
-    <a class="nav-item" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>All Clients
-    </a>
-    <a class="nav-item" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Snapshot Library
-    </a>
+    <div class="aside-section">Client Accounts</div>
+    <a class="nav-item active" onclick="show('clients',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>All Clients</a>
+    <a class="nav-item" onclick="show('plans',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83"/></svg>Plan Management</a>
+    <div class="aside-section">Your Sales CRM</div>
+    <a class="nav-item" onclick="show('sales-pipeline',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Sales Pipeline</a>
+    <a class="nav-item" onclick="show('sales-calendar',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Sales Calendar</a>
     <div class="aside-section">Platform</div>
-    <a class="nav-item" href="pricing.html">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Pricing Page
-    </a>
-    <a class="nav-item" href="#">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Revenue
-    </a>
+    <a class="nav-item" href="pricing.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Pricing Page</a>
+    <a class="nav-item" onclick="show('revenue',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Revenue</a>
     <div class="aside-section">Account</div>
-    <a class="nav-item" href="login.html">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out
-    </a>
+    <a class="nav-item" href="login.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out</a>
   </aside>
 
   <div class="main">
-    <div class="page-title">Plan Management</div>
-    <p class="page-sub">Control which features each client can access based on their plan. Changes take effect immediately.</p>
-    <div class="summary-cards">
-      <div class="scard"><div class="scard-val basic-c">3</div><div class="scard-label">Basic clients</div></div>
-      <div class="scard"><div class="scard-val standard-c">5</div><div class="scard-label">Standard clients</div></div>
-      <div class="scard"><div class="scard-val pro-c">2</div><div class="scard-label">Pro clients</div></div>
+
+    <div class="content-area active" id="area-clients">
+      <div class="page-title">All Clients</div>
+      <p class="page-sub">Click any client to see their performance, AI adoption, and billing status.</p>
+      <div class="summary-cards">
+        <div class="scard"><div class="scard-val">10</div><div class="scard-label">Active clients</div></div>
+        <div class="scard"><div class="scard-val">$3,580</div><div class="scard-label">MRR</div></div>
+        <div class="scard"><div class="scard-val" id="at-risk-count">–</div><div class="scard-label">At risk</div></div>
+      </div>
+      <table>
+        <thead><tr><th>Business</th><th>Trade</th><th>Plan</th><th>Account Status</th><th>Billing</th></tr></thead>
+        <tbody id="clients-rows"></tbody>
+      </table>
     </div>
-    <table>
-      <thead><tr><th>Business</th><th>Trade</th><th>Plan</th><th>Active Features</th><th></th></tr></thead>
-      <tbody id="client-rows"></tbody>
-    </table>
+
+    <div class="content-area" id="area-client-detail">
+      <div class="back-btn" onclick="show('clients',null)">← All clients</div>
+      <div id="client-detail-body"></div>
+    </div>
+
+    <div class="content-area" id="area-plans">
+      <div class="page-title">Plan Management</div>
+      <p class="page-sub">Control which features each client can access based on their plan.</p>
+      <table>
+        <thead><tr><th>Business</th><th>Trade</th><th>Plan</th><th>Active Features</th><th></th></tr></thead>
+        <tbody id="plan-rows"></tbody>
+      </table>
+    </div>
+
+    <div class="content-area" id="area-sales-pipeline">
+      <div class="page-title">Sales Pipeline</div>
+      <p class="page-sub">Prospective home service businesses you're trying to sign up for InnoVista.</p>
+      <div class="summary-cards">
+        <div class="scard"><div class="scard-val">14</div><div class="scard-label">Open leads</div></div>
+        <div class="scard"><div class="scard-val">4</div><div class="scard-label">Demos this week</div></div>
+        <div class="scard"><div class="scard-val">68%</div><div class="scard-label">Demo → close rate</div></div>
+      </div>
+      <div class="pipeline">
+        <div class="stage"><div class="stage-name">New <span>4</span></div>
+          <div class="lead-card"><div class="lead-name">Apex Roofing Co.</div><div class="lead-detail">Tampa · Referral</div></div>
+          <div class="lead-card"><div class="lead-name">Coastal Plumbing</div><div class="lead-detail">St. Pete · Cold outreach</div></div>
+          <div class="lead-card"><div class="lead-name">Sunshine Electric</div><div class="lead-detail">Clearwater · Website form</div></div>
+          <div class="lead-card"><div class="lead-name">GreenScape Lawns</div><div class="lead-detail">Brandon · Referral</div></div>
+        </div>
+        <div class="stage"><div class="stage-name">Contacted <span>4</span></div>
+          <div class="lead-card"><div class="lead-name">Reliable Roofing</div><div class="lead-detail">Tampa · Follow-up sent</div></div>
+          <div class="lead-card"><div class="lead-name">Quick Fix HVAC</div><div class="lead-detail">Sarasota · Called 6/14</div></div>
+          <div class="lead-card"><div class="lead-name">Bay Area Plumbing</div><div class="lead-detail">Tampa · Emailed 6/15</div></div>
+          <div class="lead-card"><div class="lead-name">ProTech Electric</div><div class="lead-detail">Lakeland · Called 6/16</div></div>
+        </div>
+        <div class="stage"><div class="stage-name">Demo Scheduled <span>3</span></div>
+          <div class="lead-card"><div class="lead-name">Titan Roofing</div><div class="lead-detail">Tampa · Jun 19, 2pm</div></div>
+          <div class="lead-card"><div class="lead-name">FastFlow Plumbing</div><div class="lead-detail">Tampa · Jun 20, 10am</div></div>
+          <div class="lead-card"><div class="lead-name">Cool Air HVAC</div><div class="lead-detail">Brandon · Jun 22, 1pm</div></div>
+        </div>
+        <div class="stage"><div class="stage-name">Closed <span>3</span></div>
+          <div class="lead-card"><div class="lead-name">Premier HVAC Solutions</div><div class="lead-detail"><span class="badge badge-won">Won · Pro</span></div></div>
+          <div class="lead-card"><div class="lead-name">SunState Roofing</div><div class="lead-detail"><span class="badge badge-won">Won · Standard</span></div></div>
+          <div class="lead-card"><div class="lead-name">Budget Plumbing Inc.</div><div class="lead-detail"><span class="badge badge-lost">Lost · Price</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-area" id="area-sales-calendar">
+      <div class="page-title">Sales Calendar</div>
+      <p class="page-sub">Your demo calls and sales meetings.</p>
+      <div class="add-btn">+ Schedule a demo call</div>
+      <div class="cal-toolbar">
+        <div class="cal-title-text">June 2026</div>
+        <div class="cal-toggles">
+          <button type="button" class="cal-tog">Day</button>
+          <button type="button" class="cal-tog">Week</button>
+          <button type="button" class="cal-tog active">Month</button>
+        </div>
+      </div>
+      <div id="sales-cal-body"></div>
+    </div>
+
+    <div class="content-area" id="area-revenue">
+      <div class="page-title">Revenue</div>
+      <p class="page-sub">Monthly recurring revenue across all clients.</p>
+      <div class="summary-cards">
+        <div class="scard"><div class="scard-val">$3,580</div><div class="scard-label">Current MRR</div></div>
+        <div class="scard"><div class="scard-val">+18%</div><div class="scard-label">Growth vs last month</div></div>
+        <div class="scard"><div class="scard-val">$43k</div><div class="scard-label">Projected ARR</div></div>
+      </div>
+      <table>
+        <thead><tr><th>Client</th><th>Plan</th><th>Monthly</th><th>Since</th></tr></thead>
+        <tbody>
+          <tr><td>Premier HVAC Solutions</td><td><span class="badge badge-pro">Pro</span></td><td>$597</td><td>Mar 2026</td></tr>
+          <tr><td>CoolBreeze Air</td><td><span class="badge badge-pro">Pro</span></td><td>$597</td><td>Apr 2026</td></tr>
+          <tr><td>SunState Roofing</td><td><span class="badge badge-standard">Standard</span></td><td>$297</td><td>Feb 2026</td></tr>
+          <tr><td>Bright Electric</td><td><span class="badge badge-standard">Standard</span></td><td>$297</td><td>Apr 2026</td></tr>
+          <tr><td>FlowRight Plumbing</td><td><span class="badge badge-standard">Standard</span></td><td>$297</td><td>May 2026</td></tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 </div>
 
-<footer><div class="foot"><span>© 2026 InnoVista Strategies.</span><span><a href="index.html">Home</a> · <a href="login.html">Sign out</a></span></div></footer>
+<footer><div class="foot"><span>© 2026 InnoVista Strategies.</span><span><a href="index.html">Home</a></span></div></footer>
 
 <script>
-const FEATURES={
-  basic:['Lead Form','Email Alerts','Missed Call Text','Manual Calendar'],
-  standard:['Lead Form','Email Alerts','Missed Call Text','Manual Calendar','SMS Automation','Auto Calendar','Pipeline','Lead List','Review Requests'],
-  pro:['Lead Form','Email Alerts','Missed Call Text','Manual Calendar','SMS Automation','Auto Calendar','Pipeline','Lead List','Review Requests','AI Chatbot ★','AI Voice ★','Advanced Reports','Multi-location','White Label','Snapshots','Priority Support'],
-};
+const FEATURES={basic:['Lead Form','Email Alerts','Manual Calendar'],standard:['Lead Form','Email Alerts','Manual Calendar','SMS Automation','Auto Calendar','Pipeline','Review Requests'],pro:['Lead Form','Email Alerts','Manual Calendar','SMS Automation','Auto Calendar','Pipeline','Review Requests','AI Chatbot ★','AI Voice ★','Advanced Reports']};
 const AI_FEATS=['AI Chatbot ★','AI Voice ★'];
+
 const clients=[
-  {name:'Premier HVAC Solutions',trade:'HVAC',plan:'pro'},
-  {name:'SunState Roofing',trade:'Roofing',plan:'standard'},
-  {name:'Ace Plumbing Co.',trade:'Plumbing',plan:'basic'},
-  {name:'Bright Electric',trade:'Electrical',plan:'standard'},
-  {name:'GreenLeaf Landscaping',trade:'Landscaping',plan:'basic'},
-  {name:'CoolBreeze Air',trade:'HVAC',plan:'pro'},
-  {name:'FlowRight Plumbing',trade:'Plumbing',plan:'standard'},
-  {name:'TopTile Roofing',trade:'Roofing',plan:'basic'},
-  {name:'Volt Masters',trade:'Electrical',plan:'standard'},
-  {name:'TrimRight Lawn Care',trade:'Landscaping',plan:'standard'},
+  {name:'Premier HVAC Solutions',trade:'HVAC',plan:'pro',billing:'paid',jobs:62,revenue:48200,leads:24,aiAdoption:91,avgResponse:'12 sec',billingHistory:[{date:'Jun 1, 2026',amount:597,status:'Paid'},{date:'May 1, 2026',amount:597,status:'Paid'},{date:'Apr 1, 2026',amount:597,status:'Paid'}]},
+  {name:'SunState Roofing',trade:'Roofing',plan:'standard',billing:'paid',jobs:34,revenue:29800,leads:18,aiAdoption:0,avgResponse:'2.4 min',billingHistory:[{date:'Jun 1, 2026',amount:297,status:'Paid'},{date:'May 1, 2026',amount:297,status:'Paid'}]},
+  {name:'Ace Plumbing Co.',trade:'Plumbing',plan:'basic',billing:'paid',jobs:8,revenue:6200,leads:9,aiAdoption:0,avgResponse:'18 min',billingHistory:[{date:'Jun 1, 2026',amount:0,status:'Free plan'}]},
+  {name:'Bright Electric',trade:'Electrical',plan:'standard',billing:'paid',jobs:28,revenue:21400,leads:15,aiAdoption:0,avgResponse:'3.1 min',billingHistory:[{date:'Jun 1, 2026',amount:297,status:'Paid'}]},
+  {name:'GreenLeaf Landscaping',trade:'Landscaping',plan:'basic',billing:'overdue',jobs:3,revenue:1800,leads:4,aiAdoption:0,avgResponse:'1.2 hr',billingHistory:[{date:'Jun 1, 2026',amount:0,status:'Free plan'}]},
+  {name:'CoolBreeze Air',trade:'HVAC',plan:'pro',billing:'paid',jobs:55,revenue:41900,leads:22,aiAdoption:87,avgResponse:'9 sec',billingHistory:[{date:'Jun 1, 2026',amount:597,status:'Paid'}]},
 ];
-const state=clients.map(c=>({...c,features:[...FEATURES[c.plan]]}));
-function renderToggles(i){
-  const wrap=document.getElementById('toggles-'+i);wrap.innerHTML='';
-  FEATURES[state[i].plan].forEach(feat=>{
-    const on=state[i].features.includes(feat),isAI=AI_FEATS.includes(feat);
-    const div=document.createElement('div');
-    div.className='toggle'+(on?(isAI?' on ai-feat':' on'):'');
-    div.innerHTML=`<span class="toggle-dot"></span>${feat}`;
-    div.onclick=()=>toggleFeat(i,feat);
-    wrap.appendChild(div);
-  });
+
+function parseResponseToMinutes(str){
+  if(str.includes('sec'))return parseFloat(str)/60;
+  if(str.includes('min'))return parseFloat(str);
+  if(str.includes('hr'))return parseFloat(str)*60;
+  return 0;
 }
-function changePlan(i,plan){state[i].plan=plan;state[i].features=[...FEATURES[plan]];renderToggles(i);}
-function toggleFeat(i,feat){const idx=state[i].features.indexOf(feat);if(idx>-1)state[i].features.splice(idx,1);else state[i].features.push(feat);renderToggles(i);}
-function save(i){const msg=document.getElementById('saved-'+i);msg.style.display='inline';setTimeout(()=>{msg.style.display='none';},2000);}
-function render(){
-  const tbody=document.getElementById('client-rows');tbody.innerHTML='';
-  state.forEach((c,i)=>{
+function calculateStatus(c){
+  if(c.billing==='overdue')return 'risk';
+  if(c.jobs<10)return 'risk';
+  const respMin=parseResponseToMinutes(c.avgResponse);
+  if(respMin>15)return 'watch';
+  if(c.plan!=='basic'&&c.leads<10)return 'watch';
+  return 'healthy';
+}
+function statusReason(c){
+  if(c.billing==='overdue')return 'Payment overdue';
+  if(c.jobs<10)return 'Low job volume ('+c.jobs+' this period)';
+  const respMin=parseResponseToMinutes(c.avgResponse);
+  if(respMin>15)return 'Slow avg response time ('+c.avgResponse+')';
+  if(c.plan!=='basic'&&c.leads<10)return 'Lead volume below plan average';
+  return 'Paid, active, responding quickly';
+}
+function badgeFor(type,val){
+  if(type==='health'){const m={healthy:'Healthy',watch:'Watch',risk:'At risk'};return `<span class="badge badge-${val}">${m[val]}</span>`;}
+  if(type==='billing'){const m={paid:'Paid',overdue:'Overdue'};return `<span class="badge badge-${val==='paid'?'paid':'overdue'}">${m[val]}</span>`;}
+  if(type==='plan'){const m={basic:'Basic',standard:'Standard',pro:'Pro'};return `<span class="badge badge-${val}">${m[val]}</span>`;}
+}
+
+function renderClientsTable(){
+  const tbody=document.getElementById('clients-rows');tbody.innerHTML='';
+  clients.forEach((c,i)=>{
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${c.name}</td><td>${c.trade}</td><td><select class="plan-select" onchange="changePlan(${i},this.value)"><option value="basic"${c.plan==='basic'?' selected':''}>Basic</option><option value="standard"${c.plan==='standard'?' selected':''}>Standard</option><option value="pro"${c.plan==='pro'?' selected':''}>Pro</option></select></td><td><div class="toggle-wrap" id="toggles-${i}"></div></td><td><button class="save-btn" onclick="save(${i})">Save</button><span class="saved-msg" id="saved-${i}">✓ Saved</span></td>`;
+    tr.onclick=()=>openClientDetail(i);
+    tr.innerHTML=`<td class="row-link">${c.name}</td><td>${c.trade}</td><td>${badgeFor('plan',c.plan)}</td><td>${badgeFor('health',calculateStatus(c))}</td><td>${badgeFor('billing',c.billing)}</td>`;
+    tbody.appendChild(tr);
+  });
+  const riskCount=clients.filter(c=>calculateStatus(c)==='risk').length;
+  document.getElementById('at-risk-count').textContent=riskCount;
+}
+
+function openClientDetail(i){
+  const c=clients[i];
+  const body=document.getElementById('client-detail-body');
+  body.innerHTML=`
+    <div class="detail-header">
+      <div><div class="detail-name">${c.name}</div><div class="detail-meta">${c.trade} · Client since ${c.billingHistory[c.billingHistory.length-1].date}</div></div>
+      <div style="display:flex;gap:8px;">${badgeFor('plan',c.plan)}${badgeFor('health',calculateStatus(c))}${badgeFor('billing',c.billing)}</div>
+    </div>
+    <div class="detail-stats">
+      <div class="dstat"><div class="dstat-val">${c.jobs}</div><div class="dstat-label">Jobs completed</div></div>
+      <div class="dstat"><div class="dstat-val">$${c.revenue.toLocaleString()}</div><div class="dstat-label">Revenue generated</div></div>
+      <div class="dstat"><div class="dstat-val">${c.leads}</div><div class="dstat-label">Leads this month</div></div>
+      <div class="dstat"><div class="dstat-val">${c.avgResponse}</div><div class="dstat-label">Avg response time</div></div>
+    </div>
+    <div class="detail-grid">
+      <div>
+        <div class="panel">
+          <div class="panel-label">AI Feature Adoption</div>
+          <div class="health-row"><div><div class="health-label">AI Chatbot usage</div><div class="bar-bg" style="width:200px;"><div class="bar-fill" style="width:${c.aiAdoption}%;"></div></div></div><div class="health-val">${c.aiAdoption}%</div></div>
+          <div class="health-row"><div class="health-label">Plan</div><div class="health-val">${c.plan==='pro'?'Pro — full AI access':c.plan==='standard'?'Standard — no AI chatbot':'Basic — manual only'}</div></div>
+          <div class="health-row"><div class="health-label">Recommendation</div><div class="health-val" style="color:${c.aiAdoption===0&&c.plan!=='pro'?'#D97706':'#16A34A'};">${c.aiAdoption===0&&c.plan!=='pro'?'Good upsell candidate for Pro':'Performing well on current plan'}</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-label">Account Status</div>
+          <div class="health-row"><div class="health-label">Status</div><div class="health-val">${badgeFor('health',calculateStatus(c))}</div></div>
+          <div class="health-row"><div class="health-label">Why</div><div class="health-val" style="font-size:12px;text-align:right;max-width:200px;">${statusReason(c)}</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <div class="panel-label">Billing with InnoVista</div>
+          ${c.billingHistory.map(b=>`<div class="billing-row"><span>${b.date}</span><span>${b.amount?'$'+b.amount:b.status}</span><span style="color:${b.status==='Paid'?'#16A34A':'#D97706'};">${b.status==='Paid'?'✓':''} ${b.status}</span></div>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+  show('client-detail',null);
+}
+
+function renderToggles(i){const wrap=document.getElementById('toggles-'+i);if(!wrap)return;wrap.innerHTML='';FEATURES[clients[i].plan].forEach(feat=>{const isAI=AI_FEATS.includes(feat);const div=document.createElement('div');div.className='toggle'+(isAI?' on ai-feat':' on');div.textContent=feat;wrap.appendChild(div);});}
+function renderPlanTable(){
+  const tbody=document.getElementById('plan-rows');tbody.innerHTML='';
+  clients.forEach((c,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${c.name}</td><td>${c.trade}</td><td><select class="plan-select" onchange="changePlan(${i},this.value)"><option value="basic"${c.plan==='basic'?' selected':''}>Basic</option><option value="standard"${c.plan==='standard'?' selected':''}>Standard</option><option value="pro"${c.plan==='pro'?' selected':''}>Pro</option></select></td><td><div class="toggle-wrap" id="toggles-${i}"></div></td><td><button type="button" class="save-btn" onclick="saveplan(${i})">Save</button><span class="saved-msg" id="saved-${i}">✓ Saved</span></td>`;
     tbody.appendChild(tr);renderToggles(i);
   });
 }
-render();
+function changePlan(i,plan){clients[i].plan=plan;renderToggles(i);}
+function saveplan(i){const msg=document.getElementById('saved-'+i);msg.style.display='inline';setTimeout(()=>{msg.style.display='none';},2000);renderClientsTable();}
+
+const salesAppts={19:['Titan Roofing · 2pm'],20:['FastFlow Plumbing · 10am'],22:['Cool Air HVAC · 1pm']};
+function renderSalesCal(){
+  const body=document.getElementById('sales-cal-body');
+  let h=`<div class="cal-day-names">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="cal-day-name">${d}</div>`).join('')}</div><div class="cal-month-grid"><div class="cal-cell empty"></div>`;
+  for(let d=1;d<=30;d++){const t=d===18;h+=`<div class="cal-cell${t?' today':''}"><div class="cal-num${t?' today-num':''}">${d}</div>${(salesAppts[d]||[]).map(a=>`<div class="cal-appt">${a}</div>`).join('')}</div>`;}
+  body.innerHTML=h+'</div>';
+}
+
+function show(area,el){
+  document.querySelectorAll('.content-area').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(e=>e.classList.remove('active'));
+  document.getElementById('area-'+area).classList.add('active');
+  if(el)el.classList.add('active');
+  if(area==='plans')renderPlanTable();
+  if(area==='sales-calendar')renderSalesCal();
+  return false;
+}
+
+renderClientsTable();
 </script>
 </body>
 </html>

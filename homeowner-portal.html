@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  var s = sessionStorage.getItem('innovista_session');
+  if (!s) { window.location.replace('login.html'); }
+})();
+</script>
+
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>InnoVista — My Service Portal</title>
@@ -210,9 +217,9 @@
       <div class="cal-toolbar">
         <div class="cal-nav"><div class="cal-nav-btn">‹</div><div class="cal-title-text">June 2026</div><div class="cal-nav-btn">›</div></div>
         <div class="cal-toggles">
-          <button class="cal-tog" onclick="hwCal('day',this)">Day</button>
-          <button class="cal-tog" onclick="hwCal('week',this)">Week</button>
-          <button class="cal-tog active" onclick="hwCal('month',this)">Month</button>
+          <button type="button" class="cal-tog" onclick="hwCal('day',this)">Day</button>
+          <button type="button" class="cal-tog" onclick="hwCal('week',this)">Week</button>
+          <button type="button" class="cal-tog active" onclick="hwCal('month',this)">Month</button>
         </div>
       </div>
       <div id="hw-cal-body"></div>
