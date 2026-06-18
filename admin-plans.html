@@ -125,6 +125,17 @@
   .cal-appt{background:var(--blue-light);border-radius:4px;padding:3px 7px;font-size:10px;color:var(--blue);margin-bottom:3px;font-weight:500;}
   .add-btn{display:inline-flex;gap:6px;font-size:13px;font-weight:600;color:var(--green);background:var(--green-light);border:1px solid #BBF7D0;border-radius:8px;padding:8px 16px;cursor:pointer;margin-bottom:18px;}
 
+  .cal-week-grid{display:grid;grid-template-columns:60px repeat(7,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+  .cal-week-head{background:var(--surface2);padding:10px 8px;text-align:center;font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;}
+  .cal-week-head.today-col{color:var(--green);}
+  .cal-time-col{background:var(--surface2);padding:8px 6px;font-size:10px;color:var(--dim);text-align:right;height:44px;display:flex;align-items:center;justify-content:flex-end;}
+  .cal-week-cell{background:var(--surface);height:44px;position:relative;}
+  .cal-week-cell.today-col{background:#F0FDF4;}
+  .cal-week-appt{position:absolute;left:3px;right:3px;top:3px;background:var(--blue-light);border-radius:4px;padding:3px 6px;font-size:10px;color:var(--blue);}
+  .cal-day-grid{display:grid;grid-template-columns:60px 1fr;gap:1px;background:var(--border);border-radius:10px;overflow:hidden;border:1px solid var(--border);max-height:400px;overflow-y:auto;}
+  .cal-day-time{background:var(--surface2);padding:8px 10px;font-size:11px;color:var(--dim);text-align:right;height:52px;display:flex;align-items:flex-start;justify-content:flex-end;padding-top:6px;}
+  .cal-day-slot{background:var(--surface);height:52px;position:relative;border-bottom:1px solid var(--border);}
+  .cal-day-appt{position:absolute;left:8px;right:8px;top:4px;background:var(--blue-light);border-left:3px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:12px;color:var(--blue);font-weight:500;}
   footer{background:var(--text);color:#9CA3AF;}
   .foot{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;padding:18px 24px;font-size:12px;}
   .foot a{color:#D1D5DB;text-decoration:none;}
@@ -197,28 +208,33 @@
       </div>
       <div class="pipeline">
         <div class="stage"><div class="stage-name">New <span>4</span></div>
-          <div class="lead-card"><div class="lead-name">Apex Roofing Co.</div><div class="lead-detail">Tampa · Referral</div></div>
-          <div class="lead-card"><div class="lead-name">Coastal Plumbing</div><div class="lead-detail">St. Pete · Cold outreach</div></div>
-          <div class="lead-card"><div class="lead-name">Sunshine Electric</div><div class="lead-detail">Clearwater · Website form</div></div>
-          <div class="lead-card"><div class="lead-name">GreenScape Lawns</div><div class="lead-detail">Brandon · Referral</div></div>
+          <div class="lead-card" onclick="openProspect('Apex_Roofing_Co')"><div class="lead-name">Apex Roofing Co.</div><div class="lead-detail">Tampa · Referral</div></div>
+          <div class="lead-card" onclick="openProspect('Coastal_Plumbing')"><div class="lead-name">Coastal Plumbing</div><div class="lead-detail">St. Pete · Cold outreach</div></div>
+          <div class="lead-card" onclick="openProspect('Sunshine_Electric')"><div class="lead-name">Sunshine Electric</div><div class="lead-detail">Clearwater · Website form</div></div>
+          <div class="lead-card" onclick="openProspect('GreenScape_Lawns')"><div class="lead-name">GreenScape Lawns</div><div class="lead-detail">Brandon · Referral</div></div>
         </div>
         <div class="stage"><div class="stage-name">Contacted <span>4</span></div>
-          <div class="lead-card"><div class="lead-name">Reliable Roofing</div><div class="lead-detail">Tampa · Follow-up sent</div></div>
-          <div class="lead-card"><div class="lead-name">Quick Fix HVAC</div><div class="lead-detail">Sarasota · Called 6/14</div></div>
-          <div class="lead-card"><div class="lead-name">Bay Area Plumbing</div><div class="lead-detail">Tampa · Emailed 6/15</div></div>
-          <div class="lead-card"><div class="lead-name">ProTech Electric</div><div class="lead-detail">Lakeland · Called 6/16</div></div>
+          <div class="lead-card" onclick="openProspect('Reliable_Roofing')"><div class="lead-name">Reliable Roofing</div><div class="lead-detail">Tampa · Follow-up sent</div></div>
+          <div class="lead-card" onclick="openProspect('Quick_Fix_HVAC')"><div class="lead-name">Quick Fix HVAC</div><div class="lead-detail">Sarasota · Called 6/14</div></div>
+          <div class="lead-card" onclick="openProspect('Bay_Area_Plumbing')"><div class="lead-name">Bay Area Plumbing</div><div class="lead-detail">Tampa · Emailed 6/15</div></div>
+          <div class="lead-card" onclick="openProspect('ProTech_Electric')"><div class="lead-name">ProTech Electric</div><div class="lead-detail">Lakeland · Called 6/16</div></div>
         </div>
         <div class="stage"><div class="stage-name">Demo Scheduled <span>3</span></div>
-          <div class="lead-card"><div class="lead-name">Titan Roofing</div><div class="lead-detail">Tampa · Jun 19, 2pm</div></div>
-          <div class="lead-card"><div class="lead-name">FastFlow Plumbing</div><div class="lead-detail">Tampa · Jun 20, 10am</div></div>
-          <div class="lead-card"><div class="lead-name">Cool Air HVAC</div><div class="lead-detail">Brandon · Jun 22, 1pm</div></div>
+          <div class="lead-card" onclick="openProspect('Titan_Roofing')"><div class="lead-name">Titan Roofing</div><div class="lead-detail">Tampa · Jun 19, 2pm</div></div>
+          <div class="lead-card" onclick="openProspect('FastFlow_Plumbing')"><div class="lead-name">FastFlow Plumbing</div><div class="lead-detail">Tampa · Jun 20, 10am</div></div>
+          <div class="lead-card" onclick="openProspect('Cool_Air_HVAC')"><div class="lead-name">Cool Air HVAC</div><div class="lead-detail">Brandon · Jun 22, 1pm</div></div>
         </div>
         <div class="stage"><div class="stage-name">Closed <span>3</span></div>
-          <div class="lead-card"><div class="lead-name">Premier HVAC Solutions</div><div class="lead-detail"><span class="badge badge-won">Won · Pro</span></div></div>
-          <div class="lead-card"><div class="lead-name">SunState Roofing</div><div class="lead-detail"><span class="badge badge-won">Won · Standard</span></div></div>
-          <div class="lead-card"><div class="lead-name">Budget Plumbing Inc.</div><div class="lead-detail"><span class="badge badge-lost">Lost · Price</span></div></div>
+          <div class="lead-card" onclick="openProspect('Premier_HVAC_Solutions')"><div class="lead-name">Premier HVAC Solutions</div><div class="lead-detail"><span class="badge badge-won">Won · Pro</span></div></div>
+          <div class="lead-card" onclick="openProspect('SunState_Roofing')"><div class="lead-name">SunState Roofing</div><div class="lead-detail"><span class="badge badge-won">Won · Standard</span></div></div>
+          <div class="lead-card" onclick="openProspect('Budget_Plumbing_Inc')"><div class="lead-name">Budget Plumbing Inc.</div><div class="lead-detail"><span class="badge badge-lost">Lost · Price</span></div></div>
         </div>
       </div>
+    </div>
+
+    <div class="content-area" id="area-prospect-detail">
+      <div class="back-btn" onclick="show('sales-pipeline',null)">← Sales Pipeline</div>
+      <div id="prospect-detail-body"></div>
     </div>
 
     <div class="content-area" id="area-sales-calendar">
@@ -228,9 +244,9 @@
       <div class="cal-toolbar">
         <div class="cal-title-text">June 2026</div>
         <div class="cal-toggles">
-          <button type="button" class="cal-tog">Day</button>
-          <button type="button" class="cal-tog">Week</button>
-          <button type="button" class="cal-tog active">Month</button>
+          <button type="button" class="cal-tog" onclick="salesCalView('day',this)">Day</button>
+          <button type="button" class="cal-tog" onclick="salesCalView('week',this)">Week</button>
+          <button type="button" class="cal-tog active" onclick="salesCalView('month',this)">Month</button>
         </div>
       </div>
       <div id="sales-cal-body"></div>
@@ -366,11 +382,87 @@ function changePlan(i,plan){clients[i].plan=plan;renderToggles(i);}
 function saveplan(i){const msg=document.getElementById('saved-'+i);msg.style.display='inline';setTimeout(()=>{msg.style.display='none';},2000);renderClientsTable();}
 
 const salesAppts={19:['Titan Roofing · 2pm'],20:['FastFlow Plumbing · 10am'],22:['Cool Air HVAC · 1pm']};
-function renderSalesCal(){
+const salesHours=['8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm'];
+const salesDayAppts={14:'Titan Roofing — Demo call',10:'FastFlow Plumbing — Intro call'};
+const salesWeekAppts={1:{14:'Titan Roofing'},2:{10:'FastFlow Plumbing'},4:{13:'Cool Air HVAC'}};
+const salesWeekDays=['Mon 16','Tue 17','Wed 18','Thu 19','Fri 20','Sat 21','Sun 22'];
+
+function salesCalView(v,btn){
+  document.querySelectorAll('#area-sales-calendar .cal-tog').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSalesCal(v);
+}
+
+function renderSalesCal(view='month'){
   const body=document.getElementById('sales-cal-body');
-  let h=`<div class="cal-day-names">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="cal-day-name">${d}</div>`).join('')}</div><div class="cal-month-grid"><div class="cal-cell empty"></div>`;
-  for(let d=1;d<=30;d++){const t=d===18;h+=`<div class="cal-cell${t?' today':''}"><div class="cal-num${t?' today-num':''}">${d}</div>${(salesAppts[d]||[]).map(a=>`<div class="cal-appt">${a}</div>`).join('')}</div>`;}
-  body.innerHTML=h+'</div>';
+  if(view==='month'){
+    let h=`<div class="cal-day-names">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="cal-day-name">${d}</div>`).join('')}</div><div class="cal-month-grid"><div class="cal-cell empty"></div>`;
+    for(let d=1;d<=30;d++){const t=d===18;h+=`<div class="cal-cell${t?' today':''}"><div class="cal-num${t?' today-num':''}">${d}</div>${(salesAppts[d]||[]).map(a=>`<div class="cal-appt">${a}</div>`).join('')}</div>`;}
+    body.innerHTML=h+'</div>';
+  } else if(view==='week'){
+    let h=`<div class="cal-week-grid"><div class="cal-week-head"></div>${salesWeekDays.map((d,i)=>`<div class="cal-week-head${i===2?' today-col':''}">${d}</div>`).join('')}`;
+    salesHours.forEach(hr=>{const n=parseInt(hr)+(hr.includes('pm')&&!hr.startsWith('12')?12:0);h+=`<div class="cal-time-col">${hr}</div>${salesWeekDays.map((_,di)=>`<div class="cal-week-cell${di===2?' today-col':''}">${salesWeekAppts[di]&&salesWeekAppts[di][n]?`<div class="cal-week-appt">${salesWeekAppts[di][n]}</div>`:''}</div>`).join('')}`;});
+    body.innerHTML=h+'</div>';
+  } else {
+    let h=`<div style="font-family:var(--fd);font-size:15px;font-weight:600;margin-bottom:14px;">Thursday, June 19 — Titan Roofing demo day</div><div class="cal-day-grid">`;
+    salesHours.forEach(hr=>{const n=parseInt(hr)+(hr.includes('pm')&&!hr.startsWith('12')?12:0);const a=salesDayAppts[n];h+=`<div class="cal-day-time">${hr}</div><div class="cal-day-slot">${a?`<div class="cal-day-appt">${a}</div>`:''}</div>`;});
+    body.innerHTML=h+'</div>';
+  }
+}
+
+const prospects={
+  Apex_Roofing_Co:{name:'Apex Roofing Co.',contact:'Mark Stevens',title:'Owner',phone:'(813) 555-0141',email:'mark@apexroofing.example',trade:'Roofing',location:'Tampa, FL',stage:'New',dealValue:'$297/mo',source:'Referral — Premier HVAC',interactions:[{date:'Jun 16',type:'Note',text:'Referred by Premier HVAC. Mark has 12 techs and loses leads on weekends.'}],nextAction:'Send intro email with case study',nextDate:'Jun 19'},
+  Coastal_Plumbing:{name:'Coastal Plumbing',contact:'Dana Ruiz',title:'Operations Manager',phone:'(727) 555-0188',email:'dana@coastalplumbing.example',trade:'Plumbing',location:'St. Petersburg, FL',stage:'New',dealValue:'$297/mo',source:'Cold outreach',interactions:[{date:'Jun 15',type:'Email',text:'Sent cold outreach email. No reply yet.'}],nextAction:'Follow up call',nextDate:'Jun 20'},
+  Sunshine_Electric:{name:'Sunshine Electric',contact:'Chris Park',title:'Owner',phone:'(727) 555-0122',email:'chris@sunshineelectric.example',trade:'Electrical',location:'Clearwater, FL',stage:'New',dealValue:'$597/mo',source:'Website form',interactions:[{date:'Jun 16',type:'Form submission',text:'Submitted contact form. Interested in AI chatbot. Has 6 techs.'}],nextAction:'Book intro call',nextDate:'Jun 18'},
+  GreenScape_Lawns:{name:'GreenScape Lawns',contact:'Tom Wallace',title:'Owner',phone:'(813) 555-0177',email:'tom@greenscapelawns.example',trade:'Landscaping',location:'Brandon, FL',stage:'New',dealValue:'$297/mo',source:'Referral',interactions:[],nextAction:'First outreach call',nextDate:'Jun 19'},
+  Reliable_Roofing:{name:'Reliable Roofing',contact:'Sandra Kim',title:'GM',phone:'(813) 555-0133',email:'sandra@reliableroofing.example',trade:'Roofing',location:'Tampa, FL',stage:'Contacted',dealValue:'$297/mo',source:'Cold outreach',interactions:[{date:'Jun 14',type:'Email',text:'Sent intro email with pricing PDF.'},{date:'Jun 16',type:'Note',text:'Sandra replied — interested but checking with partner.'}],nextAction:'Follow up — partner decision',nextDate:'Jun 21'},
+  Quick_Fix_HVAC:{name:'Quick Fix HVAC',contact:'James Ortiz',title:'Owner',phone:'(941) 555-0199',email:'james@quickfixhvac.example',trade:'HVAC',location:'Sarasota, FL',stage:'Contacted',dealValue:'$597/mo',source:'Cold call',interactions:[{date:'Jun 14',type:'Call',text:'12 min call. James loses 5-6 leads/week on weekends.'},{date:'Jun 15',type:'Email',text:'Sent follow-up with ROI breakdown.'}],nextAction:'Book demo',nextDate:'Jun 19'},
+  Bay_Area_Plumbing:{name:'Bay Area Plumbing',contact:'Luis Vega',title:'Owner',phone:'(813) 555-0155',email:'luis@bayareaplumbing.example',trade:'Plumbing',location:'Tampa, FL',stage:'Contacted',dealValue:'$297/mo',source:'Cold outreach',interactions:[{date:'Jun 15',type:'Email',text:'Sent intro email.'}],nextAction:'Follow up call',nextDate:'Jun 20'},
+  ProTech_Electric:{name:'ProTech Electric',contact:'Amy Cho',title:'Owner',phone:'(863) 555-0144',email:'amy@protechelectric.example',trade:'Electrical',location:'Lakeland, FL',stage:'Contacted',dealValue:'$297/mo',source:'Cold call',interactions:[{date:'Jun 16',type:'Call',text:'Left voicemail. Amy unavailable.'}],nextAction:'Try again',nextDate:'Jun 19'},
+  Titan_Roofing:{name:'Titan Roofing',contact:'Brian Moss',title:'Owner',phone:'(813) 555-0101',email:'brian@titanroofing.example',trade:'Roofing',location:'Tampa, FL',stage:'Demo Scheduled',dealValue:'$597/mo',source:'Cold call',interactions:[{date:'Jun 13',type:'Call',text:'30 min call. Brian losing 8+ leads/week. Very interested in Pro plan.'},{date:'Jun 15',type:'Email',text:'Sent demo prep materials and ROI calculator.'},{date:'Jun 17',type:'Note',text:'Demo confirmed Jun 19 at 2pm.'}],nextAction:'Demo call — Jun 19 at 2pm',nextDate:'Jun 19'},
+  FastFlow_Plumbing:{name:'FastFlow Plumbing',contact:'Nicole Torres',title:'Owner',phone:'(813) 555-0178',email:'nicole@fastflowplumbing.example',trade:'Plumbing',location:'Tampa, FL',stage:'Demo Scheduled',dealValue:'$297/mo',source:'Referral',interactions:[{date:'Jun 14',type:'Call',text:'15 min intro. Nicole interested in automated booking.'},{date:'Jun 16',type:'Email',text:'Demo booked Jun 20 at 10am.'}],nextAction:'Demo call — Jun 20 at 10am',nextDate:'Jun 20'},
+  Cool_Air_HVAC:{name:'Cool Air HVAC',contact:'David Reyes',title:'GM',phone:'(813) 555-0166',email:'david@coolair.example',trade:'HVAC',location:'Brandon, FL',stage:'Demo Scheduled',dealValue:'$297/mo',source:'Cold outreach',interactions:[{date:'Jun 15',type:'Email',text:'David replied to cold email, wants to see pipeline dashboard.'},{date:'Jun 17',type:'Note',text:'Demo scheduled Jun 22 at 1pm.'}],nextAction:'Demo call — Jun 22 at 1pm',nextDate:'Jun 22'},
+  Premier_HVAC_Solutions:{name:'Premier HVAC Solutions',contact:'Kevin Marsh',title:'Owner',phone:'(305) 555-0100',email:'client@hvaccompany.example',trade:'HVAC',location:'Hialeah, FL',stage:'Closed — Won',dealValue:'$597/mo',source:'Cold call',interactions:[{date:'May 1',type:'Call',text:'First contact. Kevin losing 10+ leads/week.'},{date:'May 5',type:'Demo',text:'Full demo. Kevin loved AI chatbot.'},{date:'May 8',type:'Closed',text:'Signed Pro plan. Onboarded same day.'}],nextAction:'QBR scheduled for July',nextDate:'Jul 1'},
+  SunState_Roofing:{name:'SunState Roofing',contact:'Paula Grant',title:'Owner',phone:'(813) 555-0120',email:'sunstate@roofing.example',trade:'Roofing',location:'Tampa, FL',stage:'Closed — Won',dealValue:'$297/mo',source:'Referral',interactions:[{date:'Apr 10',type:'Call',text:'Referral from Premier HVAC.'},{date:'Apr 15',type:'Demo',text:'Demoed pipeline and SMS automation.'},{date:'Apr 18',type:'Closed',text:'Signed Standard plan.'}],nextAction:'Check in — upsell to Pro',nextDate:'Jul 1'},
+  Budget_Plumbing_Inc:{name:'Budget Plumbing Inc.',contact:'Frank Lee',title:'Owner',phone:'(813) 555-0190',email:'frank@budgetplumbing.example',trade:'Plumbing',location:'Tampa, FL',stage:'Closed — Lost',dealValue:'$0',source:'Cold call',interactions:[{date:'May 20',type:'Call',text:'Frank said pricing was too high for his 2-person operation.'},{date:'May 22',type:'Email',text:'Sent Basic plan info. Frank declined.'}],nextAction:'Re-engage in 6 months',nextDate:'Dec 1'},
+};
+
+function openProspect(key){
+  const p=prospects[key];if(!p)return;
+  const stageColor=p.stage.includes('Won')?'#16A34A':p.stage.includes('Lost')?'#DC2626':p.stage.includes('Demo')?'#D97706':'#16A34A';
+  const stageBg=p.stage.includes('Won')?'#DCFCE7':p.stage.includes('Lost')?'#FEE2E2':p.stage.includes('Demo')?'#FEF3C7':'#DCFCE7';
+  document.getElementById('prospect-detail-body').innerHTML=`
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px;">
+      <div><div style="font-family:var(--fd);font-size:22px;font-weight:700;">${p.name}</div><div style="font-size:13px;color:var(--dim);margin-top:4px;">${p.trade} · ${p.location}</div></div>
+      <span style="font-size:11px;font-weight:600;padding:4px 12px;border-radius:999px;background:${stageBg};color:${stageColor};">${p.stage}</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div style="background:var(--surface);border-radius:12px;padding:20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;">Contact Info</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:6px;">${p.contact} <span style="color:var(--mute);font-weight:400;font-size:12px;">· ${p.title}</span></div>
+        <div style="font-size:13px;color:var(--mute);line-height:2;">${p.phone}<br>${p.email}</div>
+      </div>
+      <div style="background:var(--surface);border-radius:12px;padding:20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;">Deal Details</div>
+        <div style="font-family:var(--fd);font-size:26px;font-weight:700;color:var(--green);">${p.dealValue}</div>
+        <div style="font-size:12px;color:var(--dim);margin-top:4px;">Source: ${p.source}</div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:13px;color:var(--mute);">
+          <strong style="color:var(--text);">Next action:</strong> ${p.nextAction}<br>
+          <strong style="color:var(--text);">By:</strong> ${p.nextDate}
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--surface);border-radius:12px;padding:20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;">Interaction History</div>
+      ${p.interactions.length===0?'<div style="font-size:13px;color:var(--mute);">No interactions logged yet.</div>':
+        p.interactions.map(i=>`
+          <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);">
+            <div style="font-size:11px;color:var(--dim);white-space:nowrap;padding-top:2px;min-width:42px;">${i.date}</div>
+            <div style="font-size:11px;font-weight:600;background:var(--green-light);color:var(--green-dark);border-radius:999px;padding:2px 8px;height:fit-content;white-space:nowrap;">${i.type}</div>
+            <div style="font-size:13px;color:var(--mute);line-height:1.5;">${i.text}</div>
+          </div>`).join('')}
+    </div>`;
+  show('prospect-detail',null);
 }
 
 function show(area,el){
@@ -379,7 +471,7 @@ function show(area,el){
   document.getElementById('area-'+area).classList.add('active');
   if(el)el.classList.add('active');
   if(area==='plans')renderPlanTable();
-  if(area==='sales-calendar')renderSalesCal();
+  if(area==='sales-calendar')renderSalesCal('month');
   return false;
 }
 

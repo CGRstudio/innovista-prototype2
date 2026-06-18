@@ -203,6 +203,12 @@
     <a class="nav-item" onclick="show('inventory',this)" href="#">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Inventory
     </a>
+    <a class="nav-item" onclick="show('technicians',this)" href="#">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Technicians
+    </a>
+    <a class="nav-item" onclick="show('salesreps',this)" href="#">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>Sales Reps
+    </a>
     <div class="aside-section">Marketing</div>
     <a class="nav-item" onclick="show('marketing',this)" href="#">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Marketing & Attribution
@@ -235,21 +241,26 @@
       </div>
       <div class="section-title">Pipeline snapshot <a onclick="show('pipeline',null)">View all →</a></div>
       <div class="pipeline">
-        <div class="stage"><div class="stage-name">New</div><div class="lead-card"><div class="lead-name">Sarah M.</div><div class="lead-detail">AC not cooling · Miami</div><span class="lead-badge badge-new">New</span></div><div class="lead-card"><div class="lead-name">Tom R.</div><div class="lead-detail">Tune-up · Doral</div><span class="lead-badge badge-new">New</span></div></div>
-        <div class="stage"><div class="stage-name">Qualified</div><div class="lead-card"><div class="lead-name">Marcus J.</div><div class="lead-detail">Full replace · Kendall</div><span class="lead-badge badge-qualified">Qualified</span></div></div>
-        <div class="stage"><div class="stage-name">Booked</div><div class="lead-card"><div class="lead-name">James T.</div><div class="lead-detail">Install · Jun 18</div><span class="lead-badge badge-booked">Booked ✓</span></div><div class="lead-card"><div class="lead-name">Rosa V.</div><div class="lead-detail">Repair · Jun 19</div><span class="lead-badge badge-booked">Booked ✓</span></div></div>
+        <div class="stage"><div class="stage-name">New</div><div class="lead-card" onclick="openLead('Sarah M.')"><div class="lead-name">Sarah M.</div><div class="lead-detail">AC not cooling · Miami</div><span class="lead-badge badge-new">New</span></div><div class="lead-card" onclick="openLead('Tom R.')"><div class="lead-name">Tom R.</div><div class="lead-detail">Tune-up · Doral</div><span class="lead-badge badge-new">New</span></div></div>
+        <div class="stage"><div class="stage-name">Qualified</div><div class="lead-card" onclick="openLead('Marcus J.')"><div class="lead-name">Marcus J.</div><div class="lead-detail">Full replace · Kendall</div><span class="lead-badge badge-qualified">Qualified</span></div></div>
+        <div class="stage"><div class="stage-name">Booked</div><div class="lead-card" onclick="openLead('James T.')"><div class="lead-name">James T.</div><div class="lead-detail">Install · Jun 18</div><span class="lead-badge badge-booked">Booked ✓</span></div><div class="lead-card" onclick="openLead('Rosa V.')"><div class="lead-name">Rosa V.</div><div class="lead-detail">Repair · Jun 19</div><span class="lead-badge badge-booked">Booked ✓</span></div></div>
       </div>
+    </div>
+
+    <div class="content-area" id="area-lead-detail">
+      <div class="back-btn" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--green);cursor:pointer;margin-bottom:18px;" id="lead-back-btn">← Back</div>
+      <div id="lead-detail-body"></div>
     </div>
 
     <div class="content-area" id="area-pipeline">
       <div class="page-title">Lead Pipeline</div>
-      <p class="page-sub">Track every lead from first contact to completed job.</p>
+      <p class="page-sub">Track every lead from first contact to completed job. Click any card for details.</p>
       <div class="pipeline" style="grid-template-columns:repeat(5,1fr);">
-        <div class="stage"><div class="stage-name">New Lead</div><div class="lead-card"><div class="lead-name">Sarah M.</div><div class="lead-detail">AC not cooling · Miami</div><span class="lead-badge badge-new">New</span></div><div class="lead-card"><div class="lead-name">Tom R.</div><div class="lead-detail">Tune-up · Doral</div><span class="lead-badge badge-new">New</span></div></div>
-        <div class="stage"><div class="stage-name">Contacted</div><div class="lead-card"><div class="lead-name">Linda K.</div><div class="lead-detail">Duct cleaning · Brickell</div><span class="lead-badge badge-contacted">Contacted</span></div></div>
-        <div class="stage"><div class="stage-name">Qualified</div><div class="lead-card"><div class="lead-name">Marcus J.</div><div class="lead-detail">Full replace · Kendall</div><span class="lead-badge badge-qualified">Qualified</span></div><div class="lead-card"><div class="lead-name">Anna P.</div><div class="lead-detail">Emergency · Coral Gables</div><span class="lead-badge badge-qualified">Qualified</span></div></div>
-        <div class="stage"><div class="stage-name">Booked</div><div class="lead-card"><div class="lead-name">James T.</div><div class="lead-detail">Install · Jun 18</div><span class="lead-badge badge-booked">Booked ✓</span></div><div class="lead-card"><div class="lead-name">Rosa V.</div><div class="lead-detail">Repair · Jun 19</div><span class="lead-badge badge-booked">Booked ✓</span></div></div>
-        <div class="stage"><div class="stage-name">Complete</div><div class="lead-card"><div class="lead-name">Derek W.</div><div class="lead-detail">Tune-up · Pinecrest ✓</div></div><div class="lead-card"><div class="lead-name">Mei L.</div><div class="lead-detail">Filter replace ✓</div></div></div>
+        <div class="stage"><div class="stage-name">New Lead</div><div class="lead-card" onclick="openLead('Sarah M.')"><div class="lead-name">Sarah M.</div><div class="lead-detail">AC not cooling · Miami</div><span class="lead-badge badge-new">New</span></div><div class="lead-card" onclick="openLead('Tom R.')"><div class="lead-name">Tom R.</div><div class="lead-detail">Tune-up · Doral</div><span class="lead-badge badge-new">New</span></div></div>
+        <div class="stage"><div class="stage-name">Contacted</div><div class="lead-card" onclick="openLead('Linda K.')"><div class="lead-name">Linda K.</div><div class="lead-detail">Duct cleaning · Brickell</div><span class="lead-badge badge-contacted">Contacted</span></div></div>
+        <div class="stage"><div class="stage-name">Qualified</div><div class="lead-card" onclick="openLead('Marcus J.')"><div class="lead-name">Marcus J.</div><div class="lead-detail">Full replace · Kendall</div><span class="lead-badge badge-qualified">Qualified</span></div><div class="lead-card" onclick="openLead('Anna P.')"><div class="lead-name">Anna P.</div><div class="lead-detail">Emergency · Coral Gables</div><span class="lead-badge badge-qualified">Qualified</span></div></div>
+        <div class="stage"><div class="stage-name">Booked</div><div class="lead-card" onclick="openLead('James T.')"><div class="lead-name">James T.</div><div class="lead-detail">Install · Jun 18</div><span class="lead-badge badge-booked">Booked ✓</span></div><div class="lead-card" onclick="openLead('Rosa V.')"><div class="lead-name">Rosa V.</div><div class="lead-detail">Repair · Jun 19</div><span class="lead-badge badge-booked">Booked ✓</span></div></div>
+        <div class="stage"><div class="stage-name">Complete</div><div class="lead-card" onclick="openLead('Derek W.')"><div class="lead-name">Derek W.</div><div class="lead-detail">Tune-up · Pinecrest ✓</div></div><div class="lead-card" onclick="openLead('Mei L.')"><div class="lead-name">Mei L.</div><div class="lead-detail">Filter replace ✓</div></div></div>
       </div>
     </div>
 
@@ -312,11 +323,18 @@
 
     <div class="content-area" id="area-notifications">
       <div class="page-title">Notifications</div>
-      <p class="page-sub">Recent activity on your account.</p>
-      <div class="notif"><div class="notif-dot"></div><div><div class="notif-text">New lead — Sarah M. is looking for AC repair in Miami. AI follow-up sent.</div><div class="notif-time">2 hours ago</div></div></div>
-      <div class="notif"><div class="notif-dot"></div><div><div class="notif-text">James T. confirmed his appointment for June 18 at 10am.</div><div class="notif-time">4 hours ago</div></div></div>
-      <div class="notif"><div class="notif-dot read"></div><div><div class="notif-text">Derek W. left a 5-star Google review after his tune-up.</div><div class="notif-time">Yesterday</div></div></div>
-      <div class="notif"><div class="notif-dot read"></div><div><div class="notif-text">Marcus J. qualified by AI — ready to book a full system replacement.</div><div class="notif-time">Yesterday</div></div></div>
+      <p class="page-sub">Recent activity on your account. Click any notification for full details.</p>
+      <div class="notif" style="cursor:pointer;" onclick="openNotif('lead-sarah')"><div class="notif-dot"></div><div><div class="notif-text">New lead — Sarah M. is looking for AC repair in Miami. AI follow-up sent.</div><div class="notif-time">2 hours ago</div></div></div>
+      <div class="notif" style="cursor:pointer;" onclick="openNotif('confirm-james')"><div class="notif-dot"></div><div><div class="notif-text">James T. confirmed his appointment for June 18 at 10am.</div><div class="notif-time">4 hours ago</div></div></div>
+      <div class="notif" style="cursor:pointer;" onclick="openNotif('review-derek')"><div class="notif-dot read"></div><div><div class="notif-text">Derek W. left a 5-star Google review after his tune-up.</div><div class="notif-time">Yesterday</div></div></div>
+      <div class="notif" style="cursor:pointer;" onclick="openNotif('ai-marcus')"><div class="notif-dot read"></div><div><div class="notif-text">Marcus J. qualified by AI — ready to book a full system replacement.</div><div class="notif-time">Yesterday</div></div></div>
+      <div id="notif-detail" style="display:none;margin-top:20px;background:var(--surface);border-radius:12px;padding:20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div style="font-family:var(--fd);font-size:15px;font-weight:600;" id="notif-title">Notification</div>
+          <span style="font-size:12px;color:var(--mute);cursor:pointer;" onclick="document.getElementById('notif-detail').style.display='none'">Close ✕</span>
+        </div>
+        <div id="notif-body" style="font-size:13px;color:var(--mute);line-height:1.8;"></div>
+      </div>
     </div>
 
     <div class="content-area" id="area-dispatch">
@@ -432,7 +450,37 @@
         <div class="stat"><div class="stat-val">9 sec</div><div class="stat-label">Avg response time</div></div>
         <div class="stat"><div class="stat-val">78%</div><div class="stat-label">Booking rate</div></div>
       </div>
-      <div class="section-title">Recent conversation</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
+        <div class="stat" style="display:flex;flex-direction:column;gap:6px;">
+          <div style="font-family:var(--fd);font-size:13px;font-weight:600;margin-bottom:6px;">AI Impact — This Month</div>
+          <div style="font-size:13px;color:var(--mute);line-height:2.2;">
+            <div>Leads captured outside business hours <strong style="color:var(--text);float:right;">11</strong></div>
+            <div>Would-have-been lost without AI <strong style="color:var(--text);float:right;">9</strong></div>
+            <div>Revenue recovered from after-hours leads <strong style="color:var(--green);float:right;">$14,200</strong></div>
+            <div>Avg response time — AI <strong style="color:var(--text);float:right;">9 sec</strong></div>
+            <div>Avg response time — manual <strong style="color:var(--text);float:right;">4.2 hrs</strong></div>
+          </div>
+        </div>
+        <div class="stat">
+          <div style="font-family:var(--fd);font-size:13px;font-weight:600;margin-bottom:8px;">Revenue Captured by AI</div>
+          <div style="font-family:var(--fd);font-size:34px;font-weight:700;color:var(--green);">$14,200</div>
+          <div style="font-size:12px;color:var(--mute);margin-top:6px;">From 9 after-hours leads qualified and booked automatically.</div>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--mute);">Without InnoVista AI, estimated <span style="color:#DC2626;font-weight:600;">$11,400</span> would have gone to a competitor who replied first.</div>
+        </div>
+      </div>
+      <div class="section-title">Past AI-Booked Appointments</div>
+      <table class="lead-table">
+        <thead><tr><th>Client</th><th>Issue Reported</th><th>Booked By AI</th><th>Appointment</th><th>Outcome</th><th>Revenue</th></tr></thead>
+        <tbody>
+          <tr><td>James T.</td><td>Emergency — AC stopped cooling</td><td>✓ Yes</td><td>Jun 18 · 10am</td><td><span class="lead-badge badge-booked">Completed ✓</span></td><td style="color:var(--green);font-weight:600;">$4,050</td></tr>
+          <tr><td>Rosa V.</td><td>System repair needed urgently</td><td>✓ Yes</td><td>Jun 19 · 11am</td><td><span class="lead-badge badge-booked">Completed ✓</span></td><td style="color:var(--green);font-weight:600;">$620</td></tr>
+          <tr><td>Sarah M.</td><td>AC not cooling — weekend call</td><td>✓ Yes</td><td>Jun 21 · 9am</td><td><span class="lead-badge badge-qualified">Scheduled</span></td><td style="color:var(--mute);">TBD</td></tr>
+          <tr><td>Derek W.</td><td>Annual tune-up request</td><td>✓ Yes</td><td>Jun 12 · 2pm</td><td><span class="lead-badge badge-booked">Completed ✓</span></td><td style="color:var(--green);font-weight:600;">$185</td></tr>
+          <tr><td>Mei L.</td><td>Filter replacement — missed call</td><td>✓ Yes</td><td>Jun 10 · 10am</td><td><span class="lead-badge badge-booked">Completed ✓</span></td><td style="color:var(--green);font-weight:600;">$95</td></tr>
+          <tr><td>Anna P.</td><td>Emergency repair — after hours</td><td>✓ Yes</td><td>Jun 14 · 8am</td><td><span class="lead-badge badge-booked">Completed ✓</span></td><td style="color:var(--green);font-weight:600;">$340</td></tr>
+        </tbody>
+      </table>
+      <div class="section-title" style="margin-top:24px;">Recent conversation</div>
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;max-width:480px;box-shadow:var(--shadow-sm);">
         <div style="display:flex;flex-direction:column;gap:10px;">
           <div style="background:var(--surface2);border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-start;max-width:85%;">Hi! Thanks for reaching out. What service do you need help with today?</div>
@@ -443,6 +491,57 @@
           <div style="background:var(--green);color:#fff;border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-end;max-width:85%;">Yes please!</div>
           <div style="background:var(--green-light);border:1px solid #BBF7D0;border-radius:10px;padding:10px 14px;font-size:13px;align-self:flex-start;max-width:85%;color:var(--green-dark);font-weight:600;">✓ Booked — Today at 4pm. Confirmation sent by text.</div>
         </div>
+      </div>
+    </div>
+
+    <div class="content-area" id="area-technicians">
+      <div class="page-title">Technicians</div>
+      <p class="page-sub">Manage your team — schedules, routes, appointments, and pay.</p>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">4</div><div class="stat-label">Active techs</div></div>
+        <div class="stat"><div class="stat-val">6</div><div class="stat-label">Jobs today</div></div>
+        <div class="stat"><div class="stat-val">$12,400</div><div class="stat-label">Payroll this period</div></div>
+      </div>
+      <table class="lead-table" style="margin-bottom:24px;">
+        <thead><tr><th>Technician</th><th>Status</th><th>Today's Jobs</th><th>Pay Rate</th><th>Hours This Period</th><th>Pay Owed</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Mike R.</td><td><span class="lead-badge badge-booked">Active</span></td><td>AC Install · Duct cleaning</td><td>$28/hr</td><td>82 hrs</td><td style="color:var(--green);font-weight:600;">$2,296</td><td><span style="font-size:12px;color:var(--green);cursor:pointer;font-weight:600;" onclick="openTech('Mike R.')">View →</span></td></tr>
+          <tr><td>Carlos M.</td><td><span class="lead-badge badge-booked">On job</span></td><td>System Repair · Westchester</td><td>$26/hr</td><td>78 hrs</td><td style="color:var(--green);font-weight:600;">$2,028</td><td><span style="font-size:12px;color:var(--green);cursor:pointer;font-weight:600;" onclick="openTech('Carlos M.')">View →</span></td></tr>
+          <tr><td>Dana F.</td><td><span class="lead-badge badge-new">Available</span></td><td>—</td><td>$24/hr</td><td>71 hrs</td><td style="color:var(--green);font-weight:600;">$1,704</td><td><span style="font-size:12px;color:var(--green);cursor:pointer;font-weight:600;" onclick="openTech('Dana F.')">View →</span></td></tr>
+          <tr><td>Luis P.</td><td><span class="lead-badge" style="background:#F3F4F6;color:var(--mute);">Off today</span></td><td>—</td><td>$24/hr</td><td>40 hrs</td><td style="color:var(--green);font-weight:600;">$960</td><td><span style="font-size:12px;color:var(--green);cursor:pointer;font-weight:600;" onclick="openTech('Luis P.')">View →</span></td></tr>
+        </tbody>
+      </table>
+      <div id="tech-detail" style="display:none;background:var(--surface);border-radius:12px;padding:22px;border:1px solid var(--border);box-shadow:var(--shadow-sm);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div style="font-family:var(--fd);font-size:16px;font-weight:600;" id="tech-detail-name">Technician</div>
+          <span style="font-size:12px;color:var(--mute);cursor:pointer;" onclick="document.getElementById('tech-detail').style.display='none'">Close ✕</span>
+        </div>
+        <div id="tech-detail-body"></div>
+      </div>
+    </div>
+
+    <div class="content-area" id="area-salesreps">
+      <div class="page-title">Sales Reps</div>
+      <p class="page-sub">Manage your sales team — routes, schedules, leads, and pay.</p>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">3</div><div class="stat-label">Active reps</div></div>
+        <div class="stat"><div class="stat-val">24</div><div class="stat-label">Leads handled</div></div>
+        <div class="stat"><div class="stat-val">$8,200</div><div class="stat-label">Commission this period</div></div>
+      </div>
+      <table class="lead-table" style="margin-bottom:24px;">
+        <thead><tr><th>Sales Rep</th><th>Leads Handled</th><th>Booked</th><th>Close Rate</th><th>Revenue</th><th>Commission Rate</th><th>Commission Owed</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Mike R.</td><td>11</td><td>9</td><td style="color:var(--green);font-weight:600;">82%</td><td>$22,400</td><td>15%</td><td style="color:var(--green);font-weight:600;">$3,360</td><td><span style="font-size:12px;color:var(--green);cursor:pointer;font-weight:600;" onclick="openRep('Mike R.')">View →</span></td></tr>
+          <tr><td>Carlos M.</td><td>8</td><td>5</td><td>63%</td><td>$14,100</td><td>15%</td><td style="color:var(--green);font-weight:600;">$2,115</td><td><span style="font-size:12px;color:var(--green);cursor:pointer;font-weight:600;" onclick="openRep('Carlos M.')">View →</span></td></tr>
+          <tr><td>Dana F.</td><td>5</td><td>2</td><td style="color:#DC2626;font-weight:600;">40%</td><td>$5,200</td><td>10%</td><td style="color:var(--green);font-weight:600;">$520</td><td><span style="font-size:12px;color:var(--green);cursor:pointer;font-weight:600;" onclick="openRep('Dana F.')">View →</span></td></tr>
+        </tbody>
+      </table>
+      <div id="rep-detail" style="display:none;background:var(--surface);border-radius:12px;padding:22px;border:1px solid var(--border);box-shadow:var(--shadow-sm);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div style="font-family:var(--fd);font-size:16px;font-weight:600;" id="rep-detail-name">Sales Rep</div>
+          <span style="font-size:12px;color:var(--mute);cursor:pointer;" onclick="document.getElementById('rep-detail').style.display='none'">Close ✕</span>
+        </div>
+        <div id="rep-detail-body"></div>
       </div>
     </div>
 
@@ -480,6 +579,92 @@ function renderCal(view='month'){
     body.innerHTML=h+'</div>';
   }
 }
+const leadData={
+  'Sarah M.':{service:'AC not cooling',location:'Miami, FL',phone:'(305) 555-0291',stage:'New',date:'Jun 16',source:'Website form',notes:'Called after hours — AI responded in 9 sec. Unit is 8 years old, likely needs refrigerant or compressor check.',history:'First-time customer.'},
+  'Tom R.':{service:'Annual tune-up',location:'Doral, FL',phone:'(786) 555-0144',stage:'New',date:'Jun 16',source:'Referral',notes:'Referred by Derek W. Wants tune-up before summer peak.',history:'First-time customer.'},
+  'Linda K.':{service:'Duct cleaning',location:'Brickell, FL',phone:'(305) 555-0188',stage:'Contacted',date:'Jun 15',source:'Google Ads',notes:'AI texted back within 60 sec. Linda confirmed 4-bedroom condo, ducts not cleaned in 3 years.',history:'First-time customer.'},
+  'Marcus J.':{service:'Full system replacement',location:'Kendall, FL',phone:'(786) 555-0133',stage:'Qualified',date:'Jun 14',source:'Missed call text-back',notes:'System is 14 years old. AI qualified him for full replacement — estimated $6,500+ job.',history:'1 prior job — Jan 2025 diagnostic, $89.'},
+  'Anna P.':{service:'Emergency repair',location:'Coral Gables, FL',phone:'(305) 555-0166',stage:'Qualified',date:'Jun 14',source:'Missed call text-back',notes:'Called at 11pm Saturday — AI caught it. Unit is freezing up. Needs urgent visit.',history:'First-time customer.'},
+  'James T.':{service:'AC Installation',location:'Hialeah, FL',phone:'(305) 555-0100',stage:'Booked',date:'Jun 13',source:'AI chatbot',notes:'Booked Jun 18 at 10am. Carrier 3-ton unit. Signed quote $4,050.',history:'3 prior jobs — Aug 2024 repair $340, Feb 2024 tune-up $185, Jun 2023 repair $290.'},
+  'Rosa V.':{service:'System repair',location:'Westchester, FL',phone:'(305) 555-0177',stage:'Booked',date:'Jun 12',source:'SMS follow-up',notes:'AI followed up 3x over 2 days. Booked Jun 19 at 11am.',history:'1 prior job — Nov 2024 filter replacement $95.'},
+  'Derek W.':{service:'Annual tune-up',location:'Pinecrest, FL',phone:'(786) 555-0155',stage:'Complete',date:'Jun 12',source:'Repeat customer',notes:'Completed Jun 12. Left 5-star review after. AI sent review request automatically.',history:'2 prior jobs — Feb 2024 $175, Feb 2023 $165.'},
+  'Mei L.':{service:'Filter replacement',location:'Doral, FL',phone:'(786) 555-0199',stage:'Complete',date:'Jun 10',source:'Missed call text-back',notes:'Completed Jun 10. Quick job, simple filter swap.',history:'First-time customer.'},
+};
+const notifData={
+  'lead-sarah':{title:'New Lead — Sarah M.',body:'Sarah M. submitted a contact form at 11:42pm looking for AC repair in Miami. The AI responded within 9 seconds and determined her unit may need refrigerant or a compressor check.<br><br><strong>Recommended next action:</strong> Call Sarah tomorrow morning to schedule a diagnostic.'},
+  'confirm-james':{title:'Appointment Confirmed — James T.',body:'James T. confirmed his AC installation appointment for Wednesday, June 18 at 10am. Technician Mike R. has been assigned. The AI automatically sent a confirmation and reminder.<br><br><strong>Job value:</strong> $4,050 · Signed quote on file.'},
+  'review-derek':{title:'5-Star Google Review — Derek W.',body:'Derek W. left a 5-star Google review after his tune-up on June 12. The AI sent an automatic review request 2 hours after job completion.<br><br><em>"Premier HVAC was fantastic — on time, professional, and fixed everything quickly. Will definitely use them again!"</em>'},
+  'ai-marcus':{title:'AI Qualified Lead — Marcus J.',body:'Marcus J. was automatically qualified by the AI after a missed call. His 14-year-old system was identified as a full replacement candidate — estimated job value $6,500+.<br><br><strong>Next step:</strong> Schedule an in-person quote visit.'},
+};
+const techData={
+  'Mike R.':{rate:'$28/hr',hours:82,pay:2296,jobs:['Jun 18 · AC Install · James T. · Hialeah','Jun 12 · Tune-up · Derek W. · Pinecrest','Jun 10 · Filter Replace · Mei L. · Doral'],route:'Hialeah → Pinecrest → Doral'},
+  'Carlos M.':{rate:'$26/hr',hours:78,pay:2028,jobs:['Jun 19 · System Repair · Rosa V. · Westchester','Jun 15 · Diagnostic · Marcus J. · Kendall'],route:'Westchester → Kendall'},
+  'Dana F.':{rate:'$24/hr',hours:71,pay:1704,jobs:['Jun 20 · Duct Clean · Linda K. · Brickell'],route:'Brickell'},
+  'Luis P.':{rate:'$24/hr',hours:40,pay:960,jobs:['Jun 22 · Emergency · Anna P. · Coral Gables'],route:'Coral Gables'},
+};
+const repData={
+  'Mike R.':{leads:11,booked:9,revenue:22400,commission:3360,rate:'15%',jobs:['Sarah M. — AC repair','James T. — Installation','Derek W. — Tune-up','Rosa V. — Repair','Mei L. — Filter','Marcus J. — Replacement','Anna P. — Emergency','Tom R. — Tune-up','Linda K. — Duct clean']},
+  'Carlos M.':{leads:8,booked:5,revenue:14100,commission:2115,rate:'15%',jobs:['Marcus J. — Replacement','Rosa V. — Repair','Linda K. — Duct clean','Derek W. — Tune-up','Mei L. — Filter']},
+  'Dana F.':{leads:5,booked:2,revenue:5200,commission:520,rate:'10%',jobs:['Anna P. — Emergency','Tom R. — Tune-up']},
+};
+
+function openLead(name){
+  const d=leadData[name];if(!d)return;
+  const badgeCls=d.stage==='Booked'?'badge-booked':d.stage==='Qualified'?'badge-qualified':d.stage==='Contacted'?'badge-contacted':d.stage==='Complete'?'badge-booked':'badge-new';
+  document.getElementById('lead-detail-body').innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
+      <div><div style="font-family:var(--fd);font-size:22px;font-weight:700;">${name}</div><div style="font-size:13px;color:var(--mute);margin-top:4px;">${d.service} · ${d.location}</div></div>
+      <span class="lead-badge ${badgeCls}">${d.stage}</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+      <div style="background:var(--surface);border-radius:12px;padding:18px;border:1px solid var(--border);box-shadow:var(--shadow-sm);">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;">Contact</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:6px;">${name}</div>
+        <div style="font-size:13px;color:var(--mute);">${d.phone}<br>${d.location}<br>Source: ${d.source}<br>Date: ${d.date}</div>
+      </div>
+      <div style="background:var(--surface);border-radius:12px;padding:18px;border:1px solid var(--border);box-shadow:var(--shadow-sm);">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;">Customer History</div>
+        <div style="font-size:13px;color:var(--mute);line-height:1.6;">${d.history}</div>
+      </div>
+    </div>
+    <div style="background:var(--surface);border-radius:12px;padding:18px;border:1px solid var(--border);box-shadow:var(--shadow-sm);">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;">AI Interaction Notes</div>
+      <div style="font-size:13px;color:var(--mute);line-height:1.6;">${d.notes}</div>
+    </div>`;
+  show('lead-detail',null);
+}
+function openNotif(id){const d=notifData[id];if(!d)return;document.getElementById('notif-title').textContent=d.title;document.getElementById('notif-body').innerHTML=d.body;document.getElementById('notif-detail').style.display='block';}
+function openTech(name){
+  const d=techData[name];if(!d)return;
+  document.getElementById('tech-detail-name').textContent=name;
+  document.getElementById('tech-detail-body').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px;">
+      <div><div style="font-size:11px;color:var(--mute);">Pay rate</div><div style="font-family:var(--fd);font-size:18px;font-weight:700;">${d.rate}</div></div>
+      <div><div style="font-size:11px;color:var(--mute);">Hours this period</div><div style="font-family:var(--fd);font-size:18px;font-weight:700;">${d.hours} hrs</div></div>
+      <div><div style="font-size:11px;color:var(--mute);">Pay owed</div><div style="font-family:var(--fd);font-size:18px;font-weight:700;color:var(--green);">$${d.pay.toLocaleString()}</div></div>
+    </div>
+    <div style="font-size:12px;color:var(--mute);margin-bottom:10px;">Today's route: ${d.route}</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:14px 0 8px;">Scheduled Jobs</div>
+    ${d.jobs.map(j=>`<div style="font-size:13px;color:var(--mute);padding:8px 0;border-bottom:1px solid var(--border);">${j}</div>`).join('')}
+    <div style="margin-top:16px;"><span style="font-size:13px;font-weight:600;color:var(--green);cursor:pointer;background:var(--green-light);border:1px solid #BBF7D0;padding:8px 16px;border-radius:8px;">Generate pay stub →</span></div>`;
+  document.getElementById('tech-detail').style.display='block';
+}
+function openRep(name){
+  const d=repData[name];if(!d)return;
+  document.getElementById('rep-detail-name').textContent=name;
+  document.getElementById('rep-detail-body').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px;">
+      <div><div style="font-size:11px;color:var(--mute);">Leads handled</div><div style="font-family:var(--fd);font-size:18px;font-weight:700;">${d.leads}</div></div>
+      <div><div style="font-size:11px;color:var(--mute);">Booked</div><div style="font-family:var(--fd);font-size:18px;font-weight:700;">${d.booked}</div></div>
+      <div><div style="font-size:11px;color:var(--mute);">Revenue</div><div style="font-family:var(--fd);font-size:18px;font-weight:700;color:var(--green);">$${d.revenue.toLocaleString()}</div></div>
+      <div><div style="font-size:11px;color:var(--mute);">Commission (${d.rate})</div><div style="font-family:var(--fd);font-size:18px;font-weight:700;color:var(--green);">$${d.commission.toLocaleString()}</div></div>
+    </div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:14px 0 8px;">Jobs Handled</div>
+    ${d.jobs.map(j=>`<div style="font-size:13px;color:var(--mute);padding:8px 0;border-bottom:1px solid var(--border);">${j}</div>`).join('')}
+    <div style="margin-top:16px;"><span style="font-size:13px;font-weight:600;color:var(--green);cursor:pointer;background:var(--green-light);border:1px solid #BBF7D0;padding:8px 16px;border-radius:8px;">Generate commission invoice →</span></div>`;
+  document.getElementById('rep-detail').style.display='block';
+}
+
 const customerHistory={
   'Sarah M.':'First-time customer. No prior jobs on file.',
   'Tom R.':'<strong>2 prior jobs:</strong><br>• Mar 2025 — Annual tune-up, $185<br>• Mar 2024 — Annual tune-up, $175<br><em>Notes: Prefers morning appointments. Has a dog, gate code 4521.</em>',
