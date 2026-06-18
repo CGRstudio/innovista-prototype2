@@ -161,6 +161,10 @@
     <div class="aside-section">Your Sales CRM</div>
     <a class="nav-item" onclick="show('sales-pipeline',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Sales Pipeline</a>
     <a class="nav-item" onclick="show('sales-calendar',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Sales Calendar</a>
+    <div class="aside-section">Team</div>
+    <a class="nav-item" onclick="show('sales-reps',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>Sales Reps</a>
+    <a class="nav-item" onclick="show('field-reps',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>Field Reps</a>
+    <a class="nav-item" onclick="show('payroll',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payroll</a>
     <div class="aside-section">Platform</div>
     <a class="nav-item" href="pricing.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Pricing Page</a>
     <a class="nav-item" onclick="show('revenue',this)" href="#"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Revenue</a>
@@ -272,6 +276,80 @@
       </table>
     </div>
 
+    <!-- SALES REPS -->
+    <div class="content-area" id="area-sales-reps">
+      <div class="page-title">Sales Reps</div>
+      <p class="page-sub">Manage the team selling InnoVista subscriptions — territories, performance, and full payroll.</p>
+      <div class="summary-cards">
+        <div class="scard"><div class="scard-val">4</div><div class="scard-label">Active reps</div></div>
+        <div class="scard"><div class="scard-val">$11,240</div><div class="scard-label">Payroll this period</div></div>
+        <div class="scard"><div class="scard-val">68%</div><div class="scard-label">Avg close rate</div></div>
+      </div>
+      <table>
+        <thead><tr><th>Name</th><th>Territory</th><th>Leads</th><th>Closed</th><th>Close Rate</th><th>Revenue</th><th>Base Pay</th><th>Commission</th><th>Total Owed</th><th></th></tr></thead>
+        <tbody id="sales-rep-rows"></tbody>
+      </table>
+      <div id="sales-rep-detail" style="display:none;margin-top:24px;background:var(--surface);border-radius:12px;padding:24px;border:1px solid var(--border);box-shadow:var(--shadow);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <div style="font-family:var(--fd);font-size:17px;font-weight:700;" id="sr-detail-name"></div>
+          <span style="font-size:12px;color:var(--mute);cursor:pointer;" onclick="document.getElementById('sales-rep-detail').style.display='none'">Close ✕</span>
+        </div>
+        <div id="sr-detail-body"></div>
+      </div>
+    </div>
+
+    <!-- FIELD REPS -->
+    <div class="content-area" id="area-field-reps">
+      <div class="page-title">Field Reps</div>
+      <p class="page-sub">Manage reps dispatched to client sites for onboarding, training, and technical support.</p>
+      <div class="summary-cards">
+        <div class="scard"><div class="scard-val">3</div><div class="scard-label">Active field reps</div></div>
+        <div class="scard"><div class="scard-val">8</div><div class="scard-label">Site visits this week</div></div>
+        <div class="scard"><div class="scard-val">$9,180</div><div class="scard-label">Payroll this period</div></div>
+      </div>
+      <table>
+        <thead><tr><th>Name</th><th>Status</th><th>Today's Assignment</th><th>Base Pay</th><th>Hours</th><th>OT Hours</th><th>Total Owed</th><th></th></tr></thead>
+        <tbody id="field-rep-rows"></tbody>
+      </table>
+      <div id="field-rep-detail" style="display:none;margin-top:24px;background:var(--surface);border-radius:12px;padding:24px;border:1px solid var(--border);box-shadow:var(--shadow);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <div style="font-family:var(--fd);font-size:17px;font-weight:700;" id="fr-detail-name"></div>
+          <span style="font-size:12px;color:var(--mute);cursor:pointer;" onclick="document.getElementById('field-rep-detail').style.display='none'">Close ✕</span>
+        </div>
+        <div id="fr-detail-body"></div>
+      </div>
+    </div>
+
+    <!-- PAYROLL -->
+    <div class="content-area" id="area-payroll">
+      <div class="page-title">Payroll</div>
+      <p class="page-sub">Full payroll summary for all sales and field reps. Generate pay stubs and mark periods as paid.</p>
+      <div class="summary-cards">
+        <div class="scard"><div class="scard-val">$20,420</div><div class="scard-label">Total payroll due</div></div>
+        <div class="scard"><div class="scard-val">7</div><div class="scard-label">Total staff</div></div>
+        <div class="scard"><div class="scard-val" id="payroll-unpaid-count">–</div><div class="scard-label">Unpaid this period</div></div>
+      </div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;">Sales Reps</div>
+      <table style="margin-bottom:24px;">
+        <thead><tr><th>Name</th><th>Base</th><th>Commission</th><th>Deductions</th><th>Net Pay</th><th>Status</th><th></th></tr></thead>
+        <tbody id="payroll-sales-rows"></tbody>
+      </table>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;">Field Reps</div>
+      <table>
+        <thead><tr><th>Name</th><th>Regular</th><th>Overtime</th><th>Deductions</th><th>Net Pay</th><th>Status</th><th></th></tr></thead>
+        <tbody id="payroll-field-rows"></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAY STUB MODAL -->
+<div id="paystub-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px;max-width:480px;width:90%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.15);">
+    <div style="position:absolute;top:16px;right:20px;font-size:13px;color:var(--mute);cursor:pointer;" onclick="closePaystub()">Close ✕</div>
+    <div id="paystub-body"></div>
+    <button type="button" style="margin-top:24px;width:100%;background:var(--green);color:#fff;border:none;border-radius:9px;padding:13px;font-size:14px;font-weight:700;font-family:var(--fd);cursor:pointer;" onclick="closePaystub()">Download PDF (demo)</button>
   </div>
 </div>
 
@@ -472,8 +550,152 @@ function show(area,el){
   if(el)el.classList.add('active');
   if(area==='plans')renderPlanTable();
   if(area==='sales-calendar')renderSalesCal('month');
+  if(area==='sales-reps')renderSalesRepTable();
+  if(area==='field-reps')renderFieldRepTable();
+  if(area==='payroll'){renderSalesRepTable();renderFieldRepTable();renderPayroll();}
   return false;
 }
+
+// ── SALES REPS DATA ──
+const salesReps=[
+  {name:'Jordan Miles',territory:'Tampa / St. Pete',leads:18,closed:13,revenue:5841,base:3500,commissionRate:0.15,hours:84,deductions:420,status:'unpaid',
+   schedule:['Mon — Cold calls: Hillsborough County','Tue — Demo: Titan Roofing @ 2pm','Wed — Follow-ups','Thu — Demo: FastFlow Plumbing @ 10am','Fri — Pipeline review + cold outreach'],
+   deals:['Titan Roofing — Demo Scheduled — $597/mo','FastFlow Plumbing — Demo Scheduled — $297/mo','Premier HVAC — Closed Won — $597/mo','SunState Roofing — Closed Won — $297/mo']},
+  {name:'Alexis Chen',territory:'Sarasota / Bradenton',leads:11,closed:7,revenue:2679,base:3000,commissionRate:0.15,hours:76,deductions:360,status:'unpaid',
+   schedule:['Mon — Territory canvass: Sarasota County','Tue — Demo: Quick Fix HVAC @ 11am','Wed — Follow-ups','Thu — Cold calls','Fri — Weekly rep call'],
+   deals:['Quick Fix HVAC — Contacted — $597/mo','Reliable Roofing — Contacted — $297/mo','CoolBreeze Air — Closed Won — $597/mo']},
+  {name:'Marcus Webb',territory:'Lakeland / Polk County',leads:9,closed:5,revenue:1485,base:2800,commissionRate:0.12,hours:68,deductions:336,status:'paid',
+   schedule:['Mon-Fri — Cold outreach: Polk County trades'],
+   deals:['ProTech Electric — Contacted — $297/mo','Bright Electric — Closed Won — $297/mo','FlowRight Plumbing — Closed Won — $297/mo']},
+  {name:'Priya Nair',territory:'Brandon / Riverview',leads:7,closed:4,revenue:1188,base:2800,commissionRate:0.12,hours:62,deductions:336,status:'unpaid',
+   schedule:['Mon/Wed — Cold calls','Tue/Thu — Demos and follow-ups','Fri — Admin'],
+   deals:['Cool Air HVAC — Demo Scheduled — $297/mo','GreenScape Lawns — New — $297/mo','Bay Area Plumbing — Contacted — $297/mo']},
+];
+
+const fieldReps=[
+  {name:'Devon Park',status:'On site',today:'Premier HVAC Solutions — Onboarding · Hialeah',baseRate:28,hours:82,ot:6,deductions:490,status2:'unpaid',
+   route:['9am — Premier HVAC Solutions · Hialeah (onboarding)','1pm — CoolBreeze Air · Doral (setup check)'],
+   visits:['Jun 18 — Premier HVAC · Hialeah — Onboarding','Jun 15 — SunState Roofing · Tampa — Training','Jun 12 — FlowRight Plumbing · Tampa — Setup','Jun 10 — Bright Electric · Clearwater — Onboarding']},
+  {name:'Riley Torres',status:'Available',today:'—',baseRate:26,hours:74,ot:2,deductions:444,status2:'unpaid',
+   route:['10am — Bright Electric · Clearwater (monthly check-in)'],
+   visits:['Jun 17 — Ace Plumbing · Tampa — Support visit','Jun 14 — GreenLeaf Landscaping · Brandon — Setup']},
+  {name:'Sam Okafor',status:'Off today',today:'—',baseRate:24,hours:40,ot:0,deductions:288,status2:'paid',
+   route:[],
+   visits:['Jun 16 — Premier HVAC · Hialeah — Feature walkthrough','Jun 11 — SunState Roofing · Tampa — Support']},
+];
+
+function calcSalesRep(r){const commission=Math.round(r.revenue*r.commissionRate);const gross=r.base+commission;const net=gross-r.deductions;return{commission,gross,net};}
+function calcFieldRep(r){const regular=r.baseRate*r.hours;const overtime=Math.round(r.baseRate*1.5*r.ot);const gross=regular+overtime;const net=gross-r.deductions;return{regular,overtime,gross,net};}
+
+function renderSalesRepTable(){
+  const tbody=document.getElementById('sales-rep-rows');tbody.innerHTML='';
+  salesReps.forEach((r,i)=>{
+    const c=calcSalesRep(r);const cr=Math.round(r.closed/r.leads*100);const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${r.name}</td><td style="font-size:12px;">${r.territory}</td><td>${r.leads}</td><td>${r.closed}</td><td style="color:${cr>=60?'var(--green)':'#D97706'};font-weight:600;">${cr}%</td><td>$${r.revenue.toLocaleString()}</td><td>$${r.base.toLocaleString()}</td><td style="color:var(--green);">$${c.commission.toLocaleString()}</td><td style="color:var(--green);font-weight:600;">$${c.net.toLocaleString()}</td><td><span style="font-size:12px;color:var(--green);cursor:pointer;font-weight:600;" onclick="openSalesRep(${i})">View →</span></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function openSalesRep(i){
+  const r=salesReps[i];const c=calcSalesRep(r);
+  document.getElementById('sr-detail-name').textContent=r.name+' — '+r.territory;
+  document.getElementById('sr-detail-body').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;">
+      <div style="background:var(--surface2);border-radius:10px;padding:14px;border:1px solid var(--border);"><div style="font-size:11px;color:var(--mute);margin-bottom:6px;">Base pay</div><div style="font-family:var(--fd);font-size:20px;font-weight:700;">$${r.base.toLocaleString()}</div></div>
+      <div style="background:var(--surface2);border-radius:10px;padding:14px;border:1px solid var(--border);"><div style="font-size:11px;color:var(--mute);margin-bottom:6px;">Commission (${Math.round(r.commissionRate*100)}%)</div><div style="font-family:var(--fd);font-size:20px;font-weight:700;color:var(--green);">$${c.commission.toLocaleString()}</div></div>
+      <div style="background:var(--surface2);border-radius:10px;padding:14px;border:1px solid var(--border);"><div style="font-size:11px;color:var(--mute);margin-bottom:6px;">Deductions</div><div style="font-family:var(--fd);font-size:20px;font-weight:700;color:#DC2626;">-$${r.deductions.toLocaleString()}</div></div>
+      <div style="background:var(--green-light);border-radius:10px;padding:14px;border:1px solid #BBF7D0;"><div style="font-size:11px;color:var(--green-dark);margin-bottom:6px;">Net pay</div><div style="font-family:var(--fd);font-size:20px;font-weight:700;color:var(--green-dark);">$${c.net.toLocaleString()}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div><div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;">Weekly Schedule</div>${r.schedule.map(s=>`<div style="font-size:13px;color:var(--mute);padding:8px 0;border-bottom:1px solid var(--border);">${s}</div>`).join('')}</div>
+      <div><div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;">Active Deals</div>${r.deals.map(d=>`<div style="font-size:13px;color:var(--mute);padding:8px 0;border-bottom:1px solid var(--border);">${d}</div>`).join('')}</div>
+    </div>
+    <div style="margin-top:18px;display:flex;gap:10px;">
+      <button type="button" onclick="showPaystub('sales',${i})" style="font-size:13px;font-weight:600;color:var(--green-dark);background:var(--green-light);border:1px solid #BBF7D0;border-radius:8px;padding:9px 18px;cursor:pointer;font-family:var(--fd);">Generate pay stub</button>
+      <button type="button" onclick="markPaid(${i})" style="font-size:13px;font-weight:600;color:#D97706;background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:9px 18px;cursor:pointer;font-family:var(--fd);">Mark as paid</button>
+    </div>`;
+  document.getElementById('sales-rep-detail').style.display='block';
+}
+
+function renderFieldRepTable(){
+  const tbody=document.getElementById('field-rep-rows');tbody.innerHTML='';
+  fieldReps.forEach((r,i)=>{
+    const c=calcFieldRep(r);const tr=document.createElement('tr');
+    const sc=r.status==='On site'?'var(--green)':r.status==='Available'?'#1D4ED8':'var(--mute)';
+    tr.innerHTML=`<td>${r.name}</td><td style="color:${sc};font-size:13px;font-weight:500;">${r.status}</td><td style="font-size:12px;">${r.today}</td><td>$${r.baseRate}/hr</td><td>${r.hours} hrs</td><td>${r.ot} hrs</td><td style="color:var(--green);font-weight:600;">$${c.net.toLocaleString()}</td><td><span style="font-size:12px;color:var(--green);cursor:pointer;font-weight:600;" onclick="openFieldRep(${i})">View →</span></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function openFieldRep(i){
+  const r=fieldReps[i];const c=calcFieldRep(r);
+  document.getElementById('fr-detail-name').textContent=r.name;
+  document.getElementById('fr-detail-body').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;">
+      <div style="background:var(--surface2);border-radius:10px;padding:14px;border:1px solid var(--border);"><div style="font-size:11px;color:var(--mute);margin-bottom:6px;">Regular (${r.hours}h @ $${r.baseRate})</div><div style="font-family:var(--fd);font-size:20px;font-weight:700;">$${c.regular.toLocaleString()}</div></div>
+      <div style="background:var(--surface2);border-radius:10px;padding:14px;border:1px solid var(--border);"><div style="font-size:11px;color:var(--mute);margin-bottom:6px;">Overtime (${r.ot}h @ $${Math.round(r.baseRate*1.5)})</div><div style="font-family:var(--fd);font-size:20px;font-weight:700;color:var(--green);">$${c.overtime.toLocaleString()}</div></div>
+      <div style="background:var(--surface2);border-radius:10px;padding:14px;border:1px solid var(--border);"><div style="font-size:11px;color:var(--mute);margin-bottom:6px;">Deductions</div><div style="font-family:var(--fd);font-size:20px;font-weight:700;color:#DC2626;">-$${r.deductions.toLocaleString()}</div></div>
+      <div style="background:var(--green-light);border-radius:10px;padding:14px;border:1px solid #BBF7D0;"><div style="font-size:11px;color:var(--green-dark);margin-bottom:6px;">Net pay</div><div style="font-family:var(--fd);font-size:20px;font-weight:700;color:var(--green-dark);">$${c.net.toLocaleString()}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div><div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;">Today's Route</div>${r.route.length?r.route.map(s=>`<div style="font-size:13px;color:var(--mute);padding:8px 0;border-bottom:1px solid var(--border);">${s}</div>`).join(''):'<div style="font-size:13px;color:var(--dim);">No assignments today</div>'}</div>
+      <div><div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;">Recent Site Visits</div>${r.visits.map(v=>`<div style="font-size:13px;color:var(--mute);padding:8px 0;border-bottom:1px solid var(--border);">${v}</div>`).join('')}</div>
+    </div>
+    <div style="margin-top:18px;display:flex;gap:10px;">
+      <button type="button" onclick="showPaystub('field',${i})" style="font-size:13px;font-weight:600;color:var(--green-dark);background:var(--green-light);border:1px solid #BBF7D0;border-radius:8px;padding:9px 18px;cursor:pointer;font-family:var(--fd);">Generate pay stub</button>
+      <button type="button" onclick="markFieldPaid(${i})" style="font-size:13px;font-weight:600;color:#D97706;background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:9px 18px;cursor:pointer;font-family:var(--fd);">Mark as paid</button>
+    </div>`;
+  document.getElementById('field-rep-detail').style.display='block';
+}
+
+function renderPayroll(){
+  const sb=document.getElementById('payroll-sales-rows');sb.innerHTML='';
+  salesReps.forEach((r,i)=>{
+    const c=calcSalesRep(r);const paid=r.status==='paid';const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${r.name}</td><td>$${r.base.toLocaleString()}</td><td style="color:var(--green);">$${c.commission.toLocaleString()}</td><td style="color:#DC2626;">-$${r.deductions.toLocaleString()}</td><td style="font-weight:600;color:var(--green);">$${c.net.toLocaleString()}</td><td>${paid?'<span style="font-size:11px;font-weight:600;color:var(--green-dark);background:var(--green-light);padding:3px 9px;border-radius:999px;">Paid</span>':'<span style="font-size:11px;font-weight:600;color:#D97706;background:#FEF3C7;padding:3px 9px;border-radius:999px;">Unpaid</span>'}</td><td style="display:flex;gap:8px;"><button type="button" onclick="showPaystub('sales',${i})" style="font-size:11px;font-weight:600;color:var(--green-dark);background:var(--green-light);border:1px solid #BBF7D0;border-radius:6px;padding:5px 10px;cursor:pointer;">Pay stub</button>${!paid?`<button type="button" onclick="markPaid(${i})" style="font-size:11px;font-weight:600;color:#D97706;background:#FEF3C7;border:1px solid #FDE68A;border-radius:6px;padding:5px 10px;cursor:pointer;">Mark paid</button>`:''}</td>`;
+    sb.appendChild(tr);
+  });
+  const fb=document.getElementById('payroll-field-rows');fb.innerHTML='';
+  fieldReps.forEach((r,i)=>{
+    const c=calcFieldRep(r);const paid=r.status2==='paid';const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${r.name}</td><td>$${c.regular.toLocaleString()}</td><td style="color:var(--green);">$${c.overtime.toLocaleString()}</td><td style="color:#DC2626;">-$${r.deductions.toLocaleString()}</td><td style="font-weight:600;color:var(--green);">$${c.net.toLocaleString()}</td><td>${paid?'<span style="font-size:11px;font-weight:600;color:var(--green-dark);background:var(--green-light);padding:3px 9px;border-radius:999px;">Paid</span>':'<span style="font-size:11px;font-weight:600;color:#D97706;background:#FEF3C7;padding:3px 9px;border-radius:999px;">Unpaid</span>'}</td><td style="display:flex;gap:8px;"><button type="button" onclick="showPaystub('field',${i})" style="font-size:11px;font-weight:600;color:var(--green-dark);background:var(--green-light);border:1px solid #BBF7D0;border-radius:6px;padding:5px 10px;cursor:pointer;">Pay stub</button>${!paid?`<button type="button" onclick="markFieldPaid(${i})" style="font-size:11px;font-weight:600;color:#D97706;background:#FEF3C7;border:1px solid #FDE68A;border-radius:6px;padding:5px 10px;cursor:pointer;">Mark paid</button>`:''}</td>`;
+    fb.appendChild(tr);
+  });
+  const unpaid=[...salesReps.filter(r=>r.status==='unpaid'),...fieldReps.filter(r=>r.status2==='unpaid')].length;
+  document.getElementById('payroll-unpaid-count').textContent=unpaid;
+}
+
+function showPaystub(type,i){
+  const period='June 1 – June 15, 2026';const today='June 18, 2026';let body='';
+  if(type==='sales'){
+    const r=salesReps[i];const c=calcSalesRep(r);
+    body=`<div style="text-align:center;margin-bottom:20px;"><div style="font-family:var(--fd);font-size:18px;font-weight:700;">InnoVista Strategies</div><div style="font-size:13px;color:var(--mute);margin-top:4px;">Pay Stub — Sales Representative</div></div>
+    <div style="font-size:13px;color:var(--mute);margin-bottom:16px;">Employee: <strong style="color:var(--text);">${r.name}</strong><br>Territory: ${r.territory}<br>Period: ${period}<br>Issued: ${today}</div>
+    <div style="border-top:1px solid var(--border);padding-top:14px;">
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--mute);">Base salary</span><span>$${r.base.toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--mute);">Commission (${Math.round(r.commissionRate*100)}% of $${r.revenue.toLocaleString()})</span><span style="color:var(--green);">$${c.commission.toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--mute);">Gross pay</span><span>$${c.gross.toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--mute);">Deductions (taxes, benefits)</span><span style="color:#DC2626;">-$${r.deductions.toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:13px 0;font-size:16px;font-weight:700;font-family:var(--fd);"><span>Net pay</span><span style="color:var(--green);">$${c.net.toLocaleString()}</span></div>
+    </div>`;
+  } else {
+    const r=fieldReps[i];const c=calcFieldRep(r);
+    body=`<div style="text-align:center;margin-bottom:20px;"><div style="font-family:var(--fd);font-size:18px;font-weight:700;">InnoVista Strategies</div><div style="font-size:13px;color:var(--mute);margin-top:4px;">Pay Stub — Field Representative</div></div>
+    <div style="font-size:13px;color:var(--mute);margin-bottom:16px;">Employee: <strong style="color:var(--text);">${r.name}</strong><br>Rate: $${r.baseRate}/hr<br>Period: ${period}<br>Issued: ${today}</div>
+    <div style="border-top:1px solid var(--border);padding-top:14px;">
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--mute);">Regular hours (${r.hours}h × $${r.baseRate})</span><span>$${c.regular.toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--mute);">Overtime (${r.ot}h × $${Math.round(r.baseRate*1.5)})</span><span style="color:var(--green);">$${c.overtime.toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--mute);">Gross pay</span><span>$${c.gross.toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--mute);">Deductions (taxes, benefits)</span><span style="color:#DC2626;">-$${r.deductions.toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:13px 0;font-size:16px;font-weight:700;font-family:var(--fd);"><span>Net pay</span><span style="color:var(--green);">$${c.net.toLocaleString()}</span></div>
+    </div>`;
+  }
+  document.getElementById('paystub-body').innerHTML=body;
+  document.getElementById('paystub-modal').style.display='flex';
+}
+function closePaystub(){document.getElementById('paystub-modal').style.display='none';}
+function markPaid(i){salesReps[i].status='paid';renderSalesRepTable();renderPayroll();document.getElementById('sales-rep-detail').style.display='none';}
+function markFieldPaid(i){fieldReps[i].status2='paid';renderFieldRepTable();renderPayroll();document.getElementById('field-rep-detail').style.display='none';}
 
 renderClientsTable();
 </script>
